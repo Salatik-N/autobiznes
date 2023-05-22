@@ -1,0 +1,44 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.categories {
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+  .title {
+    font-weight: 700;
+    line-height: 36px;
+    margin-bottom: 10px;
+  }
+  .categoryList {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .item {
+      outline: 1px solid #e4e6e8;
+      border: 2px solid;
+      border-color: #fff;
+      @include border-radius(14px);
+      padding: 8px 10px 14px;
+      text-align: center;
+      width: 104px;
+      transition: all 200ms ease-in-out;
+      &:hover {
+        outline-color: $dark-blue;
+        border-color: $dark-blue;
+      }
+      img {
+        margin-bottom: 8px;
+        border-radius: 8px;
+        width: 100%;
+        height: 50px;
+        object-fit: contain;
+      }
+      span {
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+  }
+}

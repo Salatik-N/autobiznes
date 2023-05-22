@@ -1,0 +1,10 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.filterBlock {
+  margin-bottom: 44px;
+  .filterButton {
+    width: 100%;
+    @include btn-yellow(15px, 15px);
+  }
+}

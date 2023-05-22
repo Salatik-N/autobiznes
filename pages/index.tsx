@@ -1,45 +1,159 @@
-import Head from 'next/head'
+import Container from '../components/Container'
+import Benefits from '../components/Benefits'
+import FAQ from '../components/FAQ'
 import { GetStaticProps } from 'next'
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
-import Layout from '../components/layout'
-import { getAllPostsForHome } from '../lib/api'
-import { CMS_NAME } from '../lib/constants'
+import Image from 'next/image'
+import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
+import { client } from '../lib/apollo'
+import CategoryItem from '../components/CategoryItem'
+import CargoItem from '../components/CargoItem'
+import mainImage from '../public/images/index.png'
+import bgImage from '../public/images/bg-cargo.jpg'
+import truckVector from '../public/icons/truck-vector.svg'
+import busVector from '../public/icons/bus-vector.svg'
+import cargoVector from '../public/icons/cargo-vector.svg'
 
-export default function Index({ allPosts: { edges }, preview }) {
-  const heroPost = edges[0]?.node
-  const morePosts = edges.slice(1)
-
+export default function Index({ cargoList, cargoTransport, passengerTransport }) {
   return (
-    <Layout preview={preview}>
-      <Head>
-        <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
-      </Head>
+    <div className="home-page">
       <Container>
-        <Intro />
-        {heroPost && (
-          <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.featuredImage}
-            date={heroPost.date}
-            author={heroPost.author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
-          />
-        )}
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <div className="page-title-block">
+          <h1 className="page-title">
+            Биржа <span className="text-yellow">грузов</span> и <span className="text-yellow">транспорта</span>
+          </h1>
+          <p className="page-sub-title">Диспетчерский онлайн-центр</p>
+          <button className="add-order">Оставить заказ</button>
+          <button className="add-transport">Добавить свой транспорт</button>
+          <Image src={mainImage} alt="Биржа грузов и транспорта" />
+          <Image className="bg-image" src={bgImage} alt="Фон" />
+        </div>
       </Container>
-    </Layout>
+      <Container>
+        <div className="category-transport-block white-background">
+          <h3>Нужен транспорт?</h3>
+          <p>Выберите подходящую категорию:</p>
+          <CategoryItem category={cargoTransport} />
+          <CategoryItem category={passengerTransport} />
+        </div>
+      </Container>
+      <Container>
+        {cargoList ? (
+          <>
+            <div className="cargo-list">
+              <h3>Ищете груз для перевозки?</h3>
+              <p>Выберите подходящий заказ:</p>
+              <CargoItem cargos={cargoList} />
+            </div>
+            <div className="show-more-cargo">
+              <p>Хотите увидеть больше грузов?</p>
+              <a href="/cargos/" className="filter-button">
+                Открыть все грузы
+              </a>
+            </div>
+          </>
+        ) : null}
+      </Container>
+      <Benefits />
+      <div className="separator-white">
+        <hr />
+      </div>
+      <div className="main-categories-block">
+        <Container>
+          <h3>Основные категории объявлений</h3>
+          <p className="block-subtitile">
+            Биржа грузов и транспорта “АВТОБИЗНЕС.БАЙ” призвана стать Вашим надежным помощником в организации внутренних
+            и международных грузо-пассажиро-перевозок. Зарегистрируйтесь на нашем сайте, чтобы не пропустить подходящее
+            предложение. Владелец груза получает доступ к каталогу транспортных компаний, а владелец транспорта – к базе
+            грузоотправителей. Планируйте свой маршрут на нашем сайте, и выполняйте каждую сделку четко и в срок!
+          </p>
+          <div className="items-block">
+            <div className="item white-background">
+              <span className="number">01</span>
+              <span className="h3">Грузовой транспорт</span>
+              <Image src={truckVector} alt="Грузовой транспорт" />
+              <p>
+                Регистрируйтесь на Autobiznes.by и находите грузы для вашего транспорта. Хотите разместить объявление о
+                ваших услугах и получать больше звонков?Мы вам в это поможем!
+              </p>
+            </div>
+            <div className="item white-background">
+              <span className="number">02</span>
+              <span className="h3">Пассажирский транспорт</span>
+              <Image src={busVector} alt="Пассажирский транспорт" />
+              <p>
+                Занимаетесь перевозкой пассажиров и хотите привлечь больше клиентов ?Разместите объявление на
+                Autobiznes.by и ждите звонков!
+              </p>
+            </div>
+            <div className="item white-background">
+              <span className="number">03</span>
+              <span className="h3">Биржа грузов</span>
+              <Image src={cargoVector} alt="Биржа грузов" />
+              <p>
+                Регистрируйтесь на Autobiznes.by и перевозите свои крупногабаритные грузы с помощью грузовых
+                автомобилей. Избавьте себя от хлопот с логистикой и ненадежных перевозчиков!
+              </p>
+            </div>
+          </div>
+        </Container>
+      </div>
+      <div className="cta-block">
+        <Container>
+          <h3>Максимум эффективности для перевозчиков, грузоотправителей и экспедиторов грузов</h3>
+          <div className="inner-block">
+            <p>
+              Биржа грузов и транспорта “Автобизнес.бай” призвана стать Вашим надежным помощником в организации
+              внутренних и международных грузо-пассажиро-перевозок. Зарегистрируйтесь на нашем сайте, чтобы не
+              пропустить подходящее предложение. Владелец груза получает доступ к каталогу транспортных компаний, а
+              владелец транспорта – к базе грузоотправителей. Планируйте свой маршрут на нашем сайте, и выполняйте
+              каждую сделку четко и в срок!
+            </p>
+            <div className="item сustomer white-background">
+              <span className="title">Вы заказчик?</span>
+              <ul>
+                <li>Бесплатное размещение объявления</li>
+                <li>Качественный сервис</li>
+                <li>Большая база исполнителей</li>
+                <li>Простота работы через личный кабинет</li>
+              </ul>
+              <button>Регистрация</button>
+            </div>
+            <div className="item performer white-background">
+              <span className="title">Вы исполнитель?</span>
+              <ul>
+                <li>Сокращение “простоя” техники</li>
+                <li>Доступ к базе грузов</li>
+                <li>Постоянные звонки</li>
+                <li>Бесплатное размещение объявления</li>
+              </ul>
+              <button>Регистрация</button>
+            </div>
+          </div>
+        </Container>
+      </div>
+      <div className="separator-white">
+        <hr />
+      </div>
+      <FAQ />
+    </div>
   )
 }
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await client.query({
+    query: GET_FIVE_FIRST_CARGO,
+  })
+  const cargoList = response?.data?.cargos
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  const allPosts = await getAllPostsForHome(preview)
+  const responseCargoTransport = await client.query({
+    query: GET_CATEGORIES_CARGO_TRANSPORT,
+  })
+  const cargoTransport = responseCargoTransport?.data?.transportCategory
 
+  const responsePassengerTransport = await client.query({
+    query: GET_CATEGORIES_PASSENGER_TRANSPORT,
+  })
+  const passengerTransport = responsePassengerTransport?.data?.transportCategory
   return {
-    props: { allPosts, preview },
-    revalidate: 10,
+    props: { cargoList, cargoTransport, passengerTransport },
   }
 }

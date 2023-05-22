@@ -1,0 +1,83 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.faqBlock {
+  background-color: $white;
+  padding-top: 60px;
+  padding-bottom: 82px;
+  h3 {
+    text-align: center;
+    margin-bottom: 13px;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item {
+      padding: 15px;
+      cursor: pointer;
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+
+        .icon {
+          position: relative;
+          display: block;
+          @include border-radius(50%);
+          width: 18px;
+          height: 18px;
+          border: 2px solid;
+          border-color: $yellow;
+          flex-shrink: 0;
+          transition: all 200ms ease-in-out;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            left: calc(50% - 4px);
+            width: 8px;
+            height: 2px;
+            background-color: $yellow;
+            transition: all 200ms ease-in-out;
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            top: calc(50% - 4px);
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 8px;
+            background-color: $yellow;
+            transition: all 200ms ease-in-out;
+          }
+        }
+      }
+      .text {
+        font-size: 14px;
+        line-height: 26px;
+        color: $gray;
+      }
+      &.active {
+        .title {
+          margin-bottom: 24px;
+        }
+        .icon {
+          border-color: $dark-blue;
+          &::after {
+            background-color: $dark-blue;
+          }
+          &::before {
+            background-color: $dark-blue;
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
+}

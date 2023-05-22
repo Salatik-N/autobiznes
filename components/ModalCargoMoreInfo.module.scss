@@ -1,0 +1,45 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .route {
+    margin-top: 15px;
+    margin-left: 2px;
+    .arrow {
+      font-size: 24px;
+      line-height: 32px;
+      height: 32px;
+      width: 24px;
+      margin-left: 3px;
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
+    .adress {
+      color: $gray;
+    }
+    .pickupPoint,
+    .deliverPoint {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .map {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 9px;
+    a {
+      @include btn-yellow(11px, 12px);
+      padding-left: 20px;
+      padding-right: 20px;
+      width: max-content;
+      margin: auto;
+    }
+  }
+}

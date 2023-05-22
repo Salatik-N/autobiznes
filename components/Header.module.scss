@@ -1,0 +1,115 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+$header-height: 50px;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  width: 100%;
+}
+.holderInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(3, 3, 3, 0.08);
+  backdrop-filter: blur(4.5px);
+  padding: 3px 11px;
+  position: relative;
+  z-index: 20;
+  .siteLogo img {
+    height: 20px;
+    width: auto;
+  }
+}
+.burgerBlock {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  position: relative;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    height: 3px;
+    width: 32px;
+    left: calc(50% - 16px);
+    transition: all 200ms ease-in-out;
+    top: 50%;
+  }
+  &::before {
+    transform: translateY(-4.5px);
+  }
+  &::after {
+    transform: translateY(4.5px);
+  }
+}
+.burgerMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 42px;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  padding-top: calc($header-height + 32px);
+  padding-bottom: 32px;
+  padding-left: 18px;
+  padding-right: 18px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  background-color: $dark-blue;
+  nav {
+    overflow: auto;
+    li {
+      &:not(:last-child) {
+        margin-bottom: 22px;
+      }
+      a {
+        @include btn-clear(21.5px, 21.5px);
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
+  }
+  .burgerInfo {
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 42px;
+      .registration {
+        @include btn-clear(10px, 11px);
+        width: 142px;
+      }
+      .logIn {
+        @include btn-blue(10px, 11px);
+        width: 142px;
+      }
+    }
+    .copyright {
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.32);
+    }
+  }
+}
+.burgerOpen {
+  .burgerBlock {
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}

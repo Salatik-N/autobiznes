@@ -1,0 +1,73 @@
+@import '../styles/abstracts/colors';
+
+.modalBlock {
+  display: none;
+  align-items: flex-end;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(29, 42, 74, 0.84);
+  cursor: pointer;
+  z-index: 999;
+  &.active {
+    display: flex;
+  }
+
+  .contentBlock {
+    background-color: #fff;
+    box-shadow: 0px -15px 20px rgba(13, 10, 25, 0.1);
+    border-radius: 12px 12px 0px 0px;
+    width: 100%;
+    position: relative;
+    padding: 20px 26px 32px;
+    cursor: initial;
+    &::after {
+      content: '';
+      background-color: #fff;
+      height: 12px;
+      top: -12px;
+      width: calc(100% - 36px);
+      position: absolute;
+      left: 18px;
+      z-index: -1;
+      border-radius: 12px 12px 0px 0px;
+    }
+    .content {
+      max-height: 100%;
+      overflow-y: auto;
+    }
+
+    .close {
+      margin-bottom: 20px;
+      text-align: right;
+
+      button {
+        width: 25px;
+        height: 25px;
+        position: relative;
+        &::before {
+          content: '';
+          height: 3px;
+          width: 24px;
+          background-color: $dark-blue;
+          position: absolute;
+          top: calc(50% - 1.5px);
+          left: calc(50% - 12px);
+          transform: rotate(45deg);
+        }
+        &::after {
+          content: '';
+          height: 3px;
+          width: 24px;
+          background-color: $dark-blue;
+          position: absolute;
+          top: calc(50% - 1.5px);
+          left: calc(50% - 12px);
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}

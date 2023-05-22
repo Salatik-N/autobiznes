@@ -1,30 +1,76 @@
-import Container from './container'
-import { EXAMPLE_PATH } from '../lib/constants'
+import Container from './Container'
+import Link from 'next/link'
+import Image from 'next/image'
+import truckIcon from '../public/icons/truck.svg'
+import walletIcon from '../public/icons/wallet.svg'
+import adIcon from '../public/icons/ad.svg'
+import charterIcon from '../public/icons/charter.svg'
+import styles from './Footer.module.scss'
+import FooterNav from './FooterNav'
+import SocialIcons from './SocialIcons'
 
 export default function Footer() {
   return (
-    <footer className="bg-accent-1 border-t border-accent-2">
-      <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
-          <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-            Statically Generated with Next.js.
-          </h3>
-          <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
-            <a
-              href="https://nextjs.org/docs/basic-features/pages"
-              className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0"
-            >
-              Read Documentation
-            </a>
-            <a
-              href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
-              className="mx-3 font-bold hover:underline"
-            >
-              View on GitHub
-            </a>
+    <>
+      <footer>
+        <hr className="separator-black" />
+        <Container>
+          <div className={styles.blockAdvantages}>
+            <div className={styles.advantagesItem}>
+              <Image src={truckIcon} alt="Транспорт" />
+              Весь транспорт на одном сайте
+            </div>
+            <div className={styles.advantagesItem}>
+              <Image src={walletIcon} alt="Кошелек" />
+              Лучшие цены без посредников
+            </div>
+            <div className={styles.advantagesItem}>
+              <Image src={adIcon} alt="Объявление" />
+              Актуальные объявления
+            </div>
+            <div className={styles.advantagesItem}>
+              <Image src={charterIcon} alt="Грамота" />
+              Проверенные арендодатели
+            </div>
           </div>
+        </Container>
+        <div className={styles.mainInformation}>
+          <Container>
+            <div className={styles.topFooter}>
+              <div className={styles.buttonsBlock}>
+                <div className={styles.buttonItem}>
+                  <span>Для заказчиков</span>
+                  <button className={styles.madeOrder}>Регистрация</button>
+                </div>
+                <div className={styles.buttonItem}>
+                  <span>Для владельцев</span>
+                  <button className={styles.addAdvert}>Добавить объявление</button>
+                </div>
+              </div>
+            </div>
+            <div className={styles.menu}>
+              <FooterNav />
+            </div>
+            <SocialIcons />
+            <div className={styles.copyright}>
+              При копировании материалов установка ссылки на официальный сайт обязательна.
+            </div>
+          </Container>
         </div>
-      </Container>
-    </footer>
+        <Container>
+          <div className={styles.blockCopyright}>
+            <span className={styles.copyrightText}>2016–2023 © Белорусский интернет-портал «Автобизнес.бай»</span>
+            <div className={styles.copyrightLinks}>
+              <Link href="/">Пользовательское соглашение</Link> | <Link href="/">Политика конфиденциальности</Link>
+            </div>
+            <div className={styles.metricsBlock}>
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+            </div>
+          </div>
+        </Container>
+      </footer>
+    </>
   )
 }

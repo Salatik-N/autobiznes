@@ -1,0 +1,13 @@
+@mixin opacity {
+  -webkit-transition: opacity 1s ease-in;
+  -moz-transition: opacity 1s ease-in;
+  transition: opacity 1s ease-in;
+}
+@mixin border-radius($val) {
+  -webkit-border-radius: $val;
+  -moz-border-radius: $val;
+  -ms-border-radius: $val;
+  -o-border-radius: $val;
+  border-radius: $val;
+  background-clip: padding-box;
+}

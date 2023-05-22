@@ -1,0 +1,86 @@
+@import '../abstracts/colors';
+@import './abstracts/mixins';
+
+@mixin button($pt, $pb, $hc) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include border-radius(10px);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  padding-top: $pt;
+  padding-bottom: $pb;
+  @if $hc {
+    background-image: -webkit-linear-gradient(45deg, $hc 50%, transparent 50%);
+    background-image: linear-gradient(45deg, $hc 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    &:hover {
+      background-position: 0;
+    }
+  }
+  transition: color 300ms ease-in-out, border 300ms ease-in-out, background 400ms ease-in-out;
+}
+
+@mixin btn-blue($pt, $pb) {
+  $hc: #005b71;
+  @include button($pt, $pb, $hc);
+  color: $white;
+  background-color: $blue;
+  &:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+@mixin btn-dark-blue($pt, $pb) {
+  $hc: #141f37;
+  @include button($pt, $pb, $hc);
+  color: $white;
+  background-color: $dark-blue;
+  &:active {
+    box-shadow: inset 0px 4px 9px rgba(0, 0, 0, 0.25);
+  }
+}
+@mixin btn-yellow($pt, $pb) {
+  $hc: #ffa800;
+  @include button($pt, $pb, $hc);
+  color: $dark-blue;
+  background-color: $yellow;
+  &:active {
+    box-shadow: inset 0px 4px 9px rgba(0, 0, 0, 0.25);
+  }
+}
+@mixin btn-green($pt, $pb) {
+  $hc: #218e25;
+  @include button($pt, $pb, $hc);
+  color: $white;
+  background-color: $green;
+  &:active {
+    box-shadow: inset 0px 4px 9px rgba(0, 0, 0, 0.25);
+  }
+}
+@mixin btn-white($pt, $pb) {
+  $hc: false;
+  @include button($pt, $pb, $hc);
+  color: $dark-blue;
+  background-color: $white;
+  border: 2px solid $white;
+  &:hover {
+    border-color: $dark-blue;
+  }
+  &:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+@mixin btn-clear($pt, $pb) {
+  $hc: #f5f6f7;
+  @include button($pt, $pb, $hc);
+  color: $white;
+  border: 1px solid $white;
+  &:hover {
+    color: $dark-blue;
+  }
+  &:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}

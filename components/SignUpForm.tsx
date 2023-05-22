@@ -1,0 +1,64 @@
+import { useState } from 'react'
+import { useRegistration } from '../lib/use-registration'
+
+export default function SignUpForm({ emailSignupMethod }) {
+  const [firstName, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    try {
+      useRegistration({ firstName, phone, email, password })
+      // setName('')
+      // setEmail('')
+      // setPassword('')
+    } catch (error) {
+      console.error('Registration error:', error)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} autoComplete="on">
+      {emailSignupMethod ? (
+        <div>
+          <label>Электронная почта</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Введите вашу почту"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+      ) : (
+        <div>
+          <label>Ваш телефон</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="+375(__)___-__-__"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+      )}
+      <div>
+        <label>Ваше имя</label>
+        <input type="text" name="name" value={firstName} onChange={(e) => setName(e.target.value)} />
+      </div>
+      <div>
+        <label>Пароль</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Пароль минимум из 8 символов"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  )
+}
