@@ -5,12 +5,13 @@ import { GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } fr
 import { client } from '../../lib/apollo'
 import Benefits from '../../components/Benefits'
 import Container from '../../components/Container'
-import mainImage from '../../public/images/cargo.png'
+import boxesImage from '../../public/images/boxes.png'
+import bagsImage from '../../public/images/bags.png'
 import bgImage from '../../public/images/bg-cargo.jpg'
 
 export default function Transport({ cargoTransport, passengerTransport }) {
   return (
-    <>
+    <div className="transport-page">
       <Container>
         <div className="page-title-block">
           <h1 className="page-title">
@@ -18,7 +19,8 @@ export default function Transport({ cargoTransport, passengerTransport }) {
             <button className="add-order">Оставить заказ</button>
             <button className="add-transport">Добавить свой транспорт</button>
           </h1>
-          <Image src={mainImage} alt="Грузы" />
+          <Image src={bagsImage} alt="Грузы" />
+          <Image src={boxesImage} alt="Грузы" />
           <Image className="bg-image" src={bgImage} alt="Фон" />
         </div>
       </Container>
@@ -34,7 +36,7 @@ export default function Transport({ cargoTransport, passengerTransport }) {
         <hr />
       </div>
       <Benefits />
-    </>
+    </div>
   )
 }
 

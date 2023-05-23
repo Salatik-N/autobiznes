@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
 import { client } from '../lib/apollo'
+import ListNavigation from '../components/ListNavigation'
 import CargoItem from '../components/CargoItem'
 import CargoFilter from '../components/CargoFilter'
 import Benefits from '../components/Benefits'
@@ -12,7 +13,7 @@ import bgImage from '../public/images/bg-cargo.jpg'
 
 export default function Cargo({ cargoList }) {
   return (
-    <>
+    <div className="cargos-page">
       <Container>
         <div className="page-title-block">
           <h1 className="page-title">
@@ -34,10 +35,7 @@ export default function Cargo({ cargoList }) {
               </p>
               <CargoItem cargos={cargoList} />{' '}
             </div>
-            <div className="show-more-cargo">
-              <p>Хотите увидеть больше грузов?</p>
-              <button className="filter-button">Открыть все грузы</button>
-            </div>
+            <ListNavigation />
           </>
         ) : null}
       </Container>
@@ -45,7 +43,7 @@ export default function Cargo({ cargoList }) {
         <hr />
       </div>
       <Benefits />
-    </>
+    </div>
   )
 }
 export const getStaticProps: GetStaticProps = async () => {

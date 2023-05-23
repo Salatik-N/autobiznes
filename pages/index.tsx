@@ -46,7 +46,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             </div>
             <div className="show-more-cargo">
               <p>Хотите увидеть больше грузов?</p>
-              <a href="/cargos/" className="filter-button">
+              <a href="/cargos" className="filter-button">
                 Открыть все грузы
               </a>
             </div>

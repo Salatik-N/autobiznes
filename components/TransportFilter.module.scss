@@ -1,0 +1,17 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.filterBlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  .filterButton {
+    @include btn-white(10px, 10px);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

@@ -2,37 +2,20 @@
 @import '../styles/components/buttons';
 
 .home-page {
-  .page-title-block {
-    .add-order {
-      margin: auto;
-      width: 278px;
-      @include btn-yellow(15px, 15px);
-      margin-top: 25px;
-      margin-bottom: 17px;
-    }
-    .add-transport {
-      margin: auto;
-      width: 278px;
-      @include btn-white(15px, 15px);
-    }
-  }
-  .category-transport-block {
-    margin-bottom: 36px;
-    h3 {
-      text-align: center;
-      line-height: 36px;
-    }
+  .show-more-cargo {
+    margin-bottom: 40px;
     p {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 17px;
+    }
+    button,
+    a {
+      margin: auto;
+      width: 220px;
+      @include btn-dark-blue(16px, 16px);
     }
   }
-  .cargo-list {
-    h3 {
-      text-align: center;
-      line-height: 36px;
-    }
-  }
+
   .main-categories-block {
     background-color: $white;
     padding-top: 44px;

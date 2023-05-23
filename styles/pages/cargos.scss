@@ -1,0 +1,14 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.cargos-page {
+  .cargo-list {
+    .title {
+      display: block;
+      text-align: center;
+      font-size: 20px;
+      line-height: 30px;
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.inner {
+  margin-bottom: 123px;
+  display: flex;
+  justify-content: space-between;
+
+  .numbers {
+    display: flex;
+    gap: 4px;
+    button {
+      width: 40px;
+      height: 40px;
+      font-weight: 700;
+      transition: all 300ms ease-in-out;
+      &:hover,
+      &.active {
+        background-color: $dark-blue;
+        color: #fff;
+      }
+    }
+  }
+
+  .next {
+    button {
+      @include btn-dark-blue(9px, 10px);
+      font-weight: 600;
+      padding-left: 18px;
+      padding-right: 10px;
+
+      .arrow {
+        border: solid $white;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        margin-left: 11px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+    }
+  }
+
+  button {
+    font-size: 14px;
+    line-height: 21px;
+    border-radius: 6px;
+  }
+}

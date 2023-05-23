@@ -35,7 +35,7 @@
       border-radius: 12px 12px 0px 0px;
     }
     .content {
-      max-height: 100%;
+      max-height: calc(100% - 47.5px);
       overflow-y: auto;
     }
 
