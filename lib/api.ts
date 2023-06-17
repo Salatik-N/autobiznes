@@ -82,8 +82,9 @@ export const GET_CARGO_INFO = gql`
           lastName
         }
       }
-      acfCargoDiscription {
-        description
+      acfCargoDescription {
+        shortDescription
+        fullDescription
       }
       acfCargoFeatures {
         movers
@@ -120,6 +121,84 @@ export const GET_CARGO_INFO = gql`
         viber
         telegram
         customPhone
+        paymentMethod
+        budgetTo
+      }
+    }
+  }
+`
+export const GET_TRANSPORT_CATEGORY = gql`
+  query GetTransportCategory($id: ID!) {
+    transportCategory(id: $id, idType: SLUG) {
+      name
+      slug
+      transports {
+        edges {
+          node {
+            author {
+              node {
+                customField {
+                  verifiedUser
+                }
+              }
+            }
+            title
+            databaseId
+            acfTransportAddress {
+              regionTransport
+              city
+            }
+            acfTransportFeatures {
+              typeTransportation
+              typeTranspor
+              carryingCapacity
+              bodyWidth
+              bodyVolume
+              bodyLength
+              bodyHeight
+              price1Hour
+              price1Km
+              pricePerShift
+            }
+            acfTransportPhotos {
+              photoTruck {
+                mediaItemUrl
+              }
+            }
+            acfTransportDescription {
+              shortDescription
+              fullDescription
+            }
+          }
+        }
+      }
+    }
+  }
+`
+export const GET_TRANSPORT_INFO = gql`
+  query GetTransport($id: ID!) {
+    transport(id: $id, idType: DATABASE_ID) {
+      author {
+        node {
+          avatar {
+            url
+          }
+          customField {
+            phone
+            fatherName
+          }
+          firstName
+          lastName
+        }
+      }
+      acfTransportContacts {
+        customPhone
+        modeOperation
+        paymentMethod
+        paymentProcedure
+        telegram
+        viber
+        whatsapp
       }
     }
   }
@@ -151,6 +230,45 @@ export const GET_CATEGORIES_PASSENGER_TRANSPORT = gql`
         }
       }
       name
+    }
+  }
+`
+export const GET_USER_INFO = gql`
+  query GetUserInfo {
+    viewer {
+      id
+      username
+      email
+      firstName
+      cargos {
+        edges {
+          node {
+            slug
+            databaseId
+            acfCargoPickupPoint {
+              shippingAddress
+              dateLoading
+              shippingCity
+            }
+            acfCargoDeliverPoint {
+              dateUnloading
+              unloadingCountry
+              unloadingCity
+            }
+            acfCargoFeatures {
+              weight
+              vehicleBodyType
+              typeTransportation
+              typeLoading
+              movers
+            }
+            acfCargoContacts {
+              budgetTo
+              paymentMethod
+            }
+          }
+        }
+      }
     }
   }
 `

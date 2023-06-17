@@ -8,9 +8,12 @@ import { useState } from 'react'
 import HeaderNav from './HeaderNav'
 import logo from '../public/icons/logo.svg'
 import SocialIcons from './SocialIcons'
+import userIcon from '../public/icons/user.svg'
+import { useProvideAuth } from '../lib/use-authorization'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const { isSignedIn } = useProvideAuth()
 
   return (
     <header className={styles.header}>
@@ -20,24 +23,33 @@ export default function Header() {
             <Image src={logo} alt="Логотип" />
           </Link>
         </div>
-        <div className={`header-info ${open ? styles.burgerOpen : ''}`}>
-          {/*<MediaQuery maxWidth={1023}>
+        <div className={styles.controlButtons}>
+          {isSignedIn() && (
+            <Link href="/account" className={styles.userIcon}>
+              <Image src={userIcon} alt="Пользователь" />
+            </Link>
+          )}
+          <div className={`header-info ${open ? styles.burgerOpen : ''}`}>
+            {/*<MediaQuery maxWidth={1023}>
             <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
   </MediaQuery>*/}
-          <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
-          <MediaQuery minWidth={1024}>
-            <HeaderNav />
-          </MediaQuery>
+            <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
+            <MediaQuery minWidth={1024}>
+              <HeaderNav />
+            </MediaQuery>
+          </div>
         </div>
       </div>
       {open ? (
         <div className={styles.burgerMenu}>
           <HeaderNav />
           <div className={styles.burgerInfo}>
-            <div className={styles.buttons}>
-              <SignUp style={styles.registration}>Регистрация</SignUp>
-              <Login style={styles.logIn}>Войти</Login>
-            </div>
+            {!isSignedIn() && (
+              <div className={styles.buttons}>
+                <SignUp style={styles.registration}>Регистрация</SignUp>
+                <Login style={styles.logIn}>Войти</Login>
+              </div>
+            )}
             <SocialIcons />
             <div className={styles.copyright}>
               При копировании материалов установка ссылки на официальный сайт обязательна.

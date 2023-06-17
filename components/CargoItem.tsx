@@ -14,6 +14,7 @@ import ModalCargoMoreInfo from './ModalCargoMoreInfo'
 import { GET_CARGO_INFO } from '../lib/api'
 import { client } from '../lib/apollo'
 import { Loader } from './Loader'
+import { useProvideAuth } from '../lib/use-authorization'
 
 export default function CargoItem({ cargos }) {
   const [activeModalName, setactiveModalName] = useState(null)

@@ -14,13 +14,6 @@
     margin-bottom: 15px;
   }
 
-  .image {
-    width: 100%;
-    height: 200px;
-    background-color: $white;
-    @include border-radius(8px);
-  }
-
   .transportNumber {
     color: #ed9004;
     padding: 6px 30px;
@@ -33,6 +26,12 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 24px;
+    display: flex;
+    gap: 8px;
+
+    img {
+      margin-top: 4px;
+    }
   }
 
   .address,
@@ -43,25 +42,71 @@
     color: $gray;
   }
   .features {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-    border: 1px solid $white;
-    padding: 10px;
-    cursor: pointer;
-    @include border-radius(8px);
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      border: 1px solid $white;
+      padding: 10px;
+      cursor: pointer;
+      @include border-radius(8px);
 
-    .arrow {
-      border: solid $dark-blue;
-      border-width: 0 2px 2px 0;
-      display: inline-block;
-      padding: 4px;
-      margin-top: -2px;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
+      .arrow {
+        border: solid $dark-blue;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 4px;
+        margin-top: -2px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transition: all 200ms ease-in-out;
+      }
+    }
+    .content {
+      @include border-radius(8px);
+      border: 1px solid $white;
+      margin-top: 5px;
+
+      .item {
+        padding: 15px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &:first-child {
+          padding-top: 15px;
+        }
+        &:last-child {
+          padding-bottom: 20px;
+        }
+        &:nth-child(2n-1) {
+          background-color: $white;
+        }
+
+        .label {
+          font-size: 13px;
+          line-height: 13px;
+        }
+
+        .value {
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 13px;
+        }
+      }
+    }
+
+    &.active {
+      .button {
+        box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.12);
+        .arrow {
+          margin-top: 2px;
+          transform: rotate(-135deg);
+          -webkit-transform: rotate(-135deg);
+        }
+      }
     }
   }
 
@@ -100,5 +145,27 @@
   .buttonContacts {
     width: 100%;
     @include btn-blue(12px, 12px);
+  }
+
+  .description {
+    .label {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: 3px;
+    }
+    .text {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      color: $gray;
+    }
+    .readMore {
+      padding-left: 5px;
+      padding-right: 5px;
+      cursor: pointer;
+      text-decoration-line: underline;
+      color: $dark-blue;
+    }
   }
 }

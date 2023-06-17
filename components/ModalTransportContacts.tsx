@@ -7,11 +7,11 @@ import whatsAppIcon from '../public/icons/whatsapp.svg'
 import telegramIcon from '../public/icons/telegram.svg'
 import timeIcon from '../public/icons/time.svg'
 
-export default function ModalCargoContacts({ cargoInfo }) {
-  const authorInfo = cargoInfo.author.node
+export default function ModalCargoContacts({ transportInfo }) {
+  const authorInfo = transportInfo.author.node
   let phone
-  if (cargoInfo.acfCargoContacts.customPhone) {
-    phone = cargoInfo.acfCargoContacts.customPhone
+  if (transportInfo.acfTransportContacts.customPhone) {
+    phone = transportInfo.acfTransportContacts.customPhone
   } else {
     phone = authorInfo.customField.phone
   }
@@ -28,6 +28,7 @@ export default function ModalCargoContacts({ cargoInfo }) {
         <p>
           Место в рейтинге: {authorInfo.firstName} из {authorInfo.firstName}
         </p>
+        <p>Техники в парке: {authorInfo.registeredDate} ед.</p>
       </div>
       <div>
         <Link className={styles.phone} href={`tel:${phone}`}>
@@ -35,27 +36,31 @@ export default function ModalCargoContacts({ cargoInfo }) {
           {phone}
         </Link>
       </div>
-      {cargoInfo.acfCargoContacts.viber ||
-      cargoInfo.acfCargoContacts.whatsapp ||
-      cargoInfo.acfCargoContacts.telegram ? (
+      {transportInfo.acfTransportContacts.viber ||
+      transportInfo.acfTransportContacts.whatsapp ||
+      transportInfo.acfTransportContacts.telegram ? (
         <div className={styles.messengers}>
-          {cargoInfo.acfCargoContacts.viber && (
+          {transportInfo.acfTransportContacts.viber && (
             <Link href={`viber://chat?number=%2B${phone.replace(/\D/g, '')}`}>
               <Image src={viberIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
-          {cargoInfo.acfCargoContacts.whatsapp && (
+          {transportInfo.acfTransportContacts.whatsapp && (
             <Link href={`https://api.whatsapp.com/send?phone=${phone.replace(/\D/g, '')}`}>
               <Image src={whatsAppIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
-          {cargoInfo.acfCargoContacts.telegram && (
+          {transportInfo.acfTransportContacts.telegram && (
             <Link href={`https://t.me/${phone}`}>
               <Image src={telegramIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
         </div>
       ) : null}
+      <div className={styles.workTime}>
+        <Image src={timeIcon} alt="Звонок" width={25} height={25} />
+        Режим работы: {authorInfo.firstName}
+      </div>
     </div>
   )
 }

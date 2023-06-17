@@ -1,0 +1,109 @@
+@import 'abstracts/colors';
+@import 'abstracts/mixins';
+
+.images {
+  width: 100%;
+  height: 200px;
+  background-color: $white;
+  overflow: hidden;
+  position: relative;
+  @include border-radius(8px);
+
+  .image,
+  .defaultImage {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .image {
+    display: none;
+
+    &.activeImage {
+      display: block;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .leftButton,
+    .rightButton {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 70px;
+
+      button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        i {
+          display: inline-block;
+          padding: 5px;
+        }
+      }
+    }
+
+    .leftButton {
+      left: 0;
+
+      button {
+        padding-left: 25px;
+        justify-content: flex-start;
+      }
+      i {
+        border: solid $dark-blue;
+        border-width: 2px 0 0 2px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        margin-left: 3px;
+      }
+    }
+    .rightButton {
+      right: 0;
+
+      button {
+        padding-right: 25px;
+        justify-content: flex-end;
+      }
+      i {
+        border: solid $dark-blue;
+        border-width: 0 2px 2px 0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        margin-right: 3px;
+      }
+    }
+  }
+
+  .controls {
+    position: absolute;
+    right: 25px;
+    left: 25px;
+    bottom: 10px;
+    display: flex;
+    gap: 15px;
+
+    .item {
+      cursor: pointer;
+      height: 4px;
+      flex: 1;
+      background-color: #fff;
+      @include border-radius(8px);
+    }
+    .active {
+      background-color: $green;
+    }
+  }
+}

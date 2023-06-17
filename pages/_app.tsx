@@ -3,6 +3,7 @@ import App from 'next/app'
 import localFont from 'next/font/local'
 import { ApolloProvider } from '@apollo/client'
 import { client } from '../lib/apollo'
+import { AuthProvider } from '../lib/use-authorization'
 import Layout from '../components/Layout'
 import '../styles/index.scss'
 
@@ -34,13 +35,13 @@ const interFont = localFont({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Layout>
-        <ApolloProvider client={client}>
+      <ApolloProvider client={client}>
+        <Layout>
           <main className={interFont.className}>
             <Component {...pageProps} />
           </main>
-        </ApolloProvider>
-      </Layout>
+        </Layout>
+      </ApolloProvider>
     </>
   )
 }

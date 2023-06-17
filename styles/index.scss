@@ -1,9 +1,10 @@
-@import './abstracts/colors';
-@import './abstracts/mixins';
-@import './components/buttons';
-@import './pages/front-page.scss';
-@import './pages/cargos.scss';
-@import './pages/transport.scss';
+@import 'abstracts/colors';
+@import 'abstracts/mixins';
+@import 'components/buttons';
+@import 'pages/front-page';
+@import 'pages/cargos';
+@import 'pages/transport';
+@import 'pages/account';
 
 html,
 body {

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from './CategoryItem.module.scss'
 import { useState } from 'react'
 
@@ -48,7 +49,7 @@ const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
   }
 
   return (
-    <a
+    <Link
       href={`transport/${item.slug}/`}
       className={styles.item}
       onMouseEnter={handleMouseEnter}
@@ -60,7 +61,7 @@ const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
         <Image src={`/images/${item.slug}.png`} alt={item.name} width={172} height={125} />
       )}
       <span>{item.name}</span>
-    </a>
+    </Link>
   )
 }
 

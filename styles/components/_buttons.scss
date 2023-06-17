@@ -1,5 +1,5 @@
-@import '../abstracts/colors';
-@import './abstracts/mixins';
+@import 'abstracts/colors';
+@import 'abstracts/mixins';
 
 @mixin button($pt, $pb, $hc) {
   display: flex;
