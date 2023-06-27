@@ -5,7 +5,6 @@ import phoneIcon from '../public/icons/phone.svg'
 import viberIcon from '../public/icons/viber.svg'
 import whatsAppIcon from '../public/icons/whatsapp.svg'
 import telegramIcon from '../public/icons/telegram.svg'
-import timeIcon from '../public/icons/time.svg'
 
 export default function ModalCargoContacts({ cargoInfo }) {
   const authorInfo = cargoInfo.author.node

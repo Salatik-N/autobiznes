@@ -1,0 +1,60 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .label {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 39px;
+  }
+
+  .button {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: max-content;
+
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+}
+.menuFooter {
+  margin-top: 50px;
+
+  .button {
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+
+    img {
+      width: 30px;
+      height: auto;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: $dark-blue;
+    }
+  }
+}

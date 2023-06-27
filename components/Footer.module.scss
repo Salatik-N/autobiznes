@@ -1,88 +1,93 @@
 @import '../styles/abstracts/colors';
 @import '../styles/components/buttons';
 
-.blockAdvantages {
-  margin-top: 21px;
-  margin-bottom: 40px;
-  .advantagesItem {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-weight: 600;
-    &:not(:last-child) {
-      margin-bottom: 13px;
-    }
-  }
-}
-.mainInformation {
-  padding-top: 28px;
-  padding-bottom: 75px;
-  background-color: $dark-blue;
-  text-align: center;
-  .topFooter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    margin-bottom: 37px;
-    .buttonItem {
-      &:first-child {
-        margin-bottom: 32px;
-      }
-      span {
-        color: #fff;
-        font-weight: 700;
-        line-height: 24px;
-      }
-      .madeOrder {
-        margin-top: 11px;
-        width: 222px;
-        @include btn-clear(13px, 14px);
-      }
-      .addAdvert {
-        margin-top: 11px;
-        width: 222px;
-        @include btn-green(13px, 14px);
-      }
-    }
-  }
-  .menu {
-    margin-bottom: 37px;
-    li a {
-      color: $white;
-      line-height: 48px;
-    }
-  }
-  .socialIcons {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-  .copyright {
-    font-size: 13px;
-    line-height: 20px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.32);
-  }
-}
-
-.blockCopyright {
-  padding-top: 18px;
-  padding-bottom: 38px;
+.siteFooter {
   background-color: $white;
-  text-align: center;
-  .copyrightText {
-    font-size: 12px;
+  padding-top: 100px;
+
+  .blockAdvantages {
+    margin-top: 21px;
+    margin-bottom: 40px;
+    .advantagesItem {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-weight: 600;
+      &:not(:last-child) {
+        margin-bottom: 13px;
+      }
+    }
   }
-  .copyrightLinks {
-    margin-top: 18px;
-    margin-bottom: 18px;
-    font-size: 11px;
+  .mainInformation {
+    padding-top: 28px;
+    padding-bottom: 75px;
+    background-color: $dark-blue;
+    text-align: center;
+    .topFooter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 37px;
+      .buttonItem {
+        &:first-child {
+          margin-bottom: 32px;
+        }
+        span {
+          color: #fff;
+          font-weight: 700;
+          line-height: 24px;
+        }
+        .madeOrder {
+          margin-top: 11px;
+          width: 222px;
+          @include btn-clear(13px, 14px);
+        }
+        .addAdvert {
+          margin-top: 11px;
+          width: 222px;
+          @include btn-green(13px, 14px);
+        }
+      }
+    }
+    .menu {
+      margin-bottom: 37px;
+      li a {
+        color: $white;
+        line-height: 48px;
+      }
+    }
+    .socialIcons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .copyright {
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.32);
+    }
   }
-  .metricsBlock {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
+
+  .blockCopyright {
+    padding-top: 18px;
+    padding-bottom: 38px;
+    background-color: $white;
+    text-align: center;
+    .copyrightText {
+      font-size: 12px;
+    }
+    .copyrightLinks {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      font-size: 11px;
+    }
+    .metricsBlock {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
   }
 }

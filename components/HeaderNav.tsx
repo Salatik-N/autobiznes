@@ -4,7 +4,7 @@ export default function HeaderNav() {
   const navigation = [
     { id: 1, title: 'Главная', path: '/' },
     { id: 2, title: 'Грузы', path: '/cargos' },
-    { id: 3, title: 'Транспорт', path: '/transport' },
+    { id: 3, title: 'Транспорт', path: '/transports' },
   ]
   return (
     <>

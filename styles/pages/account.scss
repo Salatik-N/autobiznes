@@ -1,0 +1,19 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.account-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 46px;
+}
+.menu-account {
+  margin-bottom: 30px;
+  padding: 10px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: $dark-blue;
+  box-shadow: 0px 3px 27px rgba(153, 155, 168, 0.15);
+  @include border-radius(10px);
+}

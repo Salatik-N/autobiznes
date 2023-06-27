@@ -3,7 +3,6 @@ import App from 'next/app'
 import localFont from 'next/font/local'
 import { ApolloProvider } from '@apollo/client'
 import { client } from '../lib/apollo'
-import { AuthProvider } from '../lib/use-authorization'
 import Layout from '../components/Layout'
 import '../styles/index.scss'
 

@@ -1,9 +1,10 @@
 import styles from './TransportItem.module.scss'
+import { useMutation } from '@apollo/client'
 import Image from 'next/image'
 import verifiedUser from '../public/icons/verified-user.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { client } from '../lib/apollo'
-import { GET_TRANSPORT_INFO } from '../lib/api'
+import { GET_TRANSPORT_INFO, UPDATE_TRANSPORT_VIEWS } from '../lib/api'
 import Modal from './Modal'
 import { Loader } from './Loader'
 import ModalTransprotContacts from '../components/ModalTransportContacts'
@@ -55,8 +56,8 @@ const TransportItem = ({ active, transports }) => {
   }
 
   const truncateDescription = (text) => {
-    const halfLength = Math.ceil(text.length / 2)
-    return text.slice(0, halfLength)
+    const halfLength = Math.ceil(text?.length / 2)
+    return text?.slice(0, halfLength)
   }
 
   return (
@@ -75,7 +76,7 @@ const TransportItem = ({ active, transports }) => {
               {item.node.author.node.customField.verifiedUser && (
                 <Image src={verifiedUser} width={16} height={16} alt="Подтвержденный пользователь" />
               )}
-              {item.node.acfTransportDescription.shortDescription}
+              {item.node.title}
             </div>
             <div
               className={styles.address}

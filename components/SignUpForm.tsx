@@ -1,47 +1,82 @@
 import { useState } from 'react'
 import { useRegistration } from '../lib/use-registration'
+import { client } from '../lib/apollo'
+import { REGISTER_USER } from '../lib/api'
+
+enum FIELDS {
+  FIRST_NAME = 'firstName',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+}
 
 export default function SignUpForm() {
-  const [firstName, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [form, setForm] = useState({
+    [FIELDS.FIRST_NAME]: '',
+    [FIELDS.EMAIL]: '',
+    [FIELDS.PASSWORD]: '',
+  })
 
-  const handleSubmit = (e) => {
+  const handleChangeForm = (event: React.FormEvent<HTMLInputElement>) => {
+    const target = event.currentTarget
+    const name = target?.name
+    const value = target?.value
+
+    setForm((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }))
+  }
+
+  const createNewUser = async (e) => {
     e.preventDefault()
-    try {
-      useRegistration({ firstName, email, password })
-      // setName('')
-      // setEmail('')
-      // setPassword('')
-    } catch (error) {
-      console.error('Registration error:', error)
-    }
+    client
+      .mutate({
+        mutation: REGISTER_USER,
+        variables: {
+          firstName: form[FIELDS.FIRST_NAME],
+          username: form[FIELDS.EMAIL],
+          email: form[FIELDS.EMAIL],
+          password: form[FIELDS.PASSWORD],
+        },
+      })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="on">
+    <form onSubmit={createNewUser} autoComplete="on">
       <div>
         <label>Электронная почта</label>
         <input
-          type="email"
           name="email"
+          type="email"
           placeholder="Введите вашу почту"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form[FIELDS.EMAIL]}
+          onChange={handleChangeForm}
         />
       </div>
       <div>
         <label>Ваше имя</label>
-        <input type="text" name="name" value={firstName} onChange={(e) => setName(e.target.value)} />
+        <input
+          name="name"
+          type="text"
+          placeholder="Введите ваше имя"
+          value={form[FIELDS.FIRST_NAME]}
+          onChange={handleChangeForm}
+        />
       </div>
       <div>
         <label>Пароль</label>
         <input
-          type="password"
           name="password"
+          type="password"
           placeholder="Пароль минимум из 8 символов"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form[FIELDS.PASSWORD]}
+          onChange={handleChangeForm}
         />
       </div>
       <button type="submit">Зарегистрироваться</button>

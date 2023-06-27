@@ -5,10 +5,10 @@ const TransportFeatures = ({ active, features }) => {
     <>
       {active && (
         <div className={styles.content}>
-          {features.typeTranspor && (
+          {features.vehicleBodyType && (
             <div className={styles.item}>
               <div className={styles.label}>Вид транспорта</div>
-              <div className={styles.value}>{features.typeTranspor}</div>
+              <div className={styles.value}>{features.vehicleBodyType}</div>
             </div>
           )}
           {features.typeTransportation && (

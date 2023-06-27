@@ -4,8 +4,10 @@ import CargoItem from '../../components/CargoItem'
 import { client } from '../../lib/apollo'
 import { GET_USER_INFO } from '../../lib/api'
 import { useEffect, useState } from 'react'
+import AccountHeader from '../../components/AccountHeader'
 
-export default function Cargo() {
+export default function Cargos() {
+  const [modalActive, setModalActive] = useState(false)
   const [cargoList, setCargoList] = useState(null)
   useEffect(() => {
     async function getUser() {
@@ -19,9 +21,8 @@ export default function Cargo() {
 
   return (
     <Container>
-      <h2>Личный кабинет</h2>
-      <button>Меню кабинета</button>
-      <div className="white-background">Мои заказы/грузы</div>
+      <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
+      <div className="white-background">Мои грузы</div>
       {cargoList ? (
         <>
           <div className="cargo-list">

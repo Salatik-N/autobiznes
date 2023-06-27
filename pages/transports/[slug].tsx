@@ -70,7 +70,6 @@ export default function Transport1t({ transportCategory }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context)
   const responseCategory = await client.query({
     query: GET_TRANSPORT_CATEGORY,
     variables: {

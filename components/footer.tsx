@@ -12,7 +12,7 @@ import SocialIcons from './SocialIcons'
 export default function Footer() {
   return (
     <>
-      <footer>
+      <footer className={styles.siteFooter}>
         <hr className="separator-black" />
         <Container>
           <div className={styles.blockAdvantages}>
@@ -40,11 +40,15 @@ export default function Footer() {
               <div className={styles.buttonsBlock}>
                 <div className={styles.buttonItem}>
                   <span>Для заказчиков</span>
-                  <button className={styles.madeOrder}>Регистрация</button>
+                  <Link href="/account/add-cargo" className={styles.madeOrder}>
+                    Оставить заказ
+                  </Link>
                 </div>
                 <div className={styles.buttonItem}>
                   <span>Для владельцев</span>
-                  <button className={styles.addAdvert}>Добавить объявление</button>
+                  <Link href="/account/add-transport" className={styles.addAdvert}>
+                    Добавить объявление
+                  </Link>
                 </div>
               </div>
             </div>

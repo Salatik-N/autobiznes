@@ -14,7 +14,6 @@ import ModalCargoMoreInfo from './ModalCargoMoreInfo'
 import { GET_CARGO_INFO } from '../lib/api'
 import { client } from '../lib/apollo'
 import { Loader } from './Loader'
-import { useProvideAuth } from '../lib/use-authorization'
 
 export default function CargoItem({ cargos }) {
   const [activeModalName, setactiveModalName] = useState(null)
@@ -25,7 +24,7 @@ export default function CargoItem({ cargos }) {
   const handleModalOpen = (idCargo, e) => {
     setCargoInfo(null)
     setModalActive(true)
-    setactiveModalName(e)
+    setactiveModalName(e.target.name)
     getCargoInfo(idCargo)
   }
 
@@ -107,15 +106,11 @@ export default function CargoItem({ cargos }) {
               data-name="contacts"
               name="contacts"
               className={styles.contacts}
-              onClick={(e) => handleModalOpen(item.node.databaseId, e.target.name)}
+              onClick={(e) => handleModalOpen(item.node.databaseId, e)}
             >
               Контакты
             </button>
-            <button
-              name="more-info"
-              className={styles.more}
-              onClick={(e) => handleModalOpen(item.node.databaseId, e.target.name)}
-            >
+            <button name="more-info" className={styles.more} onClick={(e) => handleModalOpen(item.node.databaseId, e)}>
               <Image src={moreButtonIcon} alt="Больше информации" />
             </button>
           </div>

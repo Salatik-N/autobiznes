@@ -3,7 +3,7 @@ import adressIcon from '../public/icons/modal-adress.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function ModalCargoMoreInfo({ cargoInfo, google }) {
+export default function ModalCargoMoreInfo({ cargoInfo }) {
   const generateGoogleMapsLink = (startCity, startAddress, finishCity, finishAddress) => {
     const encodedStartCity = encodeURIComponent(startCity)
     const encodedStartAddress = encodeURIComponent(`улица ${startAddress}`)
@@ -15,9 +15,7 @@ export default function ModalCargoMoreInfo({ cargoInfo, google }) {
 
   return (
     <div className={styles.inner}>
-      {cargoInfo.acfCargoDescription.shortDescription && (
-        <div className={styles.title}>{cargoInfo.acfCargoDescription.shortDescription}</div>
-      )}
+      {cargoInfo.title && <div className={styles.title}>{cargoInfo.title}</div>}
       {cargoInfo.acfCargoDescription.fullDescription && (
         <div className={styles.description}>{cargoInfo.acfCargoDescription.fullDescription}</div>
       )}
@@ -57,7 +55,7 @@ export default function ModalCargoMoreInfo({ cargoInfo, google }) {
           <div className={styles.pickupPoint}>
             <Image src={adressIcon} alt="Адрес" />
             <div>
-              {cargoInfo.acfCargoPickupPoint.shippingCity}{' '}
+              {cargoInfo.acfCargoPickupPoint.shippingCity}
               <span className={styles.adress}>({cargoInfo.acfCargoPickupPoint.shippingAddress})</span>
             </div>
           </div>
@@ -65,7 +63,7 @@ export default function ModalCargoMoreInfo({ cargoInfo, google }) {
           <div className={styles.deliverPoint}>
             <Image src={adressIcon} alt="Адрес" />
             <div>
-              {cargoInfo.acfCargoDeliverPoint.unloadingCity}{' '}
+              {cargoInfo.acfCargoDeliverPoint.unloadingCity}
               <span className={styles.adress}>({cargoInfo.acfCargoDeliverPoint.unloadingAdress})</span>
             </div>
           </div>

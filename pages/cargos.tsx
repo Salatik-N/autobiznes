@@ -28,12 +28,12 @@ export default function Cargo({ cargoList }) {
             <div className="cargo-list">
               <span className="title">Все грузы для перевозки по Беларуси</span>
               <p>
-                По вашему запросу поиск грузов для перевозки найдено{' '}
+                По вашему запросу поиск грузов для перевозки найдено
                 <span className="text-green">
                   <Declension count={cargoList.edges.length} words={['предложение', 'предложения', 'предложений']} />
                 </span>
               </p>
-              <CargoItem cargos={cargoList} />{' '}
+              <CargoItem cargos={cargoList} />
             </div>
             <ListNavigation />
           </>

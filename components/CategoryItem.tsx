@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './CategoryItem.module.scss'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 interface CategoryItemProps {
   category: {
@@ -39,6 +40,9 @@ interface HoverableItemProps {
 
 const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const isAccountPage = useRouter().pathname.includes('/account')
+
+  const link = isAccountPage ? `/account/add-transport/${item.slug}/` : `/transports/${item.slug}/`
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -49,12 +53,7 @@ const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
   }
 
   return (
-    <Link
-      href={`transport/${item.slug}/`}
-      className={styles.item}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <Link href={link} className={styles.item} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isHovered ? (
         <Image src={`/images/${item.slug}-turn.png`} alt={item.name} width={172} height={125} />
       ) : (
