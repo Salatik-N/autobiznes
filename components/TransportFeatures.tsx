@@ -51,6 +51,12 @@ const TransportFeatures = ({ active, features }) => {
               <div className={styles.value}>{features.bodyWidth} м.</div>
             </div>
           )}
+          {features.bodyVolume && (
+            <div className={styles.item}>
+              <div className={styles.label}>Объем кузова</div>
+              <div className={styles.value}>{features.bodyVolume} м./куб.</div>
+            </div>
+          )}
         </div>
       )}
     </>

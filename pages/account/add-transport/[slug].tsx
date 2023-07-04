@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { client } from '../../../lib/apollo'
@@ -34,6 +34,7 @@ enum FIELDS {
   BODY_HEIGHT = 'bodyHeight',
   BODY_WIDTH = 'bodyWidth',
   BODY_VOLUME = 'bodyVolume',
+  PHOTO_DRIVER = 'photoDriver',
   FULL_DESCRIPTION = 'fullDescription',
 }
 
@@ -61,6 +62,7 @@ export default function Transport1t({ transportCategory }) {
     [FIELDS.BODY_HEIGHT]: null,
     [FIELDS.BODY_WIDTH]: null,
     [FIELDS.BODY_VOLUME]: null,
+    [FIELDS.PHOTO_DRIVER]: '',
     [FIELDS.FULL_DESCRIPTION]: '',
   })
   const router = useRouter()
@@ -83,6 +85,7 @@ export default function Transport1t({ transportCategory }) {
       ...prevValue,
       [name]: value,
     }))
+    console.log(form)
   }
   const handleChangeFormSelect = (event, actionMeta) => {
     const name = actionMeta?.name
@@ -105,8 +108,19 @@ export default function Transport1t({ transportCategory }) {
     }))
   }
 
+  const handleChangeFormImage = (event) => {
+    const name = event?.currentTarget?.name
+    const value = event?.target?.files[0]
+
+    if (!value || !name) return
+
+    setForm((prevValue) => ({
+      ...prevValue,
+      [name]: URL.createObjectURL(value),
+    }))
+  }
+
   const createNewCargo = async (e) => {
-    console.log(transportCategory.slug)
     e.preventDefault()
     client
       .mutate({
@@ -134,6 +148,7 @@ export default function Transport1t({ transportCategory }) {
           bodyHeight: form[FIELDS.BODY_HEIGHT],
           bodyWidth: form[FIELDS.BODY_WIDTH],
           bodyVolume: form[FIELDS.BODY_VOLUME],
+          photoDriver: form[FIELDS.PHOTO_DRIVER],
           fullDescription: form[FIELDS.FULL_DESCRIPTION],
         },
       })
@@ -309,7 +324,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Цена за 1 км, BYN</span>
+              <span>Цена за 1 км., BYN</span>
               <input
                 name={FIELDS.PRICE_1_KM}
                 type="number"
@@ -319,7 +334,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Грузоподъемность кузова, кг</span>
+              <span>Грузоподъемность кузова, кг.</span>
               <input
                 name={FIELDS.CARRYING_CAPACITY}
                 type="number"
@@ -329,7 +344,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Длина кузова, м</span>
+              <span>Длина кузова, м.</span>
               <input
                 name={FIELDS.BODY_LENGTH}
                 type="number"
@@ -339,7 +354,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Высота кузова, м</span>
+              <span>Высота кузова, м.</span>
               <input
                 name={FIELDS.BODY_HEIGHT}
                 type="number"
@@ -349,7 +364,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Ширина кузова, м</span>
+              <span>Ширина кузова, м.</span>
               <input
                 name={FIELDS.BODY_WIDTH}
                 type="number"
@@ -359,7 +374,7 @@ export default function Transport1t({ transportCategory }) {
               />
             </label>
             <label>
-              <span>Объем кузова, м/куб</span>
+              <span>Объем кузова, м./куб.</span>
               <input
                 name={FIELDS.BODY_VOLUME}
                 type="number"
@@ -380,6 +395,16 @@ export default function Transport1t({ transportCategory }) {
                 value={form[FIELDS.FULL_DESCRIPTION]}
                 onChange={handleChangeForm}
               />
+            </label>
+          </div>
+
+          <div className="white-background">
+            <span className="form-block-title">Фото водителя</span>
+            <label>
+              {form[FIELDS.PHOTO_DRIVER] && (
+                <Image src={form[FIELDS.PHOTO_DRIVER]} alt="Фото водителя" width={100} height={100} />
+              )}
+              <input name={FIELDS.PHOTO_DRIVER} type="file" accept=".jpg,.jpeg,.png" onChange={handleChangeFormImage} />
             </label>
           </div>
 

@@ -273,7 +273,7 @@ export default function AddCargo() {
         <div className="white-background">
           <span className="form-block-title">Информация о грузе</span>
           <label>
-            <span>Масса, кг</span>
+            <span>Масса, кг.</span>
             <input
               name={FIELDS.WEIGHT}
               type="number"
