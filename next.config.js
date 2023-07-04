@@ -10,6 +10,7 @@ const path = require('path')
 module.exports = {
   images: {
     domains: [
+      'http://react.autobiznes.by/',
       process.env.WORDPRESS_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
       '0.gravatar.com',
       '1.gravatar.com',
