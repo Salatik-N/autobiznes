@@ -4,7 +4,6 @@ import { GetStaticProps } from 'next'
 import Container from '../../../components/Container'
 import Image from 'next/image'
 import CategoryItem from '../../../components/CategoryItem'
-import mainImage from '../../../public/images/index.png'
 import bgImage from '../../../public/images/bg-cargo.jpg'
 
 export default function AddTransport({ cargoTransport, passengerTransport }) {

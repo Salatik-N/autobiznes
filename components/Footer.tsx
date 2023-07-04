@@ -1,7 +1,6 @@
 import Container from './Container'
 import Link from 'next/link'
 import Image from 'next/image'
-import truckIcon from '../public/icons/truck.svg'
 import walletIcon from '../public/icons/wallet.svg'
 import adIcon from '../public/icons/ad.svg'
 import charterIcon from '../public/icons/charter.svg'
@@ -17,7 +16,7 @@ export default function Footer() {
         <Container>
           <div className={styles.blockAdvantages}>
             <div className={styles.advantagesItem}>
-              <Image src={truckIcon} alt="Транспорт" />
+              <Image src="/static/icons/truck.svg" alt="Транспорт" width={100} height={100} />
               Весь транспорт на одном сайте
             </div>
             <div className={styles.advantagesItem}>
