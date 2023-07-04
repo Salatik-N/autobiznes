@@ -27,5 +27,6 @@
     "next.config.js",
     "public"
   ],
+  "paths": { "@static/*": ["./public/static/*"], "@generated/*": ["./src/__generated__/*"], "@*": ["./src*"] },
   "exclude": ["node_modules"]
 }
