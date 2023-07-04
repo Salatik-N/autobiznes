@@ -17,16 +17,16 @@
     "baseUrl": "."
   },
   "include": [
-    "src",
-    "components",
+    "src/**/*",
+    "components/**/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "lib/apollo.js",
     "lib/use-authorization.js",
     "next.config.js",
-    "public"
+    "public",
+    "pages/**/*"
   ],
-  "paths": { "@static/*": ["./public/static/*"], "@generated/*": ["./src/__generated__/*"], "@*": ["./src*"] },
   "exclude": ["node_modules"]
 }
