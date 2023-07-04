@@ -207,7 +207,7 @@ export const GET_TRANSPORT_INFO = gql`
 `
 export const GET_CATEGORIES_CARGO_TRANSPORT = gql`
   query GetCargo {
-    transportCategory(id: "12", idType: DATABASE_ID) {
+    transportCategory(id: "cargo-transport", idType: SLUG) {
       children {
         edges {
           node {
@@ -222,7 +222,7 @@ export const GET_CATEGORIES_CARGO_TRANSPORT = gql`
 `
 export const GET_CATEGORIES_PASSENGER_TRANSPORT = gql`
   query GetCargo {
-    transportCategory(id: "15", idType: DATABASE_ID) {
+    transportCategory(id: "passenger-transport", idType: SLUG) {
       children {
         edges {
           node {
