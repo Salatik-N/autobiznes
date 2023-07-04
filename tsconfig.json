@@ -13,8 +13,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/apollo.js", "lib/use-authorization.js"],
+  "include": [
+    "src",
+    "components",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "lib/apollo.js",
+    "lib/use-authorization.js",
+    "next.config.js",
+    "public"
+  ],
   "exclude": ["node_modules"]
 }
