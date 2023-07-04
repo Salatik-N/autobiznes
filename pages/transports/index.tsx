@@ -5,9 +5,6 @@ import { GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } fr
 import { client } from '../../lib/apollo'
 import Benefits from '../../components/Benefits'
 import Container from '../../components/Container'
-import boxesImage from '../../public/images/boxes.png'
-import bagsImage from '../../public/images/bags.png'
-import bgImage from '../../public/images/bg-cargo.jpg'
 
 export default function Transport({ cargoTransport, passengerTransport }) {
   return (
@@ -19,9 +16,9 @@ export default function Transport({ cargoTransport, passengerTransport }) {
             <button className="add-order">Оставить заказ</button>
             <button className="add-transport">Добавить свой транспорт</button>
           </h1>
-          <Image src={bagsImage} alt="Грузы" />
-          <Image src={boxesImage} alt="Грузы" />
-          <Image className="bg-image" src={bgImage} alt="Фон" />
+          <Image src="/static/images/bags.png" alt="Биржа грузов и транспорта" width={100} height={100} />
+          <Image src="/static/images/boxes.png" alt="Биржа грузов и транспорта" width={100} height={100} />{' '}
+          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
       <Container>

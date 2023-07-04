@@ -4,7 +4,6 @@ import { GetStaticProps } from 'next'
 import Container from '../../../components/Container'
 import Image from 'next/image'
 import CategoryItem from '../../../components/CategoryItem'
-import bgImage from '../../../public/images/bg-cargo.jpg'
 
 export default function AddTransport({ cargoTransport, passengerTransport }) {
   return (
@@ -14,7 +13,7 @@ export default function AddTransport({ cargoTransport, passengerTransport }) {
           <h2 className="page-title">
             Грузовые и пассажирские <span className="text-yellow">перевозки в РБ</span>
           </h2>
-          <Image className="bg-image" src={bgImage} alt="Фон" />
+          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
 

@@ -8,8 +8,6 @@ import CargoFilter from '../components/CargoFilter'
 import Benefits from '../components/Benefits'
 import Container from '../components/Container'
 import Declension from '../components/Declension'
-import mainImage from '../public/images/cargo.png'
-import bgImage from '../public/images/bg-cargo.jpg'
 
 export default function Cargo({ cargoList }) {
   return (
@@ -19,8 +17,8 @@ export default function Cargo({ cargoList }) {
           <h1 className="page-title">
             Диспетчерский <span className="text-yellow">онлайн-центр</span>
           </h1>
-          <Image src={mainImage} alt="Грузы" />
-          <Image className="bg-image" src={bgImage} alt="Фон" />
+          <Image src="/static/images/cargo.png" alt="Биржа грузов и транспорта" width={100} height={100} />
+          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
         {cargoList ? (
           <>

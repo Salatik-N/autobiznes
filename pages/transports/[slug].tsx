@@ -9,8 +9,6 @@ import TransportFilter from '../../components/TransportFilter'
 import TransportItem from '../../components/TransportItem'
 import ListNavigation from '../../components/ListNavigation'
 import Benefits from '../../components/Benefits'
-import bgImage from '../../public/images/bg-cargo.jpg'
-import mainImage from '../../public/images/transport-1t-big.png'
 
 export default function Transport1t({ transportCategory }) {
   const [activeRegion, setActiveRegion] = useState(0)
@@ -50,8 +48,8 @@ export default function Transport1t({ transportCategory }) {
             <button className="add-order">Оставить заказ</button>
             <button className="add-transport">Добавить свой транспорт</button>
           </h1>
-          <Image src={mainImage} alt="Грузы" />
-          <Image className="bg-image" src={bgImage} alt="Фон" />
+          <Image src="/static/images/transport-1t-big.png" alt="Биржа грузов и транспорта" width={100} height={100} />
+          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
       <Container>
