@@ -8,7 +8,7 @@ import { client } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 
-export default function Index({ cargoList, cargoTransport, passengerTransport }) {
+export default function Index() {
   return (
     <div className="home-page">
       <Container>
@@ -23,7 +23,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
           <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
-      <Container>
+      {/* <Container>
         <div className="category-transport-block white-background">
           <h3>Нужен транспорт?</h3>
           <p>Выберите подходящую категорию:</p>
@@ -48,7 +48,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
           </>
         ) : null}
       </Container>
-      <Benefits />
+      <Benefits /> */}
       <div className="separator-white">
         <hr />
       </div>
@@ -133,22 +133,22 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
     </div>
   )
 }
-export const getStaticProps: GetStaticProps = async () => {
-  const response = await client.query({
-    query: GET_FIVE_FIRST_CARGO,
-  })
-  const cargoList = response?.data?.cargos
+// export const getStaticProps: GetStaticProps = async () => {
+//   const response = await client.query({
+//     query: GET_FIVE_FIRST_CARGO,
+//   })
+//   const cargoList = response?.data?.cargos
 
-  const responseCargoTransport = await client.query({
-    query: GET_CATEGORIES_CARGO_TRANSPORT,
-  })
-  const cargoTransport = responseCargoTransport?.data?.transportCategory
+//   const responseCargoTransport = await client.query({
+//     query: GET_CATEGORIES_CARGO_TRANSPORT,
+//   })
+//   const cargoTransport = responseCargoTransport?.data?.transportCategory
 
-  const responsePassengerTransport = await client.query({
-    query: GET_CATEGORIES_PASSENGER_TRANSPORT,
-  })
-  const passengerTransport = responsePassengerTransport?.data?.transportCategory
-  return {
-    props: { cargoList, cargoTransport, passengerTransport },
-  }
-}
+//   const responsePassengerTransport = await client.query({
+//     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
+//   })
+//   const passengerTransport = responsePassengerTransport?.data?.transportCategory
+//   return {
+//     props: { cargoList, cargoTransport, passengerTransport },
+//   }
+// }
