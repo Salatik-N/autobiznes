@@ -17,8 +17,8 @@ export default function Cargo({ cargoList }) {
           <h1 className="page-title">
             Диспетчерский <span className="text-yellow">онлайн-центр</span>
           </h1>
-          <Image src="/static/images/cargo.png" alt="Биржа грузов и транспорта" width={100} height={100} />
-          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+          <Image src="/images/cargo.png" alt="Биржа грузов и транспорта" width={100} height={100} />
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
         {cargoList ? (
           <>

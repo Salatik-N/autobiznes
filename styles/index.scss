@@ -160,14 +160,14 @@ main {
 }
 .separator-black {
   height: 14px;
-  background-image: url(/static/icons/separator.svg);
+  background-image: url(/icons/separator.svg);
   background-color: $dark-blue;
 }
 .separator-white {
   height: 0;
   hr {
     height: 41px;
-    background-image: url(/static/icons/separator-white.svg);
+    background-image: url(/icons/separator-white.svg);
     position: relative;
     top: -20.5px;
   }

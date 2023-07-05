@@ -48,8 +48,13 @@ export default function Transport1t({ transportCategory }) {
             <button className="add-order">Оставить заказ</button>
             <button className="add-transport">Добавить свой транспорт</button>
           </h1>
-          <Image src="/static/images/transport-1t-big.png" alt="Биржа грузов и транспорта" width={100} height={100} />
-          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+          <Image
+            src={`/images/${transportCategory.slug}-big.png`}
+            alt="Биржа грузов и транспорта"
+            width={973}
+            height={504}
+          />
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
       <Container>

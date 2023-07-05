@@ -94,7 +94,6 @@ export default function AddCargo() {
       ...prevValue,
       [name]: value,
     }))
-    console.log(form)
   }
 
   const handleChangeFormCheckbox = (event: React.FormEvent<HTMLInputElement>) => {

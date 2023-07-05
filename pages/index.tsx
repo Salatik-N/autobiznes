@@ -19,8 +19,8 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
           <p className="page-sub-title">Диспетчерский онлайн-центр</p>
           <button className="add-order">Оставить заказ</button>
           <button className="add-transport">Добавить свой транспорт</button>
-          <Image src="/static/images/index.png" alt="Биржа грузов и транспорта" width={100} height={100} />
-          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+          <Image src="/images/index.png" alt="Биржа грузов и транспорта" width={839} height={583} />
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={746} />
         </div>
       </Container>
       <Container>
@@ -65,7 +65,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             <div className="item white-background">
               <span className="number">01</span>
               <span className="h3">Грузовой транспорт</span>
-              <Image src="/static/icons/truck-vector.svg" alt="Грузовой транспорт" width={100} height={100} />
+              <Image src="/icons/truck-vector.svg" alt="Грузовой транспорт" width={170} height={170} />
               <p>
                 Регистрируйтесь на Autobiznes.by и находите грузы для вашего транспорта. Хотите разместить объявление о
                 ваших услугах и получать больше звонков?Мы вам в это поможем!
@@ -74,7 +74,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             <div className="item white-background">
               <span className="number">02</span>
               <span className="h3">Пассажирский транспорт</span>
-              <Image src="/static/icons/bus-vector.svg" alt="Пассажирский транспорт" width={100} height={100} />
+              <Image src="/icons/bus-vector.svg" alt="Пассажирский транспорт" width={170} height={170} />
               <p>
                 Занимаетесь перевозкой пассажиров и хотите привлечь больше клиентов ?Разместите объявление на
                 Autobiznes.by и ждите звонков!
@@ -83,7 +83,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             <div className="item white-background">
               <span className="number">03</span>
               <span className="h3">Биржа грузов</span>
-              <Image src="/static/icons/cargo-vector.svg" alt="Биржа грузов" width={100} height={100} />
+              <Image src="/icons/cargo-vector.svg" alt="Биржа грузов" width={170} height={170} />
               <p>
                 Регистрируйтесь на Autobiznes.by и перевозите свои крупногабаритные грузы с помощью грузовых
                 автомобилей. Избавьте себя от хлопот с логистикой и ненадежных перевозчиков!

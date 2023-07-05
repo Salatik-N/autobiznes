@@ -16,9 +16,9 @@ export default function Transport({ cargoTransport, passengerTransport }) {
             <button className="add-order">Оставить заказ</button>
             <button className="add-transport">Добавить свой транспорт</button>
           </h1>
-          <Image src="/static/images/bags.png" alt="Биржа грузов и транспорта" width={100} height={100} />
-          <Image src="/static/images/boxes.png" alt="Биржа грузов и транспорта" width={100} height={100} />{' '}
-          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+          <Image src="/images/bags.png" alt="Биржа грузов и транспорта" width={100} height={100} />
+          <Image src="/images/boxes.png" alt="Биржа грузов и транспорта" width={100} height={100} />{' '}
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
       <Container>

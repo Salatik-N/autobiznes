@@ -153,6 +153,18 @@ export const GET_TRANSPORT_CATEGORY = gql`
               typeTransportation
               vehicleBodyType
               carryingCapacity
+              vehicleBrand
+              workExperience
+              leaseTerm
+              numberSeats
+              numberSeatsWithoutLuggage
+              serviceSpecialization
+              options
+              amenities
+              vehicleClass
+              color
+              vehiclesInPark
+              minimumOrderTime
               bodyWidth
               bodyVolume
               bodyLength
@@ -430,6 +442,18 @@ export const ADD_NEW_TRANSPORT = gql`
     $title: String = ""
     $typeTransportation: String = ""
     $vehicleBodyType: String = ""
+    $vehicleBrand: String = ""
+    $workExperience: String = ""
+    $leaseTerm: String = ""
+    $numberSeats: String = ""
+    $numberSeatsWithoutLuggage: String = ""
+    $serviceSpecialization: String = ""
+    $options: String = ""
+    $amenities: String = ""
+    $vehicleClass: String = ""
+    $color: String = ""
+    $vehiclesInPark: String = ""
+    $minimumOrderTime: String = ""
     $viber: Boolean = false
   ) {
     createTransportCustom(
@@ -455,6 +479,18 @@ export const ADD_NEW_TRANSPORT = gql`
         title: $title
         typeTransportation: $typeTransportation
         vehicleBodyType: $vehicleBodyType
+        vehicleBrand: $vehicleBrand
+        workExperience: $workExperience
+        numberSeats: $numberSeats
+        numberSeatsWithoutLuggage: $numberSeatsWithoutLuggage
+        serviceSpecialization: $serviceSpecialization
+        options: $options
+        amenities: $amenities
+        leaseTerm: $leaseTerm
+        vehicleClass: $vehicleClass
+        color: $color
+        vehiclesInPark: $vehiclesInPark
+        minimumOrderTime: $minimumOrderTime
         viber: $viber
         whatsapp: $whatsapp
       }

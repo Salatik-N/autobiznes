@@ -13,7 +13,7 @@ export default function AddTransport({ cargoTransport, passengerTransport }) {
           <h2 className="page-title">
             Грузовые и пассажирские <span className="text-yellow">перевозки в РБ</span>
           </h2>
-          <Image className="bg-image" src="/static/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
         </div>
       </Container>
 

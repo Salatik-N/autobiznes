@@ -16,7 +16,7 @@ export default function Footer() {
         <Container>
           <div className={styles.blockAdvantages}>
             <div className={styles.advantagesItem}>
-              <Image src="/static/icons/truck.svg" alt="Транспорт" width={100} height={100} />
+              <Image src="/icons/truck.svg" alt="Транспорт" width={100} height={100} />
               Весь транспорт на одном сайте
             </div>
             <div className={styles.advantagesItem}>

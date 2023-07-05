@@ -10,7 +10,8 @@ import TitleInput from '../../../components/Form/TitleInput'
 import PhoneMaskInput from '../../../components/PhoneMaskInput'
 import Select from 'react-select'
 import address from '../../../lib/city.json'
-import { vehicleBodyType, typeTransportation, paymentMethod, paymentProcedure } from '../../../lib/options'
+import { paymentMethod, paymentProcedure } from '../../../lib/options'
+import { FeaturesInput } from '../../../components/Form/FeaturesInput'
 
 enum FIELDS {
   TITLE = 'title',
@@ -26,6 +27,18 @@ enum FIELDS {
   PAYMENT_PROCEDURE = 'paymentProcedure',
   VEHICLE_BODY_TYPE = 'vehicleBodyType',
   TYPE_TRANSPORTATION = 'typeTransportation',
+  VEHICLE_BRAND = 'vehicleBrand',
+  WORK_EXPERIENCE = 'workExperience',
+  LEASE_TERM = 'leaseTerm',
+  NUMBER_SEATS = 'numberSeats',
+  NUMBER_SEATS_WITHOUT_LUGGAGE = 'numberSeatsWithoutLuggage',
+  SERVICE_SPECIALIZATION = 'serviceSpecialization',
+  OPTIONS = 'options',
+  AMENITIES = 'amenities',
+  VEHICLE_CLASS = 'vehicleClass',
+  COLOR = 'color',
+  VEHICLES_IN_PARK = 'vehiclesInPark',
+  MINIMUM_ORDER_TIME = 'minimumOrderTime',
   PRICE_1_HOUR = 'price1Hour',
   PRICE_PER_SHIFT = 'pricePerShift',
   PRICE_1_KM = 'price1Km',
@@ -54,6 +67,18 @@ export default function Transport1t({ transportCategory }) {
     [FIELDS.PAYMENT_PROCEDURE]: '',
     [FIELDS.VEHICLE_BODY_TYPE]: '',
     [FIELDS.TYPE_TRANSPORTATION]: '',
+    [FIELDS.VEHICLE_BRAND]: '',
+    [FIELDS.WORK_EXPERIENCE]: '',
+    [FIELDS.LEASE_TERM]: '',
+    [FIELDS.NUMBER_SEATS]: '',
+    [FIELDS.NUMBER_SEATS_WITHOUT_LUGGAGE]: '',
+    [FIELDS.SERVICE_SPECIALIZATION]: '',
+    [FIELDS.OPTIONS]: '',
+    [FIELDS.AMENITIES]: '',
+    [FIELDS.VEHICLE_CLASS]: '',
+    [FIELDS.COLOR]: '',
+    [FIELDS.VEHICLES_IN_PARK]: '',
+    [FIELDS.MINIMUM_ORDER_TIME]: '',
     [FIELDS.PRICE_1_HOUR]: null,
     [FIELDS.PRICE_PER_SHIFT]: null,
     [FIELDS.PRICE_1_KM]: null,
@@ -85,7 +110,6 @@ export default function Transport1t({ transportCategory }) {
       ...prevValue,
       [name]: value,
     }))
-    console.log(form)
   }
   const handleChangeFormSelect = (event, actionMeta) => {
     const name = actionMeta?.name
@@ -140,6 +164,18 @@ export default function Transport1t({ transportCategory }) {
           paymentProcedure: form[FIELDS.PAYMENT_PROCEDURE],
           vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
           typeTransportation: form[FIELDS.TYPE_TRANSPORTATION],
+          vehicleBrand: form[FIELDS.VEHICLE_BRAND],
+          workExperience: form[FIELDS.WORK_EXPERIENCE],
+          leaseTerm: form[FIELDS.LEASE_TERM],
+          numberSeats: form[FIELDS.NUMBER_SEATS],
+          numberSeatsWithoutLuggage: form[FIELDS.NUMBER_SEATS_WITHOUT_LUGGAGE],
+          serviceSpecialization: form[FIELDS.SERVICE_SPECIALIZATION],
+          options: form[FIELDS.OPTIONS],
+          amenities: form[FIELDS.AMENITIES],
+          vehicleClass: form[FIELDS.VEHICLE_CLASS],
+          color: form[FIELDS.COLOR],
+          vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
+          minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
           price1Hour: form[FIELDS.PRICE_1_HOUR],
           pricePerShift: form[FIELDS.PRICE_PER_SHIFT],
           price1Km: form[FIELDS.PRICE_1_KM],
@@ -283,107 +319,13 @@ export default function Transport1t({ transportCategory }) {
             </label>
           </div>
 
-          <div className="white-background">
-            <span className="form-block-title">Характеристики грузовика</span>
-            <label>
-              <span>Тип кузова</span>
-              <Select
-                name={FIELDS.VEHICLE_BODY_TYPE}
-                onChange={handleChangeFormSelect}
-                options={vehicleBodyType}
-                defaultValue={vehicleBodyType[0]}
-              />
-            </label>
-            <label>
-              <span>Тип перевозки</span>
-              <Select
-                name={FIELDS.TYPE_TRANSPORTATION}
-                onChange={handleChangeFormSelect}
-                options={typeTransportation}
-                defaultValue={typeTransportation[0]}
-              />
-            </label>
-            <label>
-              <span>Цена за 1 час, BYN</span>
-              <input
-                name={FIELDS.PRICE_1_HOUR}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.PRICE_1_HOUR]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Цена за смену (7+1 часов), BYN</span>
-              <input
-                name={FIELDS.PRICE_PER_SHIFT}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.PRICE_PER_SHIFT]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Цена за 1 км., BYN</span>
-              <input
-                name={FIELDS.PRICE_1_KM}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.PRICE_1_KM]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Грузоподъемность кузова, кг.</span>
-              <input
-                name={FIELDS.CARRYING_CAPACITY}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.CARRYING_CAPACITY]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Длина кузова, м.</span>
-              <input
-                name={FIELDS.BODY_LENGTH}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.BODY_LENGTH]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Высота кузова, м.</span>
-              <input
-                name={FIELDS.BODY_HEIGHT}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.BODY_HEIGHT]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Ширина кузова, м.</span>
-              <input
-                name={FIELDS.BODY_WIDTH}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.BODY_WIDTH]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Объем кузова, м./куб.</span>
-              <input
-                name={FIELDS.BODY_VOLUME}
-                type="number"
-                placeholder="Введите число"
-                value={form[FIELDS.BODY_VOLUME]}
-                onChange={handleChangeForm}
-              />
-            </label>
-          </div>
+          <FeaturesInput
+            type={transportCategory.slug}
+            form={form}
+            FIELDS={FIELDS}
+            handleChangeFormSelect={handleChangeFormSelect}
+            handleChangeForm={handleChangeForm}
+          />
 
           <div className="white-background">
             <span className="form-block-title">Дополнительная информация</span>

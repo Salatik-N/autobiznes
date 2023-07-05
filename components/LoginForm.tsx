@@ -11,7 +11,6 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     signIn({ email, password })
-    console.log(client)
   }
 
   return (

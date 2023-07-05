@@ -10,10 +10,21 @@ import logo from '../public/icons/logo.svg'
 import SocialIcons from './SocialIcons'
 import userIcon from '../public/icons/user.svg'
 import { useProvideAuth } from '../lib/use-authorization'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { isSignedIn } = useProvideAuth()
+  const router = useRouter()
+
+  const handleRouteChange = () => {
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleRouteChange)
+  }, [])
 
   return (
     <header className={styles.header}>

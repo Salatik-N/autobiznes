@@ -15,12 +15,7 @@ export default function Benefits() {
         </div>
         <div className={styles.inner}>
           <div className={styles.benefitsItem}>
-            <Image
-              src="/static/icons/benefits-first.svg"
-              alt="Бесплатная публикация объявления"
-              width={200}
-              height={200}
-            />
+            <Image src="/icons/benefits-first.svg" alt="Бесплатная публикация объявления" width={200} height={200} />
             <span className="h3">Бесплатная публикация объявления</span>
             <p>
               Наш сервис является полностью бесплатным для пользователей, зарегиструйтесь на сайте и пользуйтесь всеми
@@ -28,7 +23,7 @@ export default function Benefits() {
             </p>
           </div>
           <div className={styles.benefitsItem}>
-            <Image src="/static/icons/benefits-second.svg" alt="Удобный и надёжный сервис" width={200} height={200} />
+            <Image src="/icons/benefits-second.svg" alt="Удобный и надёжный сервис" width={200} height={200} />
             <span className="h3">Удобный и надёжный сервис</span>
             <p>
               Нашим сервисом пользуются как физические, так и юридические лица, желанием которых является получение
@@ -38,7 +33,7 @@ export default function Benefits() {
           </div>
           <div className={styles.benefitsItem}>
             <Image
-              src="/static/icons/benefits-third.svg"
+              src="/icons/benefits-third.svg"
               alt="Хороший выбор для тех, кто ищет качество"
               width={200}
               height={200}
