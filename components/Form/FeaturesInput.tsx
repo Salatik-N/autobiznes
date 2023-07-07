@@ -8,7 +8,6 @@ import {
   options,
   amenities,
   vehicleClass,
-  minimumOrderTime,
 } from '../../lib/options'
 
 export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, handleChangeForm }) => {
@@ -139,8 +138,14 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
       ) : null}
       {isBus || isMinivans || isWeddingCars || isTaxi ? (
         <label>
-          <span>Минимальное время заказа</span>
-          <Select name={FIELDS.MINIMUM_ORDER_TIME} onChange={handleChangeFormSelect} options={minimumOrderTime} />
+          <span>Минимальное время заказа, ч.</span>
+          <input
+            name={FIELDS.MINIMUM_ORDER_TIME}
+            type="number"
+            placeholder="Введите число"
+            value={form[FIELDS.MINIMUM_ORDER_TIME]}
+            onChange={handleChangeForm}
+          />
         </label>
       ) : null}
       <label>

@@ -3,6 +3,7 @@ import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
 import { client } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
@@ -17,8 +18,12 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             Биржа <span className="text-yellow">грузов</span> и <span className="text-yellow">транспорта</span>
           </h1>
           <p className="page-sub-title">Диспетчерский онлайн-центр</p>
-          <button className="add-order">Оставить заказ</button>
-          <button className="add-transport">Добавить свой транспорт</button>
+          <Link href="/account/add-cargo" className="add-order">
+            Оставить заказ
+          </Link>
+          <Link href="/account/add-transport" className="add-transport">
+            Добавить свой транспорт
+          </Link>
           <Image src="/images/index.png" alt="Биржа грузов и транспорта" width={839} height={583} />
           <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={746} />
         </div>

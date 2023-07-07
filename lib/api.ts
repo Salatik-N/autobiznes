@@ -455,6 +455,8 @@ export const ADD_NEW_TRANSPORT = gql`
     $vehiclesInPark: String = ""
     $minimumOrderTime: String = ""
     $viber: Boolean = false
+    $photoTruck: [String]
+    $photoDriver: String
   ) {
     createTransportCustom(
       input: {
@@ -493,9 +495,18 @@ export const ADD_NEW_TRANSPORT = gql`
         minimumOrderTime: $minimumOrderTime
         viber: $viber
         whatsapp: $whatsapp
+        photoTruck: $photoTruck
+        photoDriver: $photoDriver
       }
     ) {
       clientMutationId
+    }
+  }
+`
+export const UPLOAD_FILE = gql`
+  mutation MyMutation($file: Upload!, $altText: String) {
+    upload(input: { file: $file, altText: $altText }) {
+      text
     }
   }
 `

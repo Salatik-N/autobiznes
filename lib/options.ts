@@ -75,5 +75,3 @@ export const vehicleClass: Option[] = [
   { value: 'Малый (12-18)', label: 'Малый (12-18)' },
   { value: 'Средний (20-25)', label: 'Средний (20-25)' },
 ]
-
-export const minimumOrderTime: Option[] = []

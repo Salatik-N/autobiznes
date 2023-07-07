@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { client } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
-import { ADD_NEW_TRANSPORT, GET_TRANSPORT_CATEGORY, GET_USER_INFO } from '../../../lib/api'
+import { ADD_NEW_TRANSPORT, GET_TRANSPORT_CATEGORY, GET_USER_INFO, UPLOAD_FILE } from '../../../lib/api'
 import Image from 'next/image'
 import Container from '../../../components/Container'
 import TitleInput from '../../../components/Form/TitleInput'
@@ -47,6 +47,7 @@ enum FIELDS {
   BODY_HEIGHT = 'bodyHeight',
   BODY_WIDTH = 'bodyWidth',
   BODY_VOLUME = 'bodyVolume',
+  PHOTO_TRUCK = 'photoTruck',
   PHOTO_DRIVER = 'photoDriver',
   FULL_DESCRIPTION = 'fullDescription',
 }
@@ -87,8 +88,9 @@ export default function Transport1t({ transportCategory }) {
     [FIELDS.BODY_HEIGHT]: null,
     [FIELDS.BODY_WIDTH]: null,
     [FIELDS.BODY_VOLUME]: null,
-    [FIELDS.PHOTO_DRIVER]: '',
-    [FIELDS.FULL_DESCRIPTION]: '',
+    [FIELDS.PHOTO_TRUCK]: null,
+    [FIELDS.PHOTO_DRIVER]: null,
+    [FIELDS.FULL_DESCRIPTION]: null,
   })
   const router = useRouter()
 
@@ -110,6 +112,7 @@ export default function Transport1t({ transportCategory }) {
       ...prevValue,
       [name]: value,
     }))
+    console.log(form)
   }
   const handleChangeFormSelect = (event, actionMeta) => {
     const name = actionMeta?.name
@@ -132,16 +135,43 @@ export default function Transport1t({ transportCategory }) {
     }))
   }
 
-  const handleChangeFormImage = (event) => {
+  const handleChangeFormImage = async (event) => {
     const name = event?.currentTarget?.name
-    const value = event?.target?.files[0]
-
-    if (!value || !name) return
+    const images = event?.target.files
+    const formData = new FormData()
+    let value = []
+    for (let image in images) {
+      if (typeof images[image] === 'object') {
+        formData.append('file', images[image])
+        value.push(await uploadImage(formData))
+      }
+    }
+    if (value.length === 1) {
+      value = value[0]
+    }
 
     setForm((prevValue) => ({
       ...prevValue,
-      [name]: URL.createObjectURL(value),
+      [name]: value,
     }))
+  }
+
+  const uploadImage = async (formData) => {
+    return new Promise((resolve) => {
+      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
+        method: 'POST',
+        headers: {
+          authorization: localStorage.getItem('authToken') && `Bearer ${localStorage.getItem('authToken')}`,
+        },
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => resolve(data.source_url))
+        .catch((err) => {
+          console.log(err)
+          return null
+        })
+    })
   }
 
   const createNewCargo = async (e) => {
@@ -184,6 +214,7 @@ export default function Transport1t({ transportCategory }) {
           bodyHeight: form[FIELDS.BODY_HEIGHT],
           bodyWidth: form[FIELDS.BODY_WIDTH],
           bodyVolume: form[FIELDS.BODY_VOLUME],
+          photoTruck: form[FIELDS.PHOTO_TRUCK],
           photoDriver: form[FIELDS.PHOTO_DRIVER],
           fullDescription: form[FIELDS.FULL_DESCRIPTION],
         },
@@ -336,6 +367,23 @@ export default function Transport1t({ transportCategory }) {
                 placeholder="Введите описание до 200 символов"
                 value={form[FIELDS.FULL_DESCRIPTION]}
                 onChange={handleChangeForm}
+              />
+            </label>
+          </div>
+
+          <div className="white-background">
+            <span className="form-block-title">Фото водителя</span>
+            <label>
+              {form[FIELDS.PHOTO_TRUCK] &&
+                form[FIELDS.PHOTO_TRUCK].map((link) => (
+                  <Image src={link} alt="Фото грузовика" width={100} height={100} />
+                ))}
+              <input
+                name={FIELDS.PHOTO_TRUCK}
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                multiple="multiple"
+                onChange={handleChangeFormImage}
               />
             </label>
           </div>
