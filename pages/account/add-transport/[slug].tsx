@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { client } from '../../../lib/apollo'
@@ -88,7 +88,7 @@ export default function Transport1t({ transportCategory }) {
     [FIELDS.BODY_HEIGHT]: null,
     [FIELDS.BODY_WIDTH]: null,
     [FIELDS.BODY_VOLUME]: null,
-    [FIELDS.PHOTO_TRUCK]: null,
+    [FIELDS.PHOTO_TRUCK]: [],
     [FIELDS.PHOTO_DRIVER]: null,
     [FIELDS.FULL_DESCRIPTION]: null,
   })
@@ -138,17 +138,15 @@ export default function Transport1t({ transportCategory }) {
   const handleChangeFormImage = async (event) => {
     const name = event?.currentTarget?.name
     const images = event?.target.files
-    const formData = new FormData()
     let value = []
+    const formData = new FormData()
     for (let image in images) {
       if (typeof images[image] === 'object') {
         formData.append('file', images[image])
         value.push(await uploadImage(formData))
       }
     }
-    if (value.length === 1) {
-      value = value[0]
-    }
+    if (name === 'photoDriver') value = value[0]
 
     setForm((prevValue) => ({
       ...prevValue,
@@ -172,6 +170,14 @@ export default function Transport1t({ transportCategory }) {
           return null
         })
     })
+  }
+
+  const removeImageTruck = (key) => {
+    const newArray = form[FIELDS.PHOTO_TRUCK].filter((_, index) => index !== key)
+    setForm((prevValue) => ({
+      ...prevValue,
+      [FIELDS.PHOTO_TRUCK]: newArray,
+    }))
   }
 
   const createNewCargo = async (e) => {
@@ -373,16 +379,19 @@ export default function Transport1t({ transportCategory }) {
 
           <div className="white-background">
             <span className="form-block-title">Фото водителя</span>
-            <label>
-              {form[FIELDS.PHOTO_TRUCK] &&
-                form[FIELDS.PHOTO_TRUCK].map((link) => (
+            {form[FIELDS.PHOTO_TRUCK] &&
+              form[FIELDS.PHOTO_TRUCK].map((link, key) => (
+                <>
+                  <div onClick={() => removeImageTruck(key)}>X</div>
                   <Image src={link} alt="Фото грузовика" width={100} height={100} />
-                ))}
+                </>
+              ))}
+            <label>
               <input
                 name={FIELDS.PHOTO_TRUCK}
                 type="file"
                 accept=".jpg,.jpeg,.png"
-                multiple="multiple"
+                multiple
                 onChange={handleChangeFormImage}
               />
             </label>
