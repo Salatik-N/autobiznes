@@ -179,7 +179,6 @@ export const GET_TRANSPORT_CATEGORY = gql`
               }
             }
             acfTransportDescription {
-              shortDescription
               fullDescription
               views
             }
@@ -321,7 +320,6 @@ export const GET_USER_INFO = gql`
               }
             }
             acfTransportDescription {
-              shortDescription
               fullDescription
               views
             }

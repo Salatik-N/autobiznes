@@ -159,7 +159,7 @@ export default function Transport1t({ transportCategory }) {
       fetch('http://autobiznes.local/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
-          authorization: localStorage.getItem('authToken') && `Bearer ${localStorage.getItem('authToken')}`,
+          authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
         body: formData,
       })
