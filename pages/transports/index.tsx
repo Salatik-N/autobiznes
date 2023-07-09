@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import CategoryItem from '../../components/CategoryItem'
 import { GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../../lib/api'
@@ -37,7 +37,7 @@ export default function Transport({ cargoTransport, passengerTransport }) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const responseCargoTransport = await client.query({
     query: GET_CATEGORIES_CARGO_TRANSPORT,
   })
