@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
 import { client } from '../lib/apollo'
@@ -44,7 +44,7 @@ export default function Cargo({ cargoList }) {
     </div>
   )
 }
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await client.query({
     query: GET_ALL_CARGO,
   })

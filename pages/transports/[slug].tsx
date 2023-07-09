@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { client } from '../../lib/apollo'
 import { GET_TRANSPORT_CATEGORY } from '../../lib/api'
 import Image from 'next/image'
@@ -72,7 +72,7 @@ export default function Transport1t({ transportCategory }) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const responseCategory = await client.query({
     query: GET_TRANSPORT_CATEGORY,
     variables: {

@@ -1,7 +1,7 @@
 import Container from '../components/Container'
 import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
@@ -138,7 +138,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
     </div>
   )
 }
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await client.query({
     query: GET_FIVE_FIRST_CARGO,
   })
