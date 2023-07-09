@@ -17,6 +17,7 @@ module.exports = {
       'secure.gravatar.com',
     ],
   },
+  compress: false,
   sassOptions: {
     fiber: false,
     includePaths: [path.join(__dirname, 'styles')],
