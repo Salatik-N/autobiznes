@@ -26,7 +26,7 @@ export default function Cargo({ cargoList }) {
             <div className="cargo-list">
               <span className="title">Все грузы для перевозки по Беларуси</span>
               <p>
-                По вашему запросу поиск грузов для перевозки найдено
+                По вашему запросу поиск грузов для перевозки найдено&nbsp;
                 <span className="text-green">
                   <Declension count={cargoList.edges.length} words={['предложение', 'предложения', 'предложений']} />
                 </span>

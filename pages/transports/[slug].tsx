@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { client } from '../../lib/apollo'
-import { GET_TRANSPORT_CATEGORY } from '../../lib/api'
+import { GET_TRANSPORT_CATEGORY, GET_ALL_TRANSPORT_CATEGORIES } from '../../lib/api'
 import Image from 'next/image'
 import Container from '../../components/Container'
 import TransportFilter from '../../components/TransportFilter'
@@ -70,6 +70,23 @@ export default function Transport1t({ transportCategory }) {
       <Benefits />
     </>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await client.query({
+    query: GET_ALL_TRANSPORT_CATEGORIES,
+  })
+  const transportCategories = response?.data?.transportCategories?.edges || []
+
+  // Generate the dynamic paths based on the available transport categories
+  const paths = transportCategories.map((category) => ({
+    params: { slug: category.node.slug },
+  }))
+
+  return {
+    paths,
+    fallback: true,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {

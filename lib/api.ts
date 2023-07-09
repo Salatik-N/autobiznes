@@ -216,6 +216,18 @@ export const GET_TRANSPORT_INFO = gql`
     }
   }
 `
+
+export const GET_ALL_TRANSPORT_CATEGORIES = gql`
+  query GetAllTransportCategories {
+    transportCategories {
+      edges {
+        node {
+          slug
+        }
+      }
+    }
+  }
+`
 export const GET_CATEGORIES_CARGO_TRANSPORT = gql`
   query GetCargo {
     transportCategory(id: "cargo-transport", idType: SLUG) {
