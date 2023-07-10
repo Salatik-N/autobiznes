@@ -35,6 +35,11 @@ const createApolloClient = () => {
     ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink), // Concatenate the AuthLink and HttpLink
     cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
   })
 }
 

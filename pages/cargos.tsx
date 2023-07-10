@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
 import { addApolloState, initializeApollo } from '../lib/apollo'
@@ -47,13 +47,10 @@ export default function Cargo({ cargoList }) {
 
 const apolloClient = initializeApollo()
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await apolloClient.query({
     query: GET_ALL_CARGO,
   })
   const cargoList = response?.data?.cargos
-  return addApolloState(apolloClient, {
-    props: { cargoList },
-    revalidate: true,
-  })
+  return { props: { cargoList } }
 }

@@ -46,9 +46,9 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             </div>
             <div className="show-more-cargo">
               <p>Хотите увидеть больше грузов?</p>
-              <a href="/cargos" className="filter-button">
+              <Link href="/cargos" className="filter-button">
                 Открыть все грузы
-              </a>
+              </Link>
             </div>
           </>
         ) : null}
@@ -156,7 +156,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
-  return addApolloState(apolloClient, {
-    props: { cargoList, cargoTransport, passengerTransport }
-  })
+  return { props: { cargoList, cargoTransport, passengerTransport } }
 }
