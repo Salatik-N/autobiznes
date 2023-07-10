@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useProvideAuth } from '../lib/use-authorization'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')

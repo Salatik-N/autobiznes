@@ -1,5 +1,5 @@
 import { GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../../../lib/api'
-import { client } from '../../../lib/apollo'
+import { initializeApollo } from '../../../lib/apollo'
 import { GetStaticProps } from 'next'
 import Container from '../../../components/Container'
 import Image from 'next/image'
@@ -29,12 +29,13 @@ export default function AddTransport({ cargoTransport, passengerTransport }) {
   )
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const responseCargoTransport = await client.query({
+  const apolloClient = initializeApollo()
+  const responseCargoTransport = await apolloClient.query({
     query: GET_CATEGORIES_CARGO_TRANSPORT,
   })
   const cargoTransport = responseCargoTransport?.data?.transportCategory
 
-  const responsePassengerTransport = await client.query({
+  const responsePassengerTransport = await apolloClient.query({
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory

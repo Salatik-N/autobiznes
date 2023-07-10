@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import { client } from '../../lib/apollo'
+import { initializeApollo } from '../../lib/apollo'
 import { GET_TRANSPORT_CATEGORY, GET_ALL_TRANSPORT_CATEGORIES } from '../../lib/api'
 import Image from 'next/image'
 import Container from '../../components/Container'
@@ -72,8 +72,10 @@ export default function Transport1t({ transportCategory }) {
   )
 }
 
+const apolloClient = initializeApollo()
+
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await client.query({
+  const response = await apolloClient.query({
     query: GET_ALL_TRANSPORT_CATEGORIES,
   })
   const transportCategories = response?.data?.transportCategories
@@ -85,7 +87,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const responseCategory = await client.query({
+  const responseCategory = await apolloClient.query({
     query: GET_TRANSPORT_CATEGORY,
     variables: {
       id: context.params.slug,

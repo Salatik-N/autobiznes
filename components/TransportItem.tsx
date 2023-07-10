@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import Image from 'next/image'
 import verifiedUser from '../public/icons/verified-user.svg'
 import { useEffect, useState } from 'react'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 import { GET_TRANSPORT_INFO, UPDATE_TRANSPORT_VIEWS } from '../lib/api'
 import Modal from './Modal'
 import { Loader } from './Loader'
@@ -18,6 +18,7 @@ const TransportItem = ({ active, transports }) => {
   const [isFeaturesActive, setFeaturesActive] = useState(false)
   const [isDescriptionActive, setDescriptionActive] = useState(false)
   const [expandedItem, setExpandedItem] = useState(null)
+  const apolloClient = initializeApollo()
 
   const handleModalOpen = (idTransport) => {
     setModalActive(true)
@@ -25,7 +26,7 @@ const TransportItem = ({ active, transports }) => {
   }
   const getTransportInfo = async (idTransport) => {
     setLoading(true)
-    const responseTransport = await client.query({
+    const responseTransport = await apolloClient.query({
       query: GET_TRANSPORT_INFO,
       variables: {
         id: idTransport,

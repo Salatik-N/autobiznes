@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
+
+const apolloClient = initializeApollo()
 
 export const useRegistration = ({ firstName, email, password }) => {
   const username = email
@@ -17,7 +19,7 @@ export const useRegistration = ({ firstName, email, password }) => {
   `
 
   // Выполняем мутацию для регистрации пользователя
-  client
+  apolloClient
     .mutate({
       mutation: REGISTER_USER,
       variables: {

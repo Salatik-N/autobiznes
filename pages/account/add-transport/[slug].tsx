@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import { client } from '../../../lib/apollo'
+import { initializeApollo } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
 import {
   ADD_NEW_TRANSPORT,
@@ -17,6 +17,8 @@ import Select from 'react-select'
 import address from '../../../lib/city.json'
 import { paymentMethod, paymentProcedure } from '../../../lib/options'
 import { FeaturesInput } from '../../../components/Form/FeaturesInput'
+
+const apolloClient = initializeApollo()
 
 enum FIELDS {
   TITLE = 'title',
@@ -187,7 +189,7 @@ export default function Transport1t({ transportCategory }) {
 
   const createNewCargo = async (e) => {
     e.preventDefault()
-    client
+    apolloClient
       .mutate({
         mutation: ADD_NEW_TRANSPORT,
         variables: {
@@ -427,19 +429,19 @@ export default function Transport1t({ transportCategory }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await client.query({
+  const response = await apolloClient.query({
     query: GET_ALL_TRANSPORT_CATEGORIES,
   })
   const transportCategories = response?.data?.transportCategories
 
   return {
     paths: transportCategories.edges.map(({ node }) => `/account/add-transport/${node.slug}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const responseCategory = await client.query({
+  const responseCategory = await apolloClient.query({
     query: GET_TRANSPORT_CATEGORY,
     variables: {
       id: context.params.slug,

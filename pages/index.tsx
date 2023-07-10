@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 
@@ -138,18 +138,21 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
     </div>
   )
 }
+
+const apolloClient = initializeApollo()
+
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await client.query({
+  const response = await apolloClient.query({
     query: GET_FIVE_FIRST_CARGO,
   })
   const cargoList = response?.data?.cargos
 
-  const responseCargoTransport = await client.query({
+  const responseCargoTransport = await apolloClient.query({
     query: GET_CATEGORIES_CARGO_TRANSPORT,
   })
   const cargoTransport = responseCargoTransport?.data?.transportCategory
 
-  const responsePassengerTransport = await client.query({
+  const responsePassengerTransport = await apolloClient.query({
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory

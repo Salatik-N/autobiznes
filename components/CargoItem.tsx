@@ -12,7 +12,7 @@ import Modal from './Modal'
 import ModalCargoContacts from './ModalCargoContacts'
 import ModalCargoMoreInfo from './ModalCargoMoreInfo'
 import { GET_CARGO_INFO } from '../lib/api'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 import { Loader } from './Loader'
 
 export default function CargoItem({ cargos }) {
@@ -20,6 +20,7 @@ export default function CargoItem({ cargos }) {
   const [cargoInfo, setCargoInfo] = useState(null)
   const [isLoading, setLoading] = useState(false)
   const [modalActive, setModalActive] = useState(false)
+  const apolloClient = initializeApollo()
 
   const handleModalOpen = (idCargo, e) => {
     setCargoInfo(null)
@@ -30,7 +31,7 @@ export default function CargoItem({ cargos }) {
 
   const getCargoInfo = async (idCargo) => {
     setLoading(true)
-    const responseCargo = await client.query({
+    const responseCargo = await apolloClient.query({
       query: GET_CARGO_INFO,
       variables: {
         id: idCargo,

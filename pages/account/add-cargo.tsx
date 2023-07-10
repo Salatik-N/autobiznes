@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { GET_USER_INFO, ADD_NEW_CARGO } from '../../lib/api'
-import { client } from '../../lib/apollo'
+import { initializeApollo } from '../../lib/apollo'
 import { useQuery } from '@apollo/client'
 import { GetStaticProps } from 'next'
 import { movers, vehicleBodyType, typeTransportation, typeLoading, paymentMethod } from '../../lib/options'
@@ -40,6 +40,7 @@ enum FIELDS {
 
 export default function AddCargo() {
   const { data } = useQuery(GET_USER_INFO)
+  const apolloClient = initializeApollo()
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
     [FIELDS.SHIPPING_REGION]: '',
@@ -109,7 +110,7 @@ export default function AddCargo() {
 
   const createNewCargo = async (e) => {
     e.preventDefault()
-    client
+    apolloClient
       .mutate({
         mutation: ADD_NEW_CARGO,
         variables: {

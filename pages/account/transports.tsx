@@ -1,7 +1,7 @@
 import Container from '../../components/Container'
 import ListNavigation from '../../components/ListNavigation'
 import TransportItem from '../../components/TransportItem'
-import { client } from '../../lib/apollo'
+import { initializeApollo } from '../../lib/apollo'
 import { GET_USER_INFO } from '../../lib/api'
 import { useEffect, useState } from 'react'
 import AccountHeader from '../../components/AccountHeader'
@@ -9,12 +9,14 @@ import AccountHeader from '../../components/AccountHeader'
 export default function Transports() {
   const [modalActive, setModalActive] = useState(false)
   const [transportList, setTransportList] = useState(null)
+  const apolloClient = initializeApollo()
+
   useEffect(() => {
     async function getUser() {
-      const responseUser = await client.query({
+      const responseTransport = await apolloClient.query({
         query: GET_USER_INFO,
       })
-      setTransportList(responseUser?.data?.viewer?.transports)
+      setTransportList(responseTransport?.data?.viewer?.transports)
     }
     getUser()
   }, [])

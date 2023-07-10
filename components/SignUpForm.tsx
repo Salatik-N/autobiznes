@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRegistration } from '../lib/use-registration'
-import { client } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 import { REGISTER_USER } from '../lib/api'
 
 enum FIELDS {
@@ -10,6 +10,7 @@ enum FIELDS {
 }
 
 export default function SignUpForm() {
+  const apolloClient = initializeApollo()
   const [form, setForm] = useState({
     [FIELDS.FIRST_NAME]: '',
     [FIELDS.EMAIL]: '',
@@ -29,7 +30,7 @@ export default function SignUpForm() {
 
   const createNewUser = async (e) => {
     e.preventDefault()
-    client
+    apolloClient
       .mutate({
         mutation: REGISTER_USER,
         variables: {

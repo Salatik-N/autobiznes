@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { client } from '../../lib/apollo'
+import { initializeApollo } from '../../lib/apollo'
 import { useQuery } from '@apollo/client'
 import Container from '../../components/Container'
 import { GET_USER_INFO, UPDATE_USER } from '../../lib/api'
@@ -16,6 +16,7 @@ enum FIELDS {
 export default function AccountSetting() {
   const { data } = useQuery(GET_USER_INFO)
   const [modalActive, setModalActive] = useState(false)
+  const apolloClient = initializeApollo()
   const [form, setForm] = useState({
     [FIELDS.FIRST_NAME]: '',
     [FIELDS.EMAIL]: '',
@@ -45,7 +46,7 @@ export default function AccountSetting() {
 
   const editUserInfo = async (e) => {
     e.preventDefault()
-    client
+    apolloClient
       .mutate({
         mutation: UPDATE_USER,
         variables: {
