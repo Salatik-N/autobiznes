@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app'
+import { AppContext, AppInitialProps } from 'next/app'
 import App from 'next/app'
 import localFont from 'next/font/local'
 import { ApolloProvider } from '@apollo/client'
@@ -31,7 +31,7 @@ const interFont = localFont({
   ],
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppContext & AppInitialProps) {
   const apolloClient = useApollo(pageProps)
 
   return (
@@ -47,9 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-MyApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext)
+// MyApp.getInitialProps = async (appContext) => {
+//   const appProps = await App.getInitialProps(appContext)
 
-  return { ...appProps }
-}
+//   return { ...appProps }
+// }
 export default MyApp
