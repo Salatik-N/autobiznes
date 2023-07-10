@@ -1,7 +1,7 @@
 import Container from '../components/Container'
 import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
@@ -141,7 +141,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
 
 const apolloClient = initializeApollo()
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await apolloClient.query({
     query: GET_FIVE_FIRST_CARGO,
   })
@@ -157,7 +157,6 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
   return addApolloState(apolloClient, {
-    props: { cargoList, cargoTransport, passengerTransport },
-    revalidate: 60,
+    props: { cargoList, cargoTransport, passengerTransport }
   })
 }
