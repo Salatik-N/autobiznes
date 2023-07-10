@@ -81,8 +81,8 @@ export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, page
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
   }
 
-  if (pageProps.revalidate) {
-    pageProps.revalidate = 60 // Установите желаемое значение в секундах
+  if (pageProps?.revalidate) {
+    pageProps.revalidate = 60
   }
 
   return pageProps
