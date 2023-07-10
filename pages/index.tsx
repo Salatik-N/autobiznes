@@ -158,5 +158,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
   return addApolloState(apolloClient, {
     props: { cargoList, cargoTransport, passengerTransport },
+    revalidate: 60,
   })
 }
