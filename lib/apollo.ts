@@ -6,7 +6,6 @@ import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
-export const DEFAULT_REVALIDATE = 60
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
@@ -35,15 +34,7 @@ const createApolloClient = () => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink), // Concatenate the AuthLink and HttpLink
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            posts: relayStylePagination(),
-          },
-        },
-      },
-    }),
+    cache: new InMemoryCache(),
   })
 }
 
@@ -80,14 +71,10 @@ export const initializeApollo = (initialState: NormalizedCacheObject | null = nu
 export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, pageProps: any) => {
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
+    pageProps.revalidate = 60
   }
 
-  const { revalidate } = pageProps.props || {}
-
-  return {
-    ...pageProps,
-    revalidate,
-  }
+  return pageProps
 }
 
 export const useApollo = (pageProps: any) => {
