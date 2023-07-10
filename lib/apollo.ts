@@ -9,32 +9,52 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
+// const createApolloClient = () => {
+//   // Create an HttpLink with the WordPress API URL
+//   const httpLink = new HttpLink({
+//     uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+//     credentials: 'same-origin',
+//   })
+
+//   // Create an AuthLink to add the authentication header
+//   const authLink = setContext((_, { headers }) => {
+//     if (typeof window !== 'undefined') {
+//       const authToken = localStorage.getItem('authToken')
+
+//       // Return the headers with the authentication token added
+//       return {
+//         headers: {
+//           ...headers,
+//           authorization: authToken ? `Bearer ${authToken}` : '',
+//         },
+//       }
+//     }
+//   })
+
+//   return new ApolloClient({
+//     ssrMode: typeof window === 'undefined',
+//     link: authLink.concat(httpLink), // Concatenate the AuthLink and HttpLink
+//     cache: new InMemoryCache({
+//       typePolicies: {
+//         Query: {
+//           fields: {
+//             posts: relayStylePagination(),
+//           },
+//         },
+//       },
+//     }),
+//   })
+// }
+
 const createApolloClient = () => {
-  // Create an HttpLink with the WordPress API URL
-  const httpLink = new HttpLink({
-    uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
-    credentials: 'same-origin',
-  })
-
-  // Create an AuthLink to add the authentication header
-  const authLink = setContext((_, { headers }) => {
-    if (typeof window !== 'undefined') {
-      const authToken = localStorage.getItem('authToken')
-
-      // Return the headers with the authentication token added
-      return {
-        headers: {
-          ...headers,
-          authorization: authToken ? `Bearer ${authToken}` : '',
-        },
-      }
-    }
-  })
-
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: authLink.concat(httpLink), // Concatenate the AuthLink and HttpLink
+    link: new HttpLink({
+      uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL, // Server URL (must be absolute)
+      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+    }),
     cache: new InMemoryCache({
+      // typePolicies is not required to use Apollo with Next.js - only for doing pagination.
       typePolicies: {
         Query: {
           fields: {

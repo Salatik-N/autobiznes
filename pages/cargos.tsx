@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
-import { initializeApollo } from '../lib/apollo'
+import { addApolloState, initializeApollo } from '../lib/apollo'
 import ListNavigation from '../components/ListNavigation'
 import CargoItem from '../components/CargoItem'
 import CargoFilter from '../components/CargoFilter'
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
     query: GET_ALL_CARGO,
   })
   const cargoList = response?.data?.cargos
-  return {
+  return addApolloState(apolloClient, {
     props: { cargoList },
-  }
+  })
 }
