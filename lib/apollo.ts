@@ -9,29 +9,32 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
-const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
-  credentials: 'same-origin',
-})
-
-const authLink = setContext((_, { headers }) => {
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('authToken')
-    return {
-      headers: {
-        ...headers,
-        authorization: token && `Bearer ${token}`,
-      },
-    }
-  }
-})
-
 const createApolloClient = () => {
+  // Create an HttpLink with the WordPress API URL
+  const httpLink = new HttpLink({
+    uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+    credentials: 'same-origin',
+  })
+
+  // Create an AuthLink to add the authentication header
+  const authLink = setContext((_, { headers }) => {
+    if (typeof window !== 'undefined') {
+      const authToken = localStorage.getItem('authToken')
+
+      // Return the headers with the authentication token added
+      return {
+        headers: {
+          ...headers,
+          authorization: authToken ? `Bearer ${authToken}` : '',
+        },
+      }
+    }
+  })
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: authLink.concat(httpLink),
+    link: authLink.concat(httpLink), // Concatenate the AuthLink and HttpLink
     cache: new InMemoryCache({
-      // typePolicies is not required to use Apollo with Next.js - only for doing pagination.
       typePolicies: {
         Query: {
           fields: {
