@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
-import { initializeApollo } from '../lib/apollo'
+import { initializeApollo, addApolloState } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 
@@ -156,7 +156,7 @@ export const getStaticProps: GetStaticProps = async () => {
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
-  return {
+  return addApolloState(apolloClient, {
     props: { cargoList, cargoTransport, passengerTransport },
-  }
+  })
 }
