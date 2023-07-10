@@ -430,15 +430,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const response = await client.query({
     query: GET_ALL_TRANSPORT_CATEGORIES,
   })
-  const transportCategories = response?.data?.transportCategories?.edges || []
-
-  // Generate the dynamic paths based on the available transport categories
-  const paths = transportCategories.map((category) => ({
-    params: { slug: category.node.slug },
-  }))
+  const transportCategories = response?.data?.transportCategories
 
   return {
-    paths,
+    paths: transportCategories.edges.map(({ node }) => `/account/add-transport/${node.slug}`) || [],
     fallback: true,
   }
 }

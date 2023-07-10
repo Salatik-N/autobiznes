@@ -219,7 +219,7 @@ export const GET_TRANSPORT_INFO = gql`
 
 export const GET_ALL_TRANSPORT_CATEGORIES = gql`
   query GetAllTransportCategories {
-    transportCategories {
+    transportCategories(where: { childless: true }) {
       edges {
         node {
           slug
