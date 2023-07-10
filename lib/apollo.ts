@@ -52,17 +52,7 @@ const createApolloClient = () => {
     link: new HttpLink({
       uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL, // Server URL (must be absolute)
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-    }),
-    cache: new InMemoryCache({
-      // typePolicies is not required to use Apollo with Next.js - only for doing pagination.
-      typePolicies: {
-        Query: {
-          fields: {
-            posts: relayStylePagination(),
-          },
-        },
-      },
-    }),
+    })
   })
 }
 
