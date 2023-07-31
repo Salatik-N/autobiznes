@@ -199,6 +199,7 @@ export const GET_TRANSPORT_INFO = gql`
           customField {
             phone
             fatherName
+            transportInPark
           }
           firstName
           lastName
@@ -359,14 +360,10 @@ export const REGISTER_USER = gql`
     }
   }
 `
-export const UPDATE_TRANSPORT_VIEWS = gql`
-  mutation UpdateViews($id: ID!) {
-    updateTransport(input: { id: $id }) {
-      transport {
-        acfTransportDescription {
-          views
-        }
-      }
+export const UPDATE_VIEWS_COUNT = gql`
+  mutation UpdateViews($postId: ID) {
+    updateViewsCount(input: { postId: $postId }) {
+      clientMutationId
     }
   }
 `
@@ -509,6 +506,13 @@ export const ADD_NEW_TRANSPORT = gql`
         photoDriver: $photoDriver
       }
     ) {
+      clientMutationId
+    }
+  }
+`
+export const DELETE_TRANSPORT = gql`
+  mutation DeleteTransport($id: ID!) {
+    deleteTransport(input: { id: $id }) {
       clientMutationId
     }
   }

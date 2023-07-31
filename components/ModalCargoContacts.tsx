@@ -23,11 +23,11 @@ export default function ModalCargoContacts({ cargoInfo }) {
       <div className={styles.name}>
         {authorInfo.lastName} {authorInfo.firstName} {authorInfo.customField.fatherName}
       </div>
-      <div className={styles.additional}>
+      {/* <div className={styles.additional}>
         <p>
           Место в рейтинге: {authorInfo.firstName} из {authorInfo.firstName}
         </p>
-      </div>
+      </div> */}
       <div>
         <Link className={styles.phone} href={`tel:${phone}`}>
           <Image src={phoneIcon} alt="Звонок" width={16} height={16} />

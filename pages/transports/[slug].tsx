@@ -73,19 +73,6 @@ export default function Transport1t({ transportCategory }) {
 }
 
 const apolloClient = initializeApollo()
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const response = await apolloClient.query({
-//     query: GET_ALL_TRANSPORT_CATEGORIES,
-//   })
-//   const transportCategories = response?.data?.transportCategories
-
-//   return {
-//     paths: transportCategories.edges.map(({ node }) => `/transports/${node.slug}`) || [],
-//     fallback: false,
-//   }
-// }
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const responseCategory = await apolloClient.query({
     query: GET_TRANSPORT_CATEGORY,

@@ -25,14 +25,14 @@ export default function Transports() {
     <Container>
       <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
       <div className="white-background">Мой транспорт</div>
-      {transportList ? (
+      {transportList && (
         <>
-          <div className="cargo-list">
-            <TransportItem active={{ id: 0 }} transports={transportList} />
+          <div className="transport-list">
+            <TransportItem active={null} transports={transportList} isActiveAdminTools />
           </div>
           <ListNavigation />
         </>
-      ) : null}
+      )}
     </Container>
   )
 }

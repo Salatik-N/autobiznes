@@ -28,7 +28,7 @@ export default function Cargos() {
       {cargoList ? (
         <>
           <div className="cargo-list">
-            <CargoItem cargos={cargoList} />
+            <CargoItem cargos={cargoList} isActiveAdminTools />
           </div>
           <ListNavigation />
         </>

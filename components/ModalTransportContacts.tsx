@@ -9,9 +9,10 @@ import timeIcon from '../public/icons/time.svg'
 
 export default function ModalCargoContacts({ transportInfo }) {
   const authorInfo = transportInfo.author.node
+  const transport = transportInfo.acfTransportContacts
   let phone
-  if (transportInfo.acfTransportContacts.customPhone) {
-    phone = transportInfo.acfTransportContacts.customPhone
+  if (transport.customPhone) {
+    phone = transport.customPhone
   } else {
     phone = authorInfo.customField.phone
   }
@@ -24,43 +25,47 @@ export default function ModalCargoContacts({ transportInfo }) {
       <div className={styles.name}>
         {authorInfo.lastName} {authorInfo.firstName} {authorInfo.customField.fatherName}
       </div>
-      <div className={styles.additional}>
-        <p>
+      {authorInfo.customField.transportInPark && (
+        <div className={styles.additional}>
+          {/* <p>
           Место в рейтинге: {authorInfo.firstName} из {authorInfo.firstName}
-        </p>
-        <p>Техники в парке: {authorInfo.registeredDate} ед.</p>
-      </div>
-      <div>
-        <Link className={styles.phone} href={`tel:${phone}`}>
-          <Image src={phoneIcon} alt="Звонок" width={16} height={16} />
-          {phone}
-        </Link>
-      </div>
-      {transportInfo.acfTransportContacts.viber ||
-      transportInfo.acfTransportContacts.whatsapp ||
-      transportInfo.acfTransportContacts.telegram ? (
+        </p> */}
+          <p>Техники в парке: {authorInfo.customField.transportInPark} ед.</p>
+        </div>
+      )}
+      {phone && (
+        <div>
+          <Link className={styles.phone} href={`tel:${phone}`}>
+            <Image src={phoneIcon} alt="Звонок" width={16} height={16} />
+            {phone}
+          </Link>
+        </div>
+      )}
+      {transport.viber || transport.whatsapp || transport.telegram ? (
         <div className={styles.messengers}>
-          {transportInfo.acfTransportContacts.viber && (
+          {transport.viber && (
             <Link href={`viber://chat?number=%2B${phone.replace(/\D/g, '')}`}>
               <Image src={viberIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
-          {transportInfo.acfTransportContacts.whatsapp && (
+          {transport.whatsapp && (
             <Link href={`https://api.whatsapp.com/send?phone=${phone.replace(/\D/g, '')}`}>
               <Image src={whatsAppIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
-          {transportInfo.acfTransportContacts.telegram && (
+          {transport.telegram && (
             <Link href={`https://t.me/${phone}`}>
               <Image src={telegramIcon} alt="Аватар" width={33} height={33} />
             </Link>
           )}
         </div>
       ) : null}
-      <div className={styles.workTime}>
-        <Image src={timeIcon} alt="Звонок" width={25} height={25} />
-        Режим работы: {authorInfo.firstName}
-      </div>
+      {transport.modeOperation && (
+        <div className={styles.workTime}>
+          <Image src={timeIcon} alt="Звонок" width={25} height={25} />
+          Режим работы: {transport.modeOperation}
+        </div>
+      )}
     </div>
   )
 }

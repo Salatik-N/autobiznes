@@ -1,0 +1,30 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.adminTools {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  .views {
+    border: 1px solid #f8faff;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: $blue;
+    gap: 5px;
+  }
+  .delete {
+    width: 46px;
+    background: #f6f6f6;
+  }
+  .edit {
+    width: 46px;
+    background: #f8faff;
+  }
+  & > * {
+    @include border-radius(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+  }
+}

@@ -1,17 +1,26 @@
 import styles from './TransportItem.module.scss'
-import { useMutation } from '@apollo/client'
 import Image from 'next/image'
 import verifiedUser from '../public/icons/verified-user.svg'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { initializeApollo } from '../lib/apollo'
-import { GET_TRANSPORT_INFO, UPDATE_TRANSPORT_VIEWS } from '../lib/api'
+import { GET_TRANSPORT_INFO, UPDATE_VIEWS_COUNT } from '../lib/api'
 import Modal from './Modal'
+import AdminTools from './AdminTools'
 import { Loader } from './Loader'
 import ModalTransprotContacts from '../components/ModalTransportContacts'
 import TransportFeatures from './TransportFeatures'
 import ImagesGallery from './ImagesGallery'
 
-const TransportItem = ({ active, transports }) => {
+type TransportItemProps = {
+  active: {
+    id: number
+    region: string
+  }
+  transports: any
+  isActiveAdminTools?: boolean
+}
+
+const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isActiveAdminTools = false }) => {
   const [transportInfo, setTransportInfo] = useState(null)
   const [isLoading, setLoading] = useState(false)
   const [isModalActive, setModalActive] = useState(false)
@@ -34,6 +43,10 @@ const TransportItem = ({ active, transports }) => {
     })
     setTransportInfo(responseTransport?.data?.transport)
     setLoading(false)
+    apolloClient.mutate({
+      mutation: UPDATE_VIEWS_COUNT,
+      variables: { postId: idTransport },
+    })
   }
 
   const handleFeaturesOpen = (idTransport) => {
@@ -60,17 +73,17 @@ const TransportItem = ({ active, transports }) => {
     const halfLength = Math.ceil(text?.length / 2)
     return text?.slice(0, halfLength)
   }
-
   return (
     <>
       {transports.edges
         .filter((item) =>
-          active.id === 0
+          active === null || active.id === 0
             ? item.node.acfTransportAddress.regionTransport
             : item.node.acfTransportAddress.regionTransport === active.region
         )
         .map((item) => (
           <div key={item.node.databaseId} className={styles.transportItem}>
+            {isActiveAdminTools && <AdminTools item={item.node} />}
             <ImagesGallery photos={item.node.acfTransportPhotos.photoTruck} />
             <div className={styles.transportNumber}>№{item.node.databaseId}</div>
             <div className={styles.title}>

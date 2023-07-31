@@ -53,7 +53,7 @@ export default function SignUpForm() {
       <div>
         <label>Электронная почта</label>
         <input
-          name="email"
+          name={FIELDS.EMAIL}
           type="email"
           placeholder="Введите вашу почту"
           value={form[FIELDS.EMAIL]}
@@ -63,7 +63,7 @@ export default function SignUpForm() {
       <div>
         <label>Ваше имя</label>
         <input
-          name="name"
+          name={FIELDS.FIRST_NAME}
           type="text"
           placeholder="Введите ваше имя"
           value={form[FIELDS.FIRST_NAME]}
@@ -73,7 +73,7 @@ export default function SignUpForm() {
       <div>
         <label>Пароль</label>
         <input
-          name="password"
+          name={FIELDS.PASSWORD}
           type="password"
           placeholder="Пароль минимум из 8 символов"
           value={form[FIELDS.PASSWORD]}

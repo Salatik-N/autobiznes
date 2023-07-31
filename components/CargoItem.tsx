@@ -9,13 +9,14 @@ import truckIcon from '../public/icons/truck.svg'
 import walletIcon from '../public/icons/wallet.svg'
 import Declension from '../components/Declension'
 import Modal from './Modal'
+import AdminTools from './AdminTools'
 import ModalCargoContacts from './ModalCargoContacts'
 import ModalCargoMoreInfo from './ModalCargoMoreInfo'
 import { GET_CARGO_INFO } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
 import { Loader } from './Loader'
 
-export default function CargoItem({ cargos }) {
+export default function CargoItem({ cargos, isActiveAdminTools = false }) {
   const [activeModalName, setactiveModalName] = useState(null)
   const [cargoInfo, setCargoInfo] = useState(null)
   const [isLoading, setLoading] = useState(false)
@@ -45,6 +46,7 @@ export default function CargoItem({ cargos }) {
     <>
       {cargos.edges.map((item) => (
         <div key={item.node.databaseId} className={styles.cargoItem}>
+          {isActiveAdminTools && <AdminTools item={item.node} />}
           <div className={styles.cargoNumber}>№{item.node.databaseId}</div>
           <div className={styles.deliveryPlace}>
             <div>
