@@ -163,7 +163,7 @@ export default function Transport1t({ transportCategory }) {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
+      fetch('https://react.autobiznes.byl/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -173,7 +173,7 @@ export default function Transport1t({ transportCategory }) {
         .then((res) => res.json())
         .then((data) => resolve(data.source_url))
         .catch((err) => {
-          console.log(err)
+          console.error(err)
           return null
         })
     })
@@ -385,7 +385,7 @@ export default function Transport1t({ transportCategory }) {
           </div>
 
           <div className="white-background">
-            <span className="form-block-title">Фото водителя</span>
+            <span className="form-block-title">Фото грузовика</span>
             {form[FIELDS.PHOTO_TRUCK] &&
               form[FIELDS.PHOTO_TRUCK].map((link, key) => (
                 <>
