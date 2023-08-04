@@ -12,7 +12,7 @@ import Modal from './Modal'
 import AdminTools from './AdminTools'
 import ModalCargoContacts from './ModalCargoContacts'
 import ModalCargoMoreInfo from './ModalCargoMoreInfo'
-import { GET_CARGO_INFO } from '../lib/api'
+import { GET_CARGO_INFO, UPDATE_VIEWS_COUNT } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
 import { Loader } from './Loader'
 
@@ -40,14 +40,20 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
     })
     setCargoInfo(responseCargo?.data?.cargo)
     setLoading(false)
+    apolloClient.mutate({
+      mutation: UPDATE_VIEWS_COUNT,
+      variables: { postId: idCargo },
+    })
   }
 
   return (
     <>
       {cargos.edges.map((item) => (
         <div key={item.node.databaseId} className={styles.cargoItem}>
-          {isActiveAdminTools && <AdminTools item={item.node} />}
-          <div className={styles.cargoNumber}>№{item.node.databaseId}</div>
+          <div className={styles.cargoAdminBlock}>
+            <div className={styles.cargoNumber}>№{item.node.databaseId}</div>
+            {isActiveAdminTools && <AdminTools item={item.node} />}
+          </div>
           <div className={styles.deliveryPlace}>
             <div>
               <div className={styles.placeLabel}>Место погрузки</div>

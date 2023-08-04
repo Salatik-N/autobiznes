@@ -14,6 +14,11 @@
     margin-bottom: 15px;
   }
 
+  .cargoAdminBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   .cargoNumber {
     color: #ed9004;
     padding: 6px 30px;

@@ -296,6 +296,10 @@ export const GET_USER_INFO = gql`
               budgetTo
               paymentMethod
             }
+            acfCargoDescription {
+              fullDescription
+              views
+            }
           }
         }
       }
@@ -521,6 +525,13 @@ export const UPLOAD_FILE = gql`
   mutation MyMutation($file: Upload!, $altText: String) {
     upload(input: { file: $file, altText: $altText }) {
       text
+    }
+  }
+`
+export const SEND_SUPPORT_MAIL = gql`
+  mutation sendSupportMail($to: String, $from: String, $body: String, $subject: String) {
+    sendEmail(input: { to: $to, from: $from, subject: $subject, body: $body }) {
+      sent
     }
   }
 `

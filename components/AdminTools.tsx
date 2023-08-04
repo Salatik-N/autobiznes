@@ -11,6 +11,9 @@ type itemProps = {
   acfTransportDescription: {
     views: number
   }
+  acfCargoDescription: {
+    views: number
+  }
 }
 type adminToolsProps = {
   item: itemProps
@@ -24,21 +27,22 @@ const AdminTools: React.FC<adminToolsProps> = ({ item }) => {
       variables: { id: idTransport },
     })
   }
+
   return (
-    <>
-      <div className={styles.adminTools}>
-        {/* <div className={styles.views}>
-          <Image src={viewsIcon} width={20} height={20} alt="Просмотров" />
-          {item.acfTransportDescription.views === null ? '0' : item.acfTransportDescription.views}
-        </div> */}
-        <button className={styles.delete} onClick={() => handleDelete(item.databaseId)}>
-          <Image src={deleteIcon} width={33} height={33} alt="Удалить" />
-        </button>
-        <button className={styles.edit} onClick={() => console.log(item)}>
-          <Image src={editIcon} width={25} height={25} alt="Редактировать" />
-        </button>
+    <div className={styles.adminTools}>
+      <div className={styles.views}>
+        <Image src={viewsIcon} width={20} height={20} alt="Просмотров" />
+        {item.acfTransportDescription?.views === null || item.acfCargoDescription?.views === null
+          ? '0'
+          : item.acfTransportDescription?.views || item.acfCargoDescription?.views}
       </div>
-    </>
+      <button className={styles.delete} onClick={() => handleDelete(item.databaseId)}>
+        <Image src={deleteIcon} width={33} height={33} alt="Удалить" />
+      </button>
+      <button className={styles.edit} onClick={() => console.log(item)}>
+        <Image src={editIcon} width={25} height={25} alt="Редактировать" />
+      </button>
+    </div>
   )
 }
 export default AdminTools
