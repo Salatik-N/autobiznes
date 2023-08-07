@@ -603,6 +603,11 @@ export const SEND_SUPPORT_MAIL = gql`
   mutation sendSupportMail($to: String, $from: String, $body: String, $subject: String) {
     sendEmail(input: { to: $to, from: $from, subject: $subject, body: $body }) {
       sent
+      to
+      replyTo
+      origin
+      message
+      clientMutationId
     }
   }
 `
