@@ -63,7 +63,7 @@ export default function ModalCargoMoreInfo({ cargoInfo }) {
           {cargoInfo.acfCargoContacts.budgetTo} BYN
         </div>
       )}
-      {cargoInfo.acfCargoPickupPoint.shippingCity && cargoInfo.acfCargoDeliverPoint.unloadingCit ? (
+      {cargoInfo.acfCargoPickupPoint.shippingCity && cargoInfo.acfCargoDeliverPoint.unloadingCity ? (
         <div>
           <b>Маршрут: </b>
           <div className={styles.route}>
