@@ -16,13 +16,10 @@ enum FIELDS {
 export default function Transports() {
   const { data } = useQuery(GET_USER_INFO)
   const [emailUser, setEmaiUser] = useState('')
+  const apolloClient = initializeApollo()
   const [isSent, setIsSent] = useState(false)
   const [modalActive, setModalActive] = useState(false)
-  const [sendMail] = useMutation(SEND_SUPPORT_MAIL, {
-    onCompleted: (data) => {
-      setIsSent(data.sendEmail.sent)
-    },
-  })
+
   const [form, setForm] = useState({
     [FIELDS.FROM]: 'admin@autobiznes.by',
     [FIELDS.TO]: 'support@autobiznes.by',
@@ -48,7 +45,8 @@ export default function Transports() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(form)
-    sendMail({
+    apolloClient.mutate({
+      mutation: SEND_SUPPORT_MAIL,
       variables: {
         from: form[FIELDS.FROM],
         to: form[FIELDS.TO],
