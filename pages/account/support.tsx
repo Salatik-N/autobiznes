@@ -48,16 +48,11 @@ export default function Transports() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     sendMail({
+      mutation: SEND_SUPPORT_MAIL,
       variables: {
         from: form[FIELDS.FROM],
         to: form[FIELDS.TO],
         body: form[FIELDS.BODY],
-        // body: `
-        // Email: ${emailUser}
-        // Сообщение: ${form[FIELDS.BODY]}
-
-        // Это письмо отправленно автоматически, отвечайте на email пользователя в письме
-        // `,
         subject: form[FIELDS.SUBJECT],
       },
     })
