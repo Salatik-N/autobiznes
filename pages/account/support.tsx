@@ -50,12 +50,14 @@ export default function Transports() {
     sendMail({
       variables: {
         from: form[FIELDS.FROM],
-        body: `
-        Email: ${emailUser}
-        Сообщение: ${form[FIELDS.BODY]}
-        
-        Это письмо отправленно автоматически, отвечайте на email пользователя в письме
-        `,
+        to: form[FIELDS.TO],
+        body: form[FIELDS.BODY],
+        // body: `
+        // Email: ${emailUser}
+        // Сообщение: ${form[FIELDS.BODY]}
+
+        // Это письмо отправленно автоматически, отвечайте на email пользователя в письме
+        // `,
         subject: form[FIELDS.SUBJECT],
       },
     })
