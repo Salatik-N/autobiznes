@@ -45,15 +45,22 @@ export default function Transports() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(form)
-    apolloClient.mutate({
-      mutation: SEND_SUPPORT_MAIL,
-      variables: {
-        from: form[FIELDS.FROM],
-        to: form[FIELDS.TO],
-        subject: form[FIELDS.SUBJECT],
-        body: form[FIELDS.BODY],
-      },
-    })
+    apolloClient
+      .mutate({
+        mutation: SEND_SUPPORT_MAIL,
+        variables: {
+          from: form[FIELDS.FROM],
+          to: form[FIELDS.TO],
+          subject: form[FIELDS.SUBJECT],
+          body: form[FIELDS.BODY],
+        },
+      })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
