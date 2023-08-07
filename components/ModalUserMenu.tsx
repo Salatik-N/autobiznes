@@ -8,8 +8,8 @@ import addTransportIcon from '../public/icons/add-transport.svg'
 import truckIcon from '../public/icons/truck.svg'
 import logisticIcon from '../public/icons/logistics.svg'
 import searchCargoIcon from '../public/icons/search-cargo.svg'
-import SettingSVG from './SettingSVG.tsx'
-import SupportSVG from './SupportSVG.tsx'
+import SettingSVG from './SettingSVG'
+import SupportSVG from './SupportSVG'
 import signOutIcon from '../public/icons/power-button.svg'
 
 export default function ModalUserMenu() {
