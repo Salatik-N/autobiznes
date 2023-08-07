@@ -69,10 +69,10 @@ export default function Transports() {
         {!isSent ? (
           <form onSubmit={handleSubmit} autoComplete="on">
             <label>
-              <span>Полное описание</span>
+              <span>Ваше обращение</span>
               <textarea
                 name={FIELDS.BODY}
-                placeholder="Введите описание до 300 символов"
+                placeholder="Введите обращение до 300 символов"
                 maxLength={300}
                 value={form[FIELDS.BODY]}
                 onChange={handleChangeForm}

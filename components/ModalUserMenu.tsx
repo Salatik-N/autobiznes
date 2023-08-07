@@ -1,14 +1,23 @@
 import styles from './ModalUserMenu.module.scss'
 import { useRouter } from 'next/router'
-import boxesIcon from '../public/icons/boxes.svg'
 import Link from 'next/link'
 import Image from 'next/image'
+import addCargoIcon from '../public/icons/add-cargo.svg'
+import boxesIcon from '../public/icons/boxes.svg'
+import addTransportIcon from '../public/icons/add-transport.svg'
+import truckIcon from '../public/icons/truck.svg'
+import logisticIcon from '../public/icons/logistics.svg'
+import searchCargoIcon from '../public/icons/search-cargo.svg'
+import SettingSVG from './SettingSVG.tsx'
+import SupportSVG from './SupportSVG.tsx'
+import signOutIcon from '../public/icons/power-button.svg'
 
 export default function ModalUserMenu() {
   const router = useRouter()
 
   const logoutUser = () => {
     localStorage.removeItem('authToken')
+    router.push('/')
   }
 
   return (
@@ -19,7 +28,7 @@ export default function ModalUserMenu() {
           <span>Меню заказчика</span>
         </div>
         <Link href="/account/add-cargo" className={styles.button}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={addCargoIcon} alt="Добавить груз" />
           Добавить заказ/груз
         </Link>
         <Link href="/account/cargos" className={styles.button}>
@@ -32,11 +41,11 @@ export default function ModalUserMenu() {
           <span>Меню исполнителя</span>
         </div>
         <Link href="/account/add-transport" className={styles.button}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={addTransportIcon} alt="Добавить груз" />
           Добавить технику
         </Link>
         <Link href="/account/transports" className={styles.button}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={truckIcon} alt="Добавить груз" />
           Моя техника
         </Link>
       </div>
@@ -45,7 +54,7 @@ export default function ModalUserMenu() {
           <span>Управление техникой</span>
         </div>
         <Link href="/transports" className={styles.button}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={logisticIcon} alt="Добавить груз" />
           Поиск транспорта
         </Link>
       </div>
@@ -54,7 +63,7 @@ export default function ModalUserMenu() {
           <span>Управление заказами</span>
         </div>
         <Link href="/cargos" className={styles.button}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={searchCargoIcon} alt="Добавить груз" />
           Поиск грузов
         </Link>
       </div>
@@ -63,18 +72,18 @@ export default function ModalUserMenu() {
           href="/account/setting"
           className={`${styles.button} ${router.pathname === '/account/setting' && styles.active}`}
         >
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <SettingSVG fill={`${router.pathname === '/account/setting' ? 'white' : 'black'}`} />
           Настройки
         </Link>
         <Link
           href="/account/support"
           className={`${styles.button} ${router.pathname === '/account/support' && styles.active}`}
         >
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <SupportSVG fill={`${router.pathname === '/account/support' ? 'white' : 'black'}`} />
           Техподдержка
         </Link>
         <button className={styles.button} onClick={logoutUser}>
-          <Image src={boxesIcon} alt="Добавить груз" />
+          <Image src={signOutIcon} alt="Добавить груз" />
           Выйти
         </button>
       </div>

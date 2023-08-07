@@ -11,6 +11,7 @@ enum FIELDS {
   FIRST_NAME = 'firstName',
   EMAIL = 'email',
   PHONE = 'phone',
+  PASSWORD = 'password',
 }
 
 export default function AccountSetting() {
@@ -21,6 +22,7 @@ export default function AccountSetting() {
     [FIELDS.FIRST_NAME]: '',
     [FIELDS.EMAIL]: '',
     [FIELDS.PHONE]: '',
+    [FIELDS.PASSWORD]: '',
   })
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function AccountSetting() {
         [FIELDS.EMAIL]: data.viewer.email || '',
         [FIELDS.PHONE]: data.viewer.customField.phone || '',
       }))
+    console.log(form)
   }, [data])
 
   const handleChangeForm = (event: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -59,84 +62,67 @@ export default function AccountSetting() {
       .catch((err) => console.log(err))
   }
 
-  return (
-    <>
-      <Container>
-        <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
-        <form onSubmit={editUserInfo} autoComplete="on">
-          <div className="white-background">
-            <span className="form-block-title">Данные для входа в личный кабинет</span>
-            <label>
-              <span>Ваше имя</span>
-              <input
-                name={FIELDS.FIRST_NAME}
-                type="text"
-                placeholder="Введите свое имя"
-                value={form[FIELDS.FIRST_NAME]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Электронная почта</span>
-              <input
-                disabled
-                name={FIELDS.EMAIL}
-                type="email"
-                placeholder="example@mail.ru"
-                value={form[FIELDS.EMAIL]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Ваш номер телефона</span>
-              <input
-                name={FIELDS.PHONE}
-                type="text"
-                placeholder="Введите ваш номер телефона"
-                value={form[FIELDS.PHONE]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <button type="submit">Сохранить</button>
-          </div>
-          {/* <div className="white-background">
-              <span className="form-block-title">Изменение пароля</span>
-              <label>
-                <span>Предыдущий пароль</span>
-                <input
-                  name={FIELDS.PASSWORD}
-                  type="text"
-                  placeholder="Введите текст"
-                  value={form[FIELDS.PASSWORD]}
-                  onChange={handleChangeForm}
-                />
-              </label>
+  const editPassword = (e) => {
+    e.preventDefault()
+    console.log(1)
+  }
 
-            <div>
-              <label>Новый пароль </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Пароль минимум из 8 символов"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </div>
-            
-            <div>
-              <label>Повторите новый пароль</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Пароль минимум из 8 символов"
-                value={newPasswordCheck}
-                onChange={(e) => setNewPasswordCheck(e.target.value)}
-              />
-            </div>
-            <button type="submit">Сохранить</button>
-          </div> */}
-        </form>
-      </Container>
-    </>
+  return (
+    <Container>
+      <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
+      <form onSubmit={editUserInfo} autoComplete="on">
+        <div className="white-background">
+          <span className="form-block-title">Данные для входа в личный кабинет</span>
+          <label>
+            <span>Ваше имя</span>
+            <input
+              name={FIELDS.FIRST_NAME}
+              type="text"
+              placeholder="Введите свое имя"
+              value={form[FIELDS.FIRST_NAME]}
+              onChange={handleChangeForm}
+            />
+          </label>
+          <label>
+            <span>Электронная почта</span>
+            <input
+              disabled
+              name={FIELDS.EMAIL}
+              type="email"
+              placeholder="example@mail.ru"
+              value={form[FIELDS.EMAIL]}
+              onChange={handleChangeForm}
+            />
+          </label>
+          <label>
+            <span>Ваш номер телефона</span>
+            <input
+              name={FIELDS.PHONE}
+              type="text"
+              placeholder="Введите ваш номер телефона"
+              value={form[FIELDS.PHONE]}
+              onChange={handleChangeForm}
+            />
+          </label>
+          <button type="submit">Сохранить</button>
+        </div>
+      </form>
+      {/* <form onSubmit={editPassword} autoComplete="on">
+        <div className="white-background">
+          <span className="form-block-title">Изменение пароля</span>
+          <label>
+            <span>Текущий пароль</span>
+            <input
+              name={FIELDS.PASSWORD}
+              type="text"
+              placeholder="Введите текущий пароль"
+              value={form[FIELDS.PASSWORD]}
+              onChange={handleChangeForm}
+            />
+          </label>
+          <button type="submit">Сменить пароль</button>
+        </div>
+      </form> */}
+    </Container>
   )
 }

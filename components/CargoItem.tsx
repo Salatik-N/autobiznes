@@ -52,7 +52,7 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
         <div key={item.node.databaseId} className={styles.cargoItem}>
           <div className={styles.cargoAdminBlock}>
             <div className={styles.cargoNumber}>№{item.node.databaseId}</div>
-            {isActiveAdminTools && <AdminTools item={item.node} />}
+            {isActiveAdminTools && <AdminTools item={item.node} type="cargo" />}
           </div>
           <div className={styles.deliveryPlace}>
             <div>

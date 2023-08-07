@@ -287,7 +287,7 @@ export default function Transport1t({ transportCategory }) {
           <div className="white-background">
             <span className="form-block-title">Контактные данные</span>
             <label>
-              <span>ФИО исполнителя</span>
+              <span>Имя исполнителя</span>
               <input
                 name={FIELDS.CUSTOM_NAME}
                 type="text"

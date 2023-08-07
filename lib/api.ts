@@ -120,6 +120,7 @@ export const GET_CARGO_INFO = gql`
         whatsapp
         viber
         telegram
+        customName
         customPhone
         paymentMethod
         budgetTo
@@ -353,6 +354,17 @@ export const UPDATE_USER = gql`
     }
   }
 `
+export const LOGIN_USER = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(input: { clientMutationId: "uniqueId", username: $username, password: $password }) {
+      authToken
+      refreshToken
+      user {
+        username
+      }
+    }
+  }
+`
 export const REGISTER_USER = gql`
   mutation RegisterUser($firstName: String!, $username: String!, $email: String, $password: String!) {
     registerUser(input: { firstName: $firstName, username: $username, email: $email, password: $password }) {
@@ -383,12 +395,12 @@ export const ADD_NEW_CARGO = gql`
     $unloadingCountry: String = ""
     $whatsapp: Boolean = false
     $viber: Boolean = false
-    $weight: String = ""
+    $weight: Float
     $vehicleBodyType: String = ""
     $typeTransportation: String = ""
     $typeLoading: String = ""
     $telegram: Boolean = false
-    $budgetTo: String = ""
+    $budgetTo: Float
     $customName: String = ""
     $customPhone: String = ""
     $dateLoading: String = ""
@@ -399,6 +411,65 @@ export const ADD_NEW_CARGO = gql`
   ) {
     createCargoCustom(
       input: {
+        title: $title
+        shippingRegion: $shippingRegion
+        shippingCity: $shippingCity
+        shippingAddress: $shippingAddress
+        unloadingAdress: $unloadingAdress
+        unloadingCity: $unloadingCity
+        unloadingCountry: $unloadingCountry
+        unloadingRegion: $unloadingRegion
+        weight: $weight
+        viber: $viber
+        vehicleBodyType: $vehicleBodyType
+        whatsapp: $whatsapp
+        typeTransportation: $typeTransportation
+        typeLoading: $typeLoading
+        telegram: $telegram
+        paymentMethod: $paymentMethod
+        movers: $movers
+        dateUnloading: $dateUnloading
+        customPhone: $customPhone
+        customName: $customName
+        budgetTo: $budgetTo
+        dateLoading: $dateLoading
+        fullDescription: $fullDescription
+      }
+    ) {
+      clientMutationId
+    }
+  }
+`
+export const EDIT_CARGO = gql`
+  mutation updateCargoCustom(
+    $cargoId: ID
+    $shippingAddress: String = ""
+    $shippingCity: String = ""
+    $shippingRegion: String = ""
+    $title: String = ""
+    $unloadingRegion: String = ""
+    $unloadingAdress: String = ""
+    $unloadingCity: String = ""
+    $unloadingCountry: String = ""
+    $whatsapp: Boolean = false
+    $viber: Boolean = false
+    $weight: Float
+    $vehicleBodyType: String = ""
+    $typeTransportation: String = ""
+    $typeLoading: String = ""
+    $telegram: Boolean = false
+    $budgetTo: Float
+    $customName: String = ""
+    $customPhone: String = ""
+    $dateLoading: String = ""
+    $dateUnloading: String = ""
+    $movers: String = ""
+    $paymentMethod: String = ""
+    $fullDescription: String = ""
+  ) {
+    updateCargoCustom(
+      input: {
+        cargoId: $cargoId
         title: $title
         shippingRegion: $shippingRegion
         shippingCity: $shippingCity

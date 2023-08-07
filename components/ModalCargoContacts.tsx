@@ -20,9 +20,7 @@ export default function ModalCargoContacts({ cargoInfo }) {
       <div className={styles.avatar}>
         <Image src={authorInfo.avatar.url} alt="Аватар" width={80} height={80} />
       </div>
-      <div className={styles.name}>
-        {authorInfo.lastName} {authorInfo.firstName} {authorInfo.customField.fatherName}
-      </div>
+      <div className={styles.name}>{cargoInfo.acfCargoContacts.customName || authorInfo.firstName}</div>
       {/* <div className={styles.additional}>
         <p>
           Место в рейтинге: {authorInfo.firstName} из {authorInfo.firstName}

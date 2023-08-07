@@ -83,7 +83,7 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
         )
         .map((item) => (
           <div key={item.node.databaseId} className={styles.transportItem}>
-            {isActiveAdminTools && <AdminTools item={item.node} />}
+            {isActiveAdminTools && <AdminTools item={item.node} type="transport" />}
             <ImagesGallery photos={item.node.acfTransportPhotos.photoTruck} />
             <div className={styles.transportNumber}>№{item.node.databaseId}</div>
             <div className={styles.title}>

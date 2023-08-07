@@ -1,4 +1,5 @@
 import styles from './Modal.module.scss'
+import { useEffect } from 'react'
 
 export default function Modal({ active, setModalActive, children }) {
   return (
