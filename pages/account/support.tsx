@@ -52,7 +52,12 @@ export default function Transports() {
           from: form[FIELDS.FROM],
           to: form[FIELDS.TO],
           subject: form[FIELDS.SUBJECT],
-          body: form[FIELDS.BODY],
+          body: `
+          Email: ${emailUser}
+          Сообщение: ${form[FIELDS.BODY]}
+
+          Это письмо отправленно автоматически, отвечайте на email пользователя в письме
+          `,
         },
       })
       .then((result) => {
