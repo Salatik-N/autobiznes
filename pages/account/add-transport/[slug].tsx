@@ -61,6 +61,7 @@ enum FIELDS {
 
 export default function Transport1t({ transportCategory }) {
   const { data } = useQuery(GET_USER_INFO)
+
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
     [FIELDS.REGION_TRANSPORT]: '',
