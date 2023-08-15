@@ -198,15 +198,27 @@ export const GET_TRANSPORT_INFO = gql`
             url
           }
           customField {
-            phone
-            fatherName
+            verifiedUser
             transportInPark
           }
-          firstName
-          lastName
         }
       }
+      title
+      databaseId
+      transportCategories {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      acfTransportAddress {
+        regionTransport
+        city
+      }
       acfTransportContacts {
+        customName
         customPhone
         modeOperation
         paymentMethod
@@ -214,6 +226,42 @@ export const GET_TRANSPORT_INFO = gql`
         telegram
         viber
         whatsapp
+      }
+      acfTransportFeatures {
+        workExperience
+        vehiclesInPark
+        vehicleClass
+        vehicleBrand
+        vehicleBodyType
+        typeTransportation
+        serviceSpecialization
+        pricePerShift
+        price1Km
+        price1Hour
+        options
+        numberSeatsWithoutLuggage
+        numberSeats
+        minimumOrderTime
+        leaseTerm
+        color
+        carryingCapacity
+        bodyWidth
+        bodyVolume
+        bodyLength
+        bodyHeight
+        amenities
+      }
+      acfTransportPhotos {
+        photoTruck {
+          mediaItemUrl
+        }
+        photoDriver {
+          mediaItemUrl
+        }
+      }
+      acfTransportDescription {
+        fullDescription
+        views
       }
     }
   }
@@ -225,6 +273,7 @@ export const GET_ALL_TRANSPORT_CATEGORIES = gql`
       edges {
         node {
           slug
+          name
         }
       }
     }
@@ -516,9 +565,9 @@ export const ADD_NEW_TRANSPORT = gql`
     $modeOperation: String = ""
     $paymentMethod: String = ""
     $paymentProcedure: String = ""
-    $price1Hour: String = ""
-    $price1Km: String = ""
-    $pricePerShift: String = ""
+    $price1Hour: Int
+    $price1Km: Int
+    $pricePerShift: Int
     $regionTransport: String = ""
     $telegram: Boolean = false
     $title: String = ""
@@ -542,6 +591,93 @@ export const ADD_NEW_TRANSPORT = gql`
   ) {
     createTransportCustom(
       input: {
+        bodyHeight: $bodyHeight
+        bodyLength: $bodyLength
+        bodyVolume: $bodyVolume
+        bodyWidth: $bodyWidth
+        carryingCapacity: $carryingCapacity
+        category: $category
+        city: $city
+        customName: $customName
+        customPhone: $customPhone
+        fullDescription: $fullDescription
+        modeOperation: $modeOperation
+        paymentMethod: $paymentMethod
+        paymentProcedure: $paymentProcedure
+        price1Hour: $price1Hour
+        price1Km: $price1Km
+        pricePerShift: $pricePerShift
+        regionTransport: $regionTransport
+        telegram: $telegram
+        title: $title
+        typeTransportation: $typeTransportation
+        vehicleBodyType: $vehicleBodyType
+        vehicleBrand: $vehicleBrand
+        workExperience: $workExperience
+        numberSeats: $numberSeats
+        numberSeatsWithoutLuggage: $numberSeatsWithoutLuggage
+        serviceSpecialization: $serviceSpecialization
+        options: $options
+        amenities: $amenities
+        leaseTerm: $leaseTerm
+        vehicleClass: $vehicleClass
+        color: $color
+        vehiclesInPark: $vehiclesInPark
+        minimumOrderTime: $minimumOrderTime
+        viber: $viber
+        whatsapp: $whatsapp
+        photoTruck: $photoTruck
+        photoDriver: $photoDriver
+      }
+    ) {
+      clientMutationId
+    }
+  }
+`
+export const EDIT_TRANSPORT = gql`
+  mutation UpdateTransportCustom(
+    $transportId: ID
+    $bodyHeight: String = ""
+    $bodyLength: String = ""
+    $bodyVolume: String = ""
+    $bodyWidth: String = ""
+    $carryingCapacity: String = ""
+    $category: String = ""
+    $city: String = ""
+    $customPhone: String = ""
+    $customName: String = ""
+    $fullDescription: String = ""
+    $whatsapp: Boolean = false
+    $modeOperation: String = ""
+    $paymentMethod: String = ""
+    $paymentProcedure: String = ""
+    $price1Hour: Int
+    $price1Km: Int
+    $pricePerShift: Int
+    $regionTransport: String = ""
+    $telegram: Boolean = false
+    $title: String = ""
+    $typeTransportation: String = ""
+    $vehicleBodyType: String = ""
+    $vehicleBrand: String = ""
+    $workExperience: String = ""
+    $leaseTerm: String = ""
+    $numberSeats: String = ""
+    $numberSeatsWithoutLuggage: String = ""
+    $serviceSpecialization: String = ""
+    $options: String = ""
+    $amenities: String = ""
+    $vehicleClass: String = ""
+    $color: String = ""
+    $vehiclesInPark: String = ""
+    $minimumOrderTime: String = ""
+    $viber: Boolean = false
+    $photoTruck: [String]
+    $photoDriver: String
+  ) {
+    updateTransportCustom(
+      input: {
+        transportId: $transportId
         bodyHeight: $bodyHeight
         bodyLength: $bodyLength
         bodyVolume: $bodyVolume

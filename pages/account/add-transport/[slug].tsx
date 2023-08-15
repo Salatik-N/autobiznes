@@ -163,7 +163,7 @@ export default function Transport1t({ transportCategory }) {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      fetch('https://react.autobiznes.byl/wp-json/wp/v2/media', {
+      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -187,7 +187,7 @@ export default function Transport1t({ transportCategory }) {
     }))
   }
 
-  const createNewCargo = async (e) => {
+  const createNewTransport = async (e) => {
     e.preventDefault()
     apolloClient
       .mutate({
@@ -251,7 +251,7 @@ export default function Transport1t({ transportCategory }) {
           <i className="arrow" />
         </button>
         <span className="form-page-title">{transportCategory.name}</span>
-        <form onSubmit={createNewCargo} autoComplete="on">
+        <form onSubmit={createNewTransport} autoComplete="on">
           <TitleInput name={FIELDS.TITLE} value={form[FIELDS.TITLE]} onChange={handleChangeForm} />
 
           <div className="white-background">

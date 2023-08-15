@@ -54,14 +54,16 @@ export default function Transports() {
           subject: form[FIELDS.SUBJECT],
           body: `
           Email: ${emailUser}
+          <br>
           Сообщение: ${form[FIELDS.BODY]}
-
+          <br>
           Это письмо отправленно автоматически, отвечайте на email пользователя в письме
           `,
         },
       })
       .then((result) => {
         console.log(result)
+        setIsSent(true)
       })
       .catch((error) => {
         console.error(error)

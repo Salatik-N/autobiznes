@@ -33,7 +33,7 @@ const AdminTools: React.FC<adminToolsProps> = ({ item, type }) => {
   const handleEdit = async (id) => {
     router.push({
       pathname: `/account/edit-${type}`,
-      query: { idCargo: id },
+      query: { id: id },
     })
   }
 

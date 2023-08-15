@@ -42,7 +42,7 @@ export default function EditCargo() {
   const apolloClient = initializeApollo()
   const [consentToPosting, setConsentToPosting] = useState(false)
   const [form, setForm] = useState({})
-  const { data } = useQuery(GET_CARGO_INFO, { variables: { id: router.query.idCargo } })
+  const { data } = useQuery(GET_CARGO_INFO, { variables: { id: router.query.id } })
   useEffect(() => {
     const cargo = data?.cargo
     cargo &&
@@ -71,7 +71,6 @@ export default function EditCargo() {
         [FIELDS.BUDGET_TO]: cargo.acfCargoContacts[FIELDS.BUDGET_TO] || null,
         [FIELDS.FULL_DESCRIPTION]: cargo.acfCargoDescription[FIELDS.FULL_DESCRIPTION] || '',
       })
-    console.log(form)
   }, [data])
 
   const formattedDate = (item) => {
@@ -83,7 +82,7 @@ export default function EditCargo() {
     const target = event.currentTarget
     const name = target?.name
     const value = target?.value
-    console.log(router.query.idCargo)
+
     setForm((prevValue) => ({
       ...prevValue,
       [name]: value,
@@ -118,7 +117,7 @@ export default function EditCargo() {
         .mutate({
           mutation: EDIT_CARGO,
           variables: {
-            cargoId: router.query.idCargo,
+            cargoId: router.query.id,
             title: form[FIELDS.TITLE],
             shippingRegion: form[FIELDS.SHIPPING_REGION],
             shippingCity: form[FIELDS.SHIPPING_CITY],
@@ -164,7 +163,7 @@ export default function EditCargo() {
       <button onClick={goBack} className="go-back-button">
         <i className="arrow" />
       </button>
-      <span className="form-page-title">Заполните форму для получения предложений</span>
+      <span className="form-page-title">Редактирование груза, объявление №{router.query.id}</span>
       <form onSubmit={editCargo} autoComplete="on">
         <TitleInput name={FIELDS.TITLE} value={form[FIELDS.TITLE]} onChange={handleChangeForm} />
 

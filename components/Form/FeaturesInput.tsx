@@ -11,7 +11,8 @@ import {
 } from '../../lib/options'
 
 export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, handleChangeForm }) => {
-  const isCargo = type === 'transport-1t'
+  console.log(type)
+  const isCargo = type?.includes('transport-')
   const isBus = type === 'buses'
   const isWeddingCars = type === 'wedding-cars-and-limousines'
   const isMinivans = type === 'minivans-and-minibuses'
@@ -26,6 +27,12 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
           <Select
             name={FIELDS.VEHICLE_BODY_TYPE}
             onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.VEHICLE_BODY_TYPE] && {
+                label: form[FIELDS.VEHICLE_BODY_TYPE],
+                value: form[FIELDS.VEHICLE_BODY_TYPE],
+              }
+            }
             options={vehicleBodyType}
             defaultValue={vehicleBodyType[0]}
           />
@@ -37,6 +44,12 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
           <Select
             name={FIELDS.TYPE_TRANSPORTATION}
             onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.TYPE_TRANSPORTATION] && {
+                label: form[FIELDS.TYPE_TRANSPORTATION],
+                value: form[FIELDS.TYPE_TRANSPORTATION],
+              }
+            }
             options={typeTransportation}
             defaultValue={typeTransportation[0]}
           />
@@ -57,19 +70,49 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
       {isBus || isTaxi || isMinivans || isWeddingCars ? (
         <label>
           <span>Опыт работы</span>
-          <Select name={FIELDS.WORK_EXPERIENCE} onChange={handleChangeFormSelect} options={workExperience} />
+          <Select
+            name={FIELDS.WORK_EXPERIENCE}
+            onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.WORK_EXPERIENCE] && {
+                label: form[FIELDS.WORK_EXPERIENCE],
+                value: form[FIELDS.WORK_EXPERIENCE],
+              }
+            }
+            options={workExperience}
+          />
         </label>
       ) : null}
       {isBus || isMinivans || isWeddingCars ? (
         <label>
           <span>Срок аренды</span>
-          <Select name={FIELDS.LEASE_TERM} onChange={handleChangeFormSelect} options={leaseTerm} />
+          <Select
+            name={FIELDS.LEASE_TERM}
+            onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.LEASE_TERM] && {
+                label: form[FIELDS.LEASE_TERM],
+                value: form[FIELDS.LEASE_TERM],
+              }
+            }
+            options={leaseTerm}
+          />
         </label>
       ) : null}
       {isBus || isMinivans ? (
         <label>
           <span>Удобства</span>
-          <Select name={FIELDS.AMENITIES} onChange={handleChangeFormSelect} options={amenities} />
+          <Select
+            name={FIELDS.AMENITIES}
+            onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.AMENITIES] && {
+                label: form[FIELDS.AMENITIES],
+                value: form[FIELDS.AMENITIES],
+              }
+            }
+            options={amenities}
+          />
         </label>
       ) : null}
       {isBus || isMinivans || isWeddingCars || isTaxi ? (
@@ -102,6 +145,12 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
           <Select
             name={FIELDS.SERVICE_SPECIALIZATION}
             onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.SERVICE_SPECIALIZATION] && {
+                label: form[FIELDS.SERVICE_SPECIALIZATION],
+                value: form[FIELDS.SERVICE_SPECIALIZATION],
+              }
+            }
             options={serviceSpecialization}
           />
         </label>
@@ -109,13 +158,33 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
       {isBus || isTaxi || isMinivans || isWeddingCars ? (
         <label>
           <span>Опции</span>
-          <Select name={FIELDS.OPTIONS} onChange={handleChangeFormSelect} options={options} />
+          <Select
+            name={FIELDS.OPTIONS}
+            onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.OPTIONS] && {
+                label: form[FIELDS.OPTIONS],
+                value: form[FIELDS.OPTIONS],
+              }
+            }
+            options={options}
+          />
         </label>
       ) : null}
       {isBus || isMinivans ? (
         <label>
           <span>Класс автомобиля</span>
-          <Select name={FIELDS.VEHICLE_CLASS} onChange={handleChangeFormSelect} options={vehicleClass} />
+          <Select
+            name={FIELDS.VEHICLE_CLASS}
+            onChange={handleChangeFormSelect}
+            value={
+              form[FIELDS.VEHICLE_CLASS] && {
+                label: form[FIELDS.VEHICLE_CLASS],
+                value: form[FIELDS.VEHICLE_CLASS],
+              }
+            }
+            options={vehicleClass}
+          />
         </label>
       ) : null}
       {isBus || isTaxi || isMinivans || isWeddingCars ? (

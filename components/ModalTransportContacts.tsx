@@ -22,9 +22,7 @@ export default function ModalCargoContacts({ transportInfo }) {
       <div className={styles.avatar}>
         <Image src={authorInfo.avatar.url} alt="Аватар" width={80} height={80} />
       </div>
-      <div className={styles.name}>
-        {authorInfo.lastName} {authorInfo.firstName} {authorInfo.customField.fatherName}
-      </div>
+      <div className={styles.name}>{transport.customName}</div>
       {authorInfo.customField.transportInPark && (
         <div className={styles.additional}>
           {/* <p>
