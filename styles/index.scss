@@ -30,6 +30,17 @@ body {
   background: rgba(0, 0, 0, 0);
   list-style: none;
 }
+.visuallyhidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(0 0 99.9% 99.9%);
+  clip-path: inset(0 0 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
 .text-yellow {
   color: $yellow;
 }
@@ -226,6 +237,67 @@ form textarea {
 }
 form textarea {
   height: 168px;
+}
+.form-file {
+  &-block {
+    cursor: pointer;
+    border: 1px dashed #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: $gray;
+
+    &.drag-over {
+      border: 2px dashed blue;
+    }
+  }
+  &-images {
+    margin-bottom: 10px;
+
+    .images-item {
+      width: min-content;
+      position: relative;
+      min-width: 160px;
+      height: 100px;
+    }
+
+    .delete-button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      cursor: pointer;
+      background-color: #d80027;
+      border-radius: 50%;
+      height: 46px;
+      width: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &-control {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    button {
+      @include btn-blue(13px, 14px);
+      width: 200px;
+    }
+    span {
+      font-size: 14px;
+      color: $gray;
+    }
+  }
 }
 form .user-agreement {
   margin-bottom: 15px;

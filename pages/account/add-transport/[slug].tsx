@@ -61,7 +61,7 @@ enum FIELDS {
 
 export default function Transport1t({ transportCategory }) {
   const { data } = useQuery(GET_USER_INFO)
-
+  const [isDragOver, setIsDragOver] = useState(false)
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
     [FIELDS.REGION_TRANSPORT]: '',
@@ -145,7 +145,7 @@ export default function Transport1t({ transportCategory }) {
 
   const handleChangeFormImage = async (event) => {
     const name = event?.currentTarget?.name
-    const images = event?.target.files
+    const images = event?.target.files || event?.dataTransfer?.files
     let value = []
     const formData = new FormData()
     for (let image in images) {
@@ -164,7 +164,8 @@ export default function Transport1t({ transportCategory }) {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      // fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -180,11 +181,50 @@ export default function Transport1t({ transportCategory }) {
     })
   }
 
+  const handleAddPhotoClick = () => {
+    const inputElement = document.querySelector(`[name="${FIELDS.PHOTO_DRIVER}"]`)
+    if (inputElement) {
+      inputElement.click()
+    }
+  }
+
+  const handleDragEnter = (e) => {
+    e.preventDefault()
+    setIsDragOver(true)
+  }
+
+  const handleDragLeave = (e) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }
+
+  const handleAddPhotoDrop = (e) => {
+    e.preventDefault()
+
+    const inputElement = document.querySelector(`[name="${FIELDS.PHOTO_DRIVER}"]`)
+    if (inputElement) {
+      const dropEvent = new DragEvent('drop', {
+        dataTransfer: e.dataTransfer,
+        bubbles: true,
+        cancelable: true,
+      })
+
+      inputElement.dispatchEvent(dropEvent)
+    }
+  }
+
   const removeImageTruck = (key) => {
     const newArray = form[FIELDS.PHOTO_TRUCK].filter((_, index) => index !== key)
     setForm((prevValue) => ({
       ...prevValue,
       [FIELDS.PHOTO_TRUCK]: newArray,
+    }))
+  }
+
+  const removeImageDriver = () => {
+    setForm((prevValue) => ({
+      ...prevValue,
+      [FIELDS.PHOTO_DRIVER]: null,
     }))
   }
 
@@ -407,12 +447,47 @@ export default function Transport1t({ transportCategory }) {
 
           <div className="white-background">
             <span className="form-block-title">Фото водителя</span>
-            <label>
-              {form[FIELDS.PHOTO_DRIVER] && (
-                <Image src={form[FIELDS.PHOTO_DRIVER]} alt="Фото водителя" width={100} height={100} />
-              )}
-              <input name={FIELDS.PHOTO_DRIVER} type="file" accept=".jpg,.jpeg,.png" onChange={handleChangeFormImage} />
-            </label>
+            <div
+              className={`form-file-block ${isDragOver && 'drag-over'}`}
+              onClick={handleAddPhotoClick}
+              onDrop={handleAddPhotoDrop}
+              onDragOver={(e) => e.preventDefault()}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+            >
+              <Image src="/icons/add-image.svg" width={52} height={48} alt="Добавить фото" />
+              <p>Используйте только свои снимки и не размещайте рекламу. Иначе модератор отклонит ваше объявление.</p>
+              <p>JPG, JPEG или PNG размером до 2 МБ.</p>
+            </div>
+            <input
+              className="visuallyhidden"
+              name={FIELDS.PHOTO_DRIVER}
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              onChange={handleChangeFormImage}
+            />
+            {form[FIELDS.PHOTO_DRIVER] && (
+              <div className="form-file-images">
+                <div className="images-item">
+                  <div className="delete-button" onClick={removeImageDriver}>
+                    <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                  </div>
+                  <Image
+                    className="form-image"
+                    src={form[FIELDS.PHOTO_DRIVER]}
+                    alt="Фото водителя"
+                    width={100}
+                    height={100}
+                  />
+                </div>
+              </div>
+            )}
+            <div className="form-file-control">
+              <button onClick={handleAddPhotoClick}>
+                {form[FIELDS.PHOTO_DRIVER] ? 'Изменить фото' : 'Добавить фото'}
+              </button>
+              <span>до 1 фото</span>
+            </div>
           </div>
 
           <div className="white-background">

@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { useProvideAuth } from '../lib/use-authorization'
+import { useAuth } from '../lib/use-authorization'
 import { initializeApollo } from '../lib/apollo'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { signIn } = useProvideAuth()
+  const { signIn } = useAuth()
 
   const handleSubmit = (e) => {
     e.preventDefault()

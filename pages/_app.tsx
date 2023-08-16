@@ -3,6 +3,7 @@ import App from 'next/app'
 import localFont from 'next/font/local'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo'
+import { AuthProvider } from '../lib/use-authorization'
 import Layout from '../components/Layout'
 import '../styles/index.scss'
 
@@ -37,11 +38,13 @@ function MyApp({ Component, pageProps }: AppContext & AppInitialProps) {
   return (
     <>
       <ApolloProvider client={apolloClient}>
-        <Layout>
-          <main className={interFont.className}>
-            <Component {...pageProps} />
-          </main>
-        </Layout>
+        <AuthProvider>
+          <Layout>
+            <main className={interFont.className}>
+              <Component {...pageProps} />
+            </main>
+          </Layout>
+        </AuthProvider>
       </ApolloProvider>
     </>
   )

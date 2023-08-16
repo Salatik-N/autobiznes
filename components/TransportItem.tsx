@@ -95,7 +95,7 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
             <div
               className={styles.address}
             >{`${item.node.acfTransportAddress.regionTransport}, ${item.node.acfTransportAddress.city}`}</div>
-            <div className={styles.experience}>{item.node.author.node.registeredDate} лет в сервисе</div>
+            {/* <div className={styles.experience}>{item.node.author.node.registeredDate} лет в сервисе</div> */}
             <div
               className={`${styles.features} ${
                 expandedItem === item.node.databaseId && isFeaturesActive && styles.active

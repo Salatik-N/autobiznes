@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import MediaQuery from 'react-responsive'
 import styles from './Header.module.scss'
 import Image from 'next/image'
 import Login from './Login'
@@ -9,13 +8,13 @@ import HeaderNav from './HeaderNav'
 import logo from '../public/icons/logo.svg'
 import SocialIcons from './SocialIcons'
 import userIcon from '../public/icons/user.svg'
-import { useProvideAuth } from '../lib/use-authorization'
+import { useAuth } from '../lib/use-authorization'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const { isSignedIn } = useProvideAuth()
+  const { isSignedIn } = useAuth()
   const router = useRouter()
 
   const handleRouteChange = () => {
@@ -35,19 +34,14 @@ export default function Header() {
           </Link>
         </div>
         <div className={styles.controlButtons}>
-          {isSignedIn() && (
+          {isSignedIn && (
             <Link href="/account" className={styles.userIcon}>
               <Image src={userIcon} alt="Пользователь" />
             </Link>
           )}
-          <div className={`header-info ${open ? styles.burgerOpen : ''}`}>
-            {/*<MediaQuery maxWidth={1023}>
+          <div className={`${styles.headerInfo} ${open ? styles.burgerOpen : ''}`}>
+            <HeaderNav />
             <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
-  </MediaQuery>*/}
-            <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
-            <MediaQuery minWidth={1024}>
-              <HeaderNav />
-            </MediaQuery>
           </div>
         </div>
       </div>
@@ -55,7 +49,7 @@ export default function Header() {
         <div className={styles.burgerMenu}>
           <HeaderNav />
           <div className={styles.burgerInfo}>
-            {!isSignedIn() && (
+            {!isSignedIn && (
               <div className={styles.buttons}>
                 <SignUp style={styles.registration}>Регистрация</SignUp>
                 <Login style={styles.logIn}>Войти</Login>

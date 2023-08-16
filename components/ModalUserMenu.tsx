@@ -11,13 +11,14 @@ import searchCargoIcon from '../public/icons/search-cargo.svg'
 import SettingSVG from './SettingSVG'
 import SupportSVG from './SupportSVG'
 import signOutIcon from '../public/icons/power-button.svg'
+import { useAuth } from '../lib/use-authorization'
 
 export default function ModalUserMenu() {
   const router = useRouter()
+  const { signOut } = useAuth()
 
   const logoutUser = () => {
-    localStorage.removeItem('authToken')
-    router.push('/')
+    signOut()
   }
 
   return (
