@@ -61,7 +61,8 @@ enum FIELDS {
 
 export default function Transport1t({ transportCategory }) {
   const { data } = useQuery(GET_USER_INFO)
-  const [isDragOver, setIsDragOver] = useState(false)
+  const inputPhotoDriverRef = useRef(null)
+  const inputPhotoTruckRef = useRef(null)
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
     [FIELDS.REGION_TRANSPORT]: '',
@@ -144,8 +145,9 @@ export default function Transport1t({ transportCategory }) {
   }
 
   const handleChangeFormImage = async (event) => {
+    console.log(event?.currentTarget?.name)
     const name = event?.currentTarget?.name
-    const images = event?.target.files || event?.dataTransfer?.files
+    const images = event?.target.files
     let value = []
     const formData = new FormData()
     for (let image in images) {
@@ -181,36 +183,29 @@ export default function Transport1t({ transportCategory }) {
     })
   }
 
-  const handleAddPhotoClick = () => {
-    const inputElement = document.querySelector(`[name="${FIELDS.PHOTO_DRIVER}"]`)
-    if (inputElement) {
-      inputElement.click()
+  const handleAddPhotoClick = (ref) => {
+    if (ref.current) {
+      ref.current.click()
     }
   }
 
-  const handleDragEnter = (e) => {
+  const handleAddPhotoDrop = async (e, name) => {
     e.preventDefault()
-    setIsDragOver(true)
-  }
-
-  const handleDragLeave = (e) => {
-    e.preventDefault()
-    setIsDragOver(false)
-  }
-
-  const handleAddPhotoDrop = (e) => {
-    e.preventDefault()
-
-    const inputElement = document.querySelector(`[name="${FIELDS.PHOTO_DRIVER}"]`)
-    if (inputElement) {
-      const dropEvent = new DragEvent('drop', {
-        dataTransfer: e.dataTransfer,
-        bubbles: true,
-        cancelable: true,
-      })
-
-      inputElement.dispatchEvent(dropEvent)
+    const images = e?.dataTransfer?.files
+    let value = []
+    const formData = new FormData()
+    for (let image in images) {
+      if (typeof images[image] === 'object') {
+        formData.append('file', images[image])
+        value.push(await uploadImage(formData))
+      }
     }
+    if (name === 'photoDriver') value = value[0]
+
+    setForm((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }))
   }
 
   const removeImageTruck = (key) => {
@@ -427,39 +422,63 @@ export default function Transport1t({ transportCategory }) {
 
           <div className="white-background">
             <span className="form-block-title">Фото грузовика</span>
-            {form[FIELDS.PHOTO_TRUCK] &&
-              form[FIELDS.PHOTO_TRUCK].map((link, key) => (
-                <>
-                  <div onClick={() => removeImageTruck(key)}>X</div>
-                  <Image src={link} alt="Фото грузовика" width={100} height={100} />
-                </>
-              ))}
-            <label>
-              <input
-                name={FIELDS.PHOTO_TRUCK}
-                type="file"
-                accept=".jpg,.jpeg,.png"
-                multiple
-                onChange={handleChangeFormImage}
-              />
-            </label>
-          </div>
-
-          <div className="white-background">
-            <span className="form-block-title">Фото водителя</span>
             <div
-              className={`form-file-block ${isDragOver && 'drag-over'}`}
-              onClick={handleAddPhotoClick}
-              onDrop={handleAddPhotoDrop}
+              className={`form-file-block`}
+              onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}
+              onDrop={(e) => handleAddPhotoDrop(e, FIELDS.PHOTO_TRUCK)}
               onDragOver={(e) => e.preventDefault()}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
+              onDragEnter={(e) => e.preventDefault()}
+              onDragLeave={(e) => e.preventDefault()}
             >
               <Image src="/icons/add-image.svg" width={52} height={48} alt="Добавить фото" />
               <p>Используйте только свои снимки и не размещайте рекламу. Иначе модератор отклонит ваше объявление.</p>
               <p>JPG, JPEG или PNG размером до 2 МБ.</p>
             </div>
             <input
+              ref={inputPhotoTruckRef}
+              className="visuallyhidden"
+              name={FIELDS.PHOTO_TRUCK}
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              multiple
+              onChange={handleChangeFormImage}
+            />
+            {form[FIELDS.PHOTO_TRUCK] && (
+              <div className="form-file-images">
+                {form[FIELDS.PHOTO_TRUCK].map((link, key) => (
+                  <div className="images-item">
+                    <div className="delete-button" onClick={() => removeImageTruck(key)}>
+                      <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                    </div>
+                    <Image className="form-image" src={link} alt="Фото техники" width={200} height={200} />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="form-file-control">
+              <button onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}>
+                {form[FIELDS.PHOTO_TRUCK].length === 4 ? 'Изменить фото' : 'Добавить фото'}
+              </button>
+              <span>до 4 фото</span>
+            </div>
+          </div>
+
+          <div className="white-background">
+            <span className="form-block-title">Фото водителя</span>
+            <div
+              className={`form-file-block`}
+              onClick={() => handleAddPhotoClick(inputPhotoDriverRef)}
+              onDrop={(e) => handleAddPhotoDrop(e, FIELDS.PHOTO_DRIVER)}
+              onDragOver={(e) => e.preventDefault()}
+              onDragEnter={(e) => e.preventDefault()}
+              onDragLeave={(e) => e.preventDefault()}
+            >
+              <Image src="/icons/add-image.svg" width={52} height={48} alt="Добавить фото" />
+              <p>Используйте только свои снимки и не размещайте рекламу. Иначе модератор отклонит ваше объявление.</p>
+              <p>JPG, JPEG или PNG размером до 2 МБ.</p>
+            </div>
+            <input
+              ref={inputPhotoDriverRef}
               className="visuallyhidden"
               name={FIELDS.PHOTO_DRIVER}
               type="file"
@@ -476,14 +495,14 @@ export default function Transport1t({ transportCategory }) {
                     className="form-image"
                     src={form[FIELDS.PHOTO_DRIVER]}
                     alt="Фото водителя"
-                    width={100}
-                    height={100}
+                    width={200}
+                    height={200}
                   />
                 </div>
               </div>
             )}
             <div className="form-file-control">
-              <button onClick={handleAddPhotoClick}>
+              <button onClick={() => handleAddPhotoClick(inputPhotoDriverRef)}>
                 {form[FIELDS.PHOTO_DRIVER] ? 'Изменить фото' : 'Добавить фото'}
               </button>
               <span>до 1 фото</span>

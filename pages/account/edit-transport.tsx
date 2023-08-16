@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { EDIT_TRANSPORT, GET_TRANSPORT_INFO, GET_ALL_TRANSPORT_CATEGORIES } from '../../lib/api'
@@ -56,6 +56,8 @@ enum FIELDS {
 export default function EditCargo() {
   const router = useRouter()
   const apolloClient = initializeApollo()
+  const inputPhotoDriverRef = useRef(null)
+  const inputPhotoTruckRef = useRef(null)
   const [consentToPosting, setConsentToPosting] = useState(false)
   const [categoriesTransport, setCategoriesTransport] = useState(null)
   const [form, setForm] = useState({})
@@ -192,11 +194,43 @@ export default function EditCargo() {
     })
   }
 
+  const handleAddPhotoClick = (ref) => {
+    if (ref.current) {
+      ref.current.click()
+    }
+  }
+
+  const handleAddPhotoDrop = async (e, name) => {
+    e.preventDefault()
+    const images = e?.dataTransfer?.files
+    let value = []
+    const formData = new FormData()
+    for (let image in images) {
+      if (typeof images[image] === 'object') {
+        formData.append('file', images[image])
+        value.push(await uploadImage(formData))
+      }
+    }
+    if (name === 'photoDriver') value = value[0]
+
+    setForm((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }))
+  }
+
   const removeImageTruck = (key) => {
     const newArray = form[FIELDS.PHOTO_TRUCK].filter((_, index) => index !== key)
     setForm((prevValue) => ({
       ...prevValue,
       [FIELDS.PHOTO_TRUCK]: newArray,
+    }))
+  }
+
+  const removeImageDriver = () => {
+    setForm((prevValue) => ({
+      ...prevValue,
+      [FIELDS.PHOTO_DRIVER]: null,
     }))
   }
 
@@ -431,32 +465,91 @@ export default function EditCargo() {
 
         <div className="white-background">
           <span className="form-block-title">Фото грузовика</span>
-          {form[FIELDS.PHOTO_TRUCK] &&
-            form[FIELDS.PHOTO_TRUCK].map((link, key) => (
-              <>
-                <div onClick={() => removeImageTruck(key)}>X</div>
-                <Image src={link} alt="Фото грузовика" width={100} height={100} />
-              </>
-            ))}
-          <label>
-            <input
-              name={FIELDS.PHOTO_TRUCK}
-              type="file"
-              accept=".jpg,.jpeg,.png"
-              multiple
-              onChange={handleChangeFormImage}
-            />
-          </label>
+          <div
+            className={`form-file-block`}
+            onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}
+            onDrop={(e) => handleAddPhotoDrop(e, FIELDS.PHOTO_TRUCK)}
+            onDragOver={(e) => e.preventDefault()}
+            onDragEnter={(e) => e.preventDefault()}
+            onDragLeave={(e) => e.preventDefault()}
+          >
+            <Image src="/icons/add-image.svg" width={52} height={48} alt="Добавить фото" />
+            <p>Используйте только свои снимки и не размещайте рекламу. Иначе модератор отклонит ваше объявление.</p>
+            <p>JPG, JPEG или PNG размером до 2 МБ.</p>
+          </div>
+          <input
+            ref={inputPhotoTruckRef}
+            className="visuallyhidden"
+            name={FIELDS.PHOTO_TRUCK}
+            type="file"
+            accept=".jpg,.jpeg,.png"
+            multiple
+            onChange={handleChangeFormImage}
+          />
+          {form[FIELDS.PHOTO_TRUCK] && (
+            <div className="form-file-images">
+              {form[FIELDS.PHOTO_TRUCK].map((link, key) => (
+                <div className="images-item">
+                  <div className="delete-button" onClick={() => removeImageTruck(key)}>
+                    <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                  </div>
+                  <Image className="form-image" src={link} alt="Фото техники" width={200} height={200} />
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="form-file-control">
+            <button onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}>
+              {form[FIELDS.PHOTO_TRUCK].length === 4 ? 'Изменить фото' : 'Добавить фото'}
+            </button>
+            <span>до 4 фото</span>
+          </div>
         </div>
 
         <div className="white-background">
           <span className="form-block-title">Фото водителя</span>
-          <label>
-            {form[FIELDS.PHOTO_DRIVER] && (
-              <Image src={form[FIELDS.PHOTO_DRIVER]} alt="Фото водителя" width={100} height={100} />
-            )}
-            <input name={FIELDS.PHOTO_DRIVER} type="file" accept=".jpg,.jpeg,.png" onChange={handleChangeFormImage} />
-          </label>
+          <div
+            className={`form-file-block`}
+            onClick={() => handleAddPhotoClick(inputPhotoDriverRef)}
+            onDrop={(e) => handleAddPhotoDrop(e, FIELDS.PHOTO_DRIVER)}
+            onDragOver={(e) => e.preventDefault()}
+            onDragEnter={(e) => e.preventDefault()}
+            onDragLeave={(e) => e.preventDefault()}
+          >
+            <Image src="/icons/add-image.svg" width={52} height={48} alt="Добавить фото" />
+            <p>Используйте только свои снимки и не размещайте рекламу. Иначе модератор отклонит ваше объявление.</p>
+            <p>JPG, JPEG или PNG размером до 2 МБ.</p>
+          </div>
+          <input
+            ref={inputPhotoDriverRef}
+            className="visuallyhidden"
+            name={FIELDS.PHOTO_DRIVER}
+            type="file"
+            accept=".jpg,.jpeg,.png"
+            onChange={handleChangeFormImage}
+          />
+          {form[FIELDS.PHOTO_DRIVER] && (
+            <div className="form-file-images">
+              <div className="images-item">
+                <div className="delete-button" onClick={removeImageDriver}>
+                  <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                </div>
+                <Image
+                  className="form-image"
+                  src={form[FIELDS.PHOTO_DRIVER]}
+                  alt="Фото водителя"
+                  width={200}
+                  height={200}
+                />
+              </div>
+            </div>
+          )}
+          <div className="form-file-control">
+            <button onClick={() => handleAddPhotoClick(inputPhotoDriverRef)}>
+              {form[FIELDS.PHOTO_DRIVER] ? 'Изменить фото' : 'Добавить фото'}
+            </button>
+            <span>до 1 фото</span>
+          </div>
         </div>
 
         <div className="white-background">
