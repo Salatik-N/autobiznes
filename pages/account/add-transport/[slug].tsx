@@ -167,7 +167,7 @@ export default function Transport1t({ transportCategory }) {
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
       // fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
-      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
+      fetch('http://react.autobiznes.by/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -255,9 +255,9 @@ export default function Transport1t({ transportCategory }) {
           color: form[FIELDS.COLOR],
           vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
           minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
-          price1Hour: form[FIELDS.PRICE_1_HOUR],
-          pricePerShift: form[FIELDS.PRICE_PER_SHIFT],
-          price1Km: form[FIELDS.PRICE_1_KM],
+          price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
+          pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),
+          price1Km: parseInt(form[FIELDS.PRICE_1_KM]),
           carryingCapacity: form[FIELDS.CARRYING_CAPACITY],
           bodyLength: form[FIELDS.BODY_LENGTH],
           bodyHeight: form[FIELDS.BODY_HEIGHT],

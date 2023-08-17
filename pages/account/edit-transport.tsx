@@ -104,13 +104,13 @@ export default function EditCargo() {
         [FIELDS.BODY_WIDTH]: transport.acfTransportFeatures[FIELDS.BODY_WIDTH] || null,
         [FIELDS.BODY_VOLUME]: transport.acfTransportFeatures[FIELDS.BODY_VOLUME] || null,
         [FIELDS.PHOTO_TRUCK]: getImagesTruck(transport.acfTransportPhotos[FIELDS.PHOTO_TRUCK]) || [],
-        [FIELDS.PHOTO_DRIVER]: transport.acfTransportPhotos[FIELDS.PHOTO_DRIVER].mediaItemUrl || null,
+        [FIELDS.PHOTO_DRIVER]: transport.acfTransportPhotos[FIELDS.PHOTO_DRIVER]?.mediaItemUrl || null,
         [FIELDS.FULL_DESCRIPTION]: transport.acfTransportDescription[FIELDS.FULL_DESCRIPTION] || null,
       })
   }, [data])
 
   const getImagesTruck = (e) => {
-    const newArr = e.map((item) => {
+    const newArr = e?.map((item) => {
       return item.mediaItemUrl
     })
     return newArr
@@ -178,7 +178,7 @@ export default function EditCargo() {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
+      fetch('http://react.autobiznes.by/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -268,9 +268,9 @@ export default function EditCargo() {
             color: form[FIELDS.COLOR],
             vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
             minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
-            price1Hour: form[FIELDS.PRICE_1_HOUR],
-            pricePerShift: form[FIELDS.PRICE_PER_SHIFT],
-            price1Km: form[FIELDS.PRICE_1_KM],
+            price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
+            pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),
+            price1Km: parseInt(form[FIELDS.PRICE_1_KM]),
             carryingCapacity: form[FIELDS.CARRYING_CAPACITY],
             bodyLength: form[FIELDS.BODY_LENGTH],
             bodyHeight: form[FIELDS.BODY_HEIGHT],
