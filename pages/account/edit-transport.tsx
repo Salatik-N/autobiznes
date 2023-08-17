@@ -178,7 +178,7 @@ export default function EditCargo() {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      fetch('http://autobiznes.local/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${localStorage.getItem('authToken')}`,
@@ -500,7 +500,7 @@ export default function EditCargo() {
           )}
           <div className="form-file-control">
             <button onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}>
-              {form[FIELDS.PHOTO_TRUCK].length === 4 ? 'Изменить фото' : 'Добавить фото'}
+              {form[FIELDS.PHOTO_TRUCK]?.length === 4 ? 'Изменить фото' : 'Добавить фото'}
             </button>
             <span>до 4 фото</span>
           </div>

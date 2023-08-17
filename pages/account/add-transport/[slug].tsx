@@ -457,7 +457,7 @@ export default function Transport1t({ transportCategory }) {
             )}
             <div className="form-file-control">
               <button onClick={() => handleAddPhotoClick(inputPhotoTruckRef)}>
-                {form[FIELDS.PHOTO_TRUCK].length === 4 ? 'Изменить фото' : 'Добавить фото'}
+                {form[FIELDS.PHOTO_TRUCK]?.length === 4 ? 'Изменить фото' : 'Добавить фото'}
               </button>
               <span>до 4 фото</span>
             </div>
