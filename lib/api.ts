@@ -551,11 +551,11 @@ export const EDIT_CARGO = gql`
 
 export const ADD_NEW_TRANSPORT = gql`
   mutation AddNewTransport(
-    $bodyHeight: String = ""
-    $bodyLength: String = ""
-    $bodyVolume: String = ""
-    $bodyWidth: String = ""
-    $carryingCapacity: String = ""
+    $bodyHeight: Int
+    $bodyLength: Int
+    $bodyVolume: Int
+    $bodyWidth: Int
+    $carryingCapacity: Int
     $category: String = ""
     $city: String = ""
     $customPhone: String = ""
@@ -637,11 +637,11 @@ export const ADD_NEW_TRANSPORT = gql`
 export const EDIT_TRANSPORT = gql`
   mutation UpdateTransportCustom(
     $transportId: ID
-    $bodyHeight: String = ""
-    $bodyLength: String = ""
-    $bodyVolume: String = ""
-    $bodyWidth: String = ""
-    $carryingCapacity: String = ""
+    $bodyHeight: Int
+    $bodyLength: Int
+    $bodyVolume: Int
+    $bodyWidth: Int
+    $carryingCapacity: Int
     $category: String = ""
     $city: String = ""
     $customPhone: String = ""

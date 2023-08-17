@@ -133,10 +133,13 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
                   item.node.acfTransportDescription.fullDescription
                 ) : (
                   <>
-                    {truncateDescription(item.node.acfTransportDescription.fullDescription)}
-                    <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
-                      Читать больше
-                    </span>
+                    {item.node.acfTransportDescription.fullDescription.length > 255
+                      ? truncateDescription(item.node.acfTransportDescription.fullDescription)(
+                          <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
+                            Читать больше
+                          </span>
+                        )
+                      : item.node.acfTransportDescription.fullDescription}
                   </>
                 )}
               </div>
