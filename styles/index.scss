@@ -53,6 +53,14 @@ h1,
   font-weight: 700;
   font-size: 36px;
   line-height: 40px;
+  @media (min-width: $breakpoint-tablet) {
+    font-size: 48px;
+    line-height: 56.5px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    font-size: 75px;
+    line-height: 74px;
+  }
 }
 h3,
 .h3 {
@@ -60,6 +68,14 @@ h3,
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
+  @media (min-width: $breakpoint-tablet) {
+    font-size: 36px;
+    line-height: 36px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    font-size: 48px;
+    line-height: normal;
+  }
 }
 a {
   color: $dark-blue;
@@ -70,66 +86,206 @@ button {
   cursor: pointer;
 }
 main {
-  padding-top: 65px;
+  padding-top: 54px;
+  @media (min-width: $breakpoint-tablet) {
+    padding-top: 80px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    padding-top: 94px;
+  }
 }
 .container {
   padding-left: 12px;
   padding-right: 12px;
+  @media (min-width: $breakpoint-tablet) {
+    margin: auto;
+    max-width: 768px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media (min-width: $breakpoint-laptop) {
+    max-width: 1024px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    max-width: 1440px;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
 }
 .social-icons {
   display: flex;
   gap: 12px;
   justify-content: center;
-  margin-bottom: 18px;
-}
-.page-title-block {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  @media (min-width: $breakpoint-tablet) {
+    margin-bottom: 25px;
+  }
 
-  .page-title {
-    color: #fff;
-    text-align: center;
-    margin-bottom: 16px;
+  a {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background-color: $gray;
+
+    svg {
+      width: 20px;
+    }
   }
-  .page-sub-title {
-    text-align: center;
-    color: $white;
-  }
-  .add-order {
-    margin: auto;
-    width: 278px;
-    @include btn-yellow(15px, 15px);
-    margin-top: 25px;
-    margin-bottom: 17px;
-  }
-  .add-transport {
-    margin: auto;
-    width: 278px;
-    @include btn-white(15px, 15px);
-  }
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+}
+.header-section {
+  position: relative;
+  .page-title-block {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    @media (min-width: $breakpoint-tablet) {
+      padding-top: 30px;
+      padding-bottom: 45px;
+      display: flex;
+    }
+    @media (min-width: $breakpoint-laptop) {
+      padding-top: 60px;
+      padding-bottom: 200px;
+    }
+
+    .page-title-content {
+      @media (min-width: $breakpoint-tablet) {
+        width: 70%;
+      }
+      @media (min-width: $breakpoint-laptop) {
+        width: 50%;
+      }
+    }
+
+    .page-title {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 15px;
+      @media (min-width: $breakpoint-tablet) {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+      @media (min-width: $breakpoint-xl) {
+        margin-bottom: 40px;
+      }
+    }
+    .page-sub-title {
+      text-align: center;
+      color: $white;
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 24px;
+        line-height: 27px;
+        text-align: left;
+      }
+      @media (min-width: $breakpoint-xl) {
+        font-size: 32px;
+      }
+    }
+    .page-header-buttons {
+      @media (min-width: $breakpoint-tablet) {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+      }
+      @media (min-width: $breakpoint-xl) {
+        margin-top: 40px;
+      }
+    }
+    .add-order {
+      margin: auto;
+      width: 278px;
+      @include btn-yellow(15px, 15px);
+      margin-top: 25px;
+      margin-bottom: 17px;
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 16px;
+        width: 220px;
+        margin: 0;
+      }
+    }
+    .add-transport {
+      margin: auto;
+      width: 278px;
+      @include btn-white(15px, 15px);
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+    img {
+      height: auto;
+      object-fit: cover;
+    }
+    .content-image {
+      margin-left: -12px;
+      margin-right: -12px;
+      width: calc(100% + 24px);
+      @media (min-width: $breakpoint-tablet) {
+        margin-left: 0;
+        margin-right: 0;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        position: absolute;
+        width: 436px;
+      }
+      @media (min-width: $breakpoint-laptop) {
+        width: 600px;
+      }
+      @media (min-width: $breakpoint-xl) {
+        width: 800px;
+      }
+    }
   }
   .bg-image {
     clip-path: polygon(43% 73%, 75% 84%, 66% 100%, 0 100%, 0 0, 100% 0, 100% 27%);
     position: absolute;
-    top: 0;
+    object-fit: cover;
+    top: -100px;
     left: 0;
     right: 0;
-    height: 480px;
-    z-index: -1;
+    width: 100%;
+    height: calc(100% + 100px);
+    z-index: -2;
+  }
+}
+.first-section {
+  margin-top: -30px;
+  @media (min-width: $breakpoint-laptop) {
+    margin-top: -120px;
   }
 }
 .category-transport-block {
   margin-bottom: 36px;
+  @media (min-width: $breakpoint-tablet) {
+    margin-bottom: 100px;
+  }
   h3 {
     text-align: center;
     line-height: 36px;
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 20px;
+    }
+    @media (min-width: $breakpoint-xl) {
+      margin-bottom: 30px;
+      line-height: normal;
+    }
   }
   p {
     text-align: center;
     margin-bottom: 32px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 20px;
+      line-height: 21px;
+    }
+    @media (min-width: $breakpoint-xl) {
+      font-size: 24px;
+      margin-bottom: 60px;
+    }
   }
 }
 .go-back-button {
@@ -154,16 +310,40 @@ main {
 }
 .cargo-list {
   margin-bottom: 30px;
+  .cargo-list-button {
+    display: none;
+    @media (min-width: $breakpoint-tablet) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .add-order {
+      @include btn-blue(10px, 11px);
+      width: 142px;
+    }
+  }
   h3 {
     display: block;
     text-align: center;
     font-size: 20px;
     line-height: 30px;
     margin-bottom: 10px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 36px;
+      line-height: 36px;
+      margin-bottom: 20px;
+    }
   }
   p {
     text-align: center;
     margin-bottom: 30px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 20px;
+      line-height: 21px;
+      margin-bottom: 40px;
+    }
   }
 }
 .transport-list {
@@ -188,6 +368,12 @@ main {
   box-shadow: 0px 3px 50px rgba(153, 155, 168, 0.12);
   padding: 15px 10px;
   @include border-radius(16px);
+  @media (min-width: $breakpoint-tablet) {
+    padding: 30px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    padding: 40px;
+  }
 }
 form {
   display: flex;

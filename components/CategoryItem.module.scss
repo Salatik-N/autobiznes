@@ -4,11 +4,21 @@
 .categories {
   &:not(:last-child) {
     margin-bottom: 32px;
+    @media (min-width: $breakpoint-xl) {
+      margin-bottom: 60px;
+    }
   }
   .title {
     font-weight: 700;
     line-height: 36px;
     margin-bottom: 10px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    @media (min-width: $breakpoint-xl) {
+      font-size: 28px;
+    }
   }
   .categoryList {
     display: flex;
@@ -23,6 +33,12 @@
       text-align: center;
       width: 104px;
       transition: all 200ms ease-in-out;
+      @media (min-width: $breakpoint-tablet) {
+        width: 150px;
+      }
+      @media (min-width: $breakpoint-laptop) {
+        width: 200px;
+      }
       &:hover {
         outline-color: $dark-blue;
         border-color: $dark-blue;
@@ -33,11 +49,22 @@
         width: 100%;
         height: 50px;
         object-fit: contain;
+        @media (min-width: $breakpoint-tablet) {
+          height: 125px;
+        }
       }
       span {
         font-weight: 600;
         font-size: 10px;
         line-height: 14px;
+        @media (min-width: $breakpoint-tablet) {
+          font-size: 14px;
+          line-height: 20px;
+        }
+        @media (min-width: $breakpoint-laptop) {
+          font-size: 18px;
+          line-height: 24px;
+        }
       }
     }
   }

@@ -69,10 +69,6 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
     setDescriptionActive(!isDescriptionActive)
   }
 
-  const truncateDescription = (text) => {
-    const halfLength = Math.ceil(text?.length / 2)
-    return text?.slice(0, halfLength)
-  }
   return (
     <>
       {transports.edges
@@ -133,13 +129,16 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
                   item.node.acfTransportDescription.fullDescription
                 ) : (
                   <>
-                    {item.node.acfTransportDescription.fullDescription.length > 255
-                      ? truncateDescription(item.node.acfTransportDescription.fullDescription)(
-                          <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
-                            Читать больше
-                          </span>
-                        )
-                      : item.node.acfTransportDescription.fullDescription}
+                    {item.node.acfTransportDescription.fullDescription?.length > 255 ? (
+                      <>
+                        {item.node.acfTransportDescription.fullDescription.slice(0, 255)}
+                        <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
+                          Читать больше
+                        </span>
+                      </>
+                    ) : (
+                      item.node.acfTransportDescription.fullDescription
+                    )}
                   </>
                 )}
               </div>

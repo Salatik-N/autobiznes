@@ -7,6 +7,7 @@ import charterIcon from '../public/icons/charter.svg'
 import styles from './Footer.module.scss'
 import FooterNav from './FooterNav'
 import SocialIcons from './SocialIcons'
+import logo from '../public/icons/logo.svg'
 
 export default function Footer() {
   return (
@@ -36,6 +37,11 @@ export default function Footer() {
         <div className={styles.mainInformation}>
           <Container>
             <div className={styles.topFooter}>
+              <div className={styles.logo}>
+                <Link href="/">
+                  <Image src={logo} alt="Логотип" />
+                </Link>
+              </div>
               <div className={styles.buttonsBlock}>
                 <div className={styles.buttonItem}>
                   <span>Для заказчиков</span>
@@ -62,9 +68,11 @@ export default function Footer() {
         </div>
         <Container>
           <div className={styles.blockCopyright}>
-            <span className={styles.copyrightText}>2016–2023 © Белорусский интернет-портал «Автобизнес.бай»</span>
-            <div className={styles.copyrightLinks}>
-              <Link href="/">Пользовательское соглашение</Link> | <Link href="/">Политика конфиденциальности</Link>
+            <div>
+              <span className={styles.copyrightText}>2016–2023 © Белорусский интернет-портал «Автобизнес.бай»</span>
+              <div className={styles.copyrightLinks}>
+                <Link href="/">Пользовательское соглашение</Link> | <Link href="/">Политика конфиденциальности</Link>
+              </div>
             </div>
             <div className={styles.metricsBlock}>
               <div>1</div>

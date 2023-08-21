@@ -9,38 +9,109 @@
   box-shadow: 0px 3px 50px rgba(153, 155, 168, 0.12);
   padding: 10px;
   @include border-radius(16px);
+  @media (min-width: $breakpoint-tablet) {
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 30px;
+    padding: 15px 25px;
+    position: relative;
+    overflow: hidden;
+    @include border-radius(8px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 9px;
+    }
+
+    &:nth-child(even) {
+      &::before {
+        background: $yellow;
+      }
+    }
+    &:nth-child(odd) {
+      &::before {
+        background: $dark-blue;
+      }
+    }
+  }
+  @media (min-width: $breakpoint-xl) {
+    gap: 70px;
+  }
 
   &:not(:last-child) {
     margin-bottom: 15px;
   }
 
   .cargoAdminBlock {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
+    &Active {
+      @media (min-width: $breakpoint-tablet) {
+        display: flex;
+      }
+    }
   }
   .cargoNumber {
-    color: #ed9004;
-    padding: 6px 30px;
-    background: rgba(255, 199, 0, 0.1);
-    border-radius: 6px;
-    width: max-content;
+    &,
+    &Phone {
+      color: #ed9004;
+      padding: 6px 30px;
+      background: rgba(255, 199, 0, 0.1);
+      border-radius: 6px;
+      width: max-content;
+    }
+    & {
+      margin-bottom: 20px;
+      display: none;
+      @media (min-width: $breakpoint-tablet) {
+        display: block;
+      }
+      @media (min-width: $breakpoint-laptop) {
+        margin-bottom: 0;
+        margin-right: 40px;
+      }
+      @media (min-width: $breakpoint-xl) {
+        margin-right: 70px;
+      }
+    }
+    &Phone {
+      @media (min-width: $breakpoint-tablet) {
+        display: none;
+      }
+    }
   }
 
   .deliveryPlace {
     display: flex;
     gap: 40px;
     margin-bottom: 10px;
+    @media (min-width: $breakpoint-tablet) {
+      gap: 30px;
+      margin-bottom: 0;
+    }
 
     .placeLabel,
     .placeDate {
+      text-wrap: nowrap;
       font-size: 10px;
       line-height: 18px;
       color: $gray;
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 12px;
+      }
     }
     .placeLabel {
       font-weight: 500;
       margin-bottom: 2px;
+      @media (min-width: $breakpoint-tablet) {
+        margin-bottom: 5px;
+      }
     }
     .placeDate {
       font-weight: 400;
@@ -52,11 +123,18 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      @media (min-width: $breakpoint-tablet) {
+        margin-bottom: 5px;
+      }
 
       .flag {
         width: 12px;
         height: 12px;
         @include border-radius(50%);
+        @media (min-width: $breakpoint-tablet) {
+          width: 17px;
+          height: 17px;
+        }
       }
     }
   }
@@ -65,10 +143,12 @@
     gap: 10px 32px;
     flex-wrap: wrap;
     margin-bottom: 10px;
-
-    .infoLabel {
-      display: none;
+    height: max-content;
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 0;
+      gap: 10px 20px;
     }
+
     .infoItem {
       font-size: 14px;
       line-height: 21px;
@@ -82,19 +162,57 @@
       }
     }
   }
-  .buttonsBlock {
-    display: flex;
-    gap: 20px;
-
-    .contacts {
-      flex: 1 0 auto;
-      @include btn-green(12px, 13px);
+  .contactsBlock {
+    @media (min-width: $breakpoint-tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .more {
-      width: 46px;
-      background-color: $dark-blue;
-      @include btn-dark-blue(13px, 13px);
-      @include border-radius(50%);
+    @media (min-width: $breakpoint-laptop) {
+      flex-direction: row;
+    }
+    .buttonsBlock {
+      display: flex;
+      gap: 20px;
+      @media (min-width: $breakpoint-tablet) {
+        gap: 15px;
+      }
+
+      .contacts {
+        flex: 1 0 auto;
+        @include btn-green(12px, 13px);
+        @media (min-width: $breakpoint-tablet) {
+          width: 40px;
+          max-width: 40px;
+          height: 40px;
+          @include border-radius(50%);
+        }
+
+        span {
+          @media (min-width: $breakpoint-tablet) {
+            display: none;
+          }
+        }
+
+        svg {
+          display: none;
+          @media (min-width: $breakpoint-tablet) {
+            display: block;
+          }
+        }
+      }
+      .more {
+        width: 46px;
+        background-color: $dark-blue;
+        @include btn-dark-blue(13px, 13px);
+        @include border-radius(50%);
+        @media (min-width: $breakpoint-tablet) {
+          width: 40px;
+          max-width: 40px;
+          height: 40px;
+          @include border-radius(50%);
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { relayStylePagination } from '@apollo/client/utilities'
+import Cookies from 'js-cookie'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 
@@ -18,16 +18,14 @@ const createApolloClient = () => {
 
   // Create an AuthLink to add the authentication header
   const authLink = setContext((_, { headers }) => {
-    if (typeof window !== 'undefined') {
-      const authToken = localStorage.getItem('authToken')
+    const authToken = Cookies.get('authToken')
 
-      // Return the headers with the authentication token added
-      return {
-        headers: {
-          ...headers,
-          authorization: authToken ? `Bearer ${authToken}` : '',
-        },
-      }
+    // Return the headers with the authentication token added
+    return {
+      headers: {
+        ...headers,
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
     }
   })
 

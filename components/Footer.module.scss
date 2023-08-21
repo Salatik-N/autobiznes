@@ -8,53 +8,167 @@
   .blockAdvantages {
     margin-top: 21px;
     margin-bottom: 40px;
+    @media (min-width: $breakpoint-laptop) {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    @media (min-width: $breakpoint-xl) {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 45px;
+    }
     .advantagesItem {
       display: flex;
       align-items: center;
       gap: 15px;
       font-weight: 600;
+      @media (min-width: $breakpoint-laptop) {
+        max-width: calc(100% / 4 - 45px / 4);
+        flex: 0 0 calc(100% / 4 - 45px / 4);
+      }
+      @media (min-width: $breakpoint-xl) {
+        max-width: calc(100% / 4 - 135px / 4);
+        flex: 0 0 calc(100% / 4 - 135px / 4);
+      }
       &:not(:last-child) {
         margin-bottom: 13px;
+        @media (min-width: $breakpoint-laptop) {
+          margin-bottom: 0;
+        }
+      }
+
+      img {
+        height: auto;
+        width: 40px;
+        min-width: 40px;
       }
     }
   }
   .mainInformation {
-    padding-top: 28px;
+    padding-top: 30px;
     padding-bottom: 75px;
     background-color: $dark-blue;
     text-align: center;
+    @media (min-width: $breakpoint-tablet) {
+      padding-top: 40px;
+      padding-bottom: 30px;
+    }
     .topFooter {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 32px;
       margin-bottom: 37px;
-      .buttonItem {
-        &:first-child {
-          margin-bottom: 32px;
+      @media (min-width: $breakpoint-laptop) {
+        align-items: flex-start;
+        gap: 50px;
+        margin-bottom: 70px;
+      }
+      @media (min-width: $breakpoint-xl) {
+        flex-direction: row;
+      }
+      .logo {
+        display: none;
+        width: 140px;
+        height: auto;
+        @media (min-width: $breakpoint-laptop) {
+          display: block;
         }
-        span {
-          color: #fff;
-          font-weight: 700;
-          line-height: 24px;
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
         }
-        .madeOrder {
-          margin-top: 11px;
-          width: 222px;
-          @include btn-clear(13px, 14px);
+      }
+      .buttonsBlock {
+        @media (min-width: $breakpoint-laptop) {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
         }
-        .addAdvert {
-          margin-top: 11px;
-          width: 222px;
-          @include btn-green(13px, 14px);
+        @media (min-width: $breakpoint-xl) {
+          justify-content: space-evenly;
+        }
+        .buttonItem {
+          @media (min-width: $breakpoint-laptop) {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+          }
+          &:first-child {
+            margin-bottom: 32px;
+            @media (min-width: $breakpoint-laptop) {
+              margin-bottom: 0;
+            }
+          }
+          span {
+            color: #fff;
+            font-weight: 700;
+            line-height: 24px;
+          }
+          .madeOrder {
+            margin-top: 11px;
+            width: 222px;
+            @include btn-clear(13px, 14px);
+            @media (min-width: $breakpoint-laptop) {
+              margin-top: 0;
+            }
+          }
+          .addAdvert {
+            margin-top: 11px;
+            width: 222px;
+            @include btn-green(13px, 14px);
+            @media (min-width: $breakpoint-laptop) {
+              margin-top: 0;
+            }
+          }
         }
       }
     }
     .menu {
       margin-bottom: 37px;
-      li a {
-        color: $white;
-        line-height: 48px;
+      @media (min-width: $breakpoint-laptop) {
+        margin-bottom: 45px;
+        background: $white;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 50px;
+        height: 48px;
+        width: 100%;
+      }
+      ul {
+        @media (min-width: $breakpoint-laptop) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 22px;
+          height: 100%;
+        }
+        li {
+          &:not(:last-child) a::after {
+            @media (min-width: $breakpoint-laptop) {
+              content: '';
+              height: 8px;
+              width: 1px;
+              background: #1f1f1f;
+              position: absolute;
+              right: -11px;
+              top: calc(50% - 4px);
+            }
+          }
+          a {
+            color: $white;
+            line-height: 48px;
+            position: relative;
+            @media (min-width: $breakpoint-laptop) {
+              line-height: normal;
+              font-size: 12px;
+              color: $dark-blue;
+            }
+          }
+        }
       }
     }
     .socialIcons {
@@ -76,6 +190,14 @@
     padding-bottom: 38px;
     background-color: $white;
     text-align: center;
+    @media (min-width: $breakpoint-laptop) {
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 25px;
+      padding-bottom: 25px;
+    }
     .copyrightText {
       font-size: 12px;
     }
@@ -83,6 +205,10 @@
       margin-top: 18px;
       margin-bottom: 18px;
       font-size: 11px;
+      @media (min-width: $breakpoint-laptop) {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
     }
     .metricsBlock {
       display: flex;

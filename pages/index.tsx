@@ -12,36 +12,57 @@ import CargoItem from '../components/CargoItem'
 export default function Index({ cargoList, cargoTransport, passengerTransport }) {
   return (
     <div className="home-page">
-      <Container>
-        <div className="page-title-block">
-          <h1 className="page-title">
-            Биржа <span className="text-yellow">грузов</span> и <span className="text-yellow">транспорта</span>
-          </h1>
-          <p className="page-sub-title">Диспетчерский онлайн-центр</p>
-          <Link href="/account/add-cargo" className="add-order">
-            Оставить заказ
-          </Link>
-          <Link href="/account/add-transport" className="add-transport">
-            Добавить свой транспорт
-          </Link>
-          <Image src="/images/index.png" alt="Биржа грузов и транспорта" width={839} height={583} />
-          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={746} />
-        </div>
-      </Container>
-      <Container>
-        <div className="category-transport-block white-background">
-          <h3>Нужен транспорт?</h3>
-          <p>Выберите подходящую категорию:</p>
-          <CategoryItem category={cargoTransport} />
-          <CategoryItem category={passengerTransport} />
-        </div>
-      </Container>
+      <section className="header-section">
+        <Container>
+          <div className="page-title-block">
+            <div className="page-title-content">
+              <h1 className="page-title">
+                Биржа <span className="text-yellow">грузов</span> и <span className="text-yellow">транспорта</span>
+              </h1>
+              <p className="page-sub-title">Диспетчерский онлайн-центр</p>
+              <div className="page-header-buttons">
+                <Link href="/account/add-cargo" className="add-order">
+                  Оставить заказ
+                </Link>
+                <Link href="/account/add-transport" className="add-transport">
+                  Добавить свой транспорт
+                </Link>
+              </div>
+            </div>
+            <Image
+              className="content-image"
+              src="/images/index.png"
+              alt="Биржа грузов и транспорта"
+              width={839}
+              height={583}
+            />
+          </div>
+        </Container>
+        <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={746} />
+      </section>
+      <hr className="separator-black"></hr>
+      <section className="first-section">
+        <Container>
+          <div className="category-transport-block white-background">
+            <h3>Нужен транспорт?</h3>
+            <p>Выберите подходящую категорию:</p>
+            <CategoryItem category={cargoTransport} />
+            <CategoryItem category={passengerTransport} />
+          </div>
+        </Container>
+      </section>
       <Container>
         {cargoList ? (
           <>
             <div className="cargo-list">
               <h3>Ищете груз для перевозки?</h3>
               <p>Выберите подходящий заказ:</p>
+              <div className="cargo-list-button">
+                <span>У вас есть груз?</span>
+                <Link href="/account/add-cargo" className="add-order">
+                  Добавить заказ
+                </Link>
+              </div>
               <CargoItem cargos={cargoList} />
             </div>
             <div className="show-more-cargo">
@@ -100,14 +121,13 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
       <div className="cta-block">
         <Container>
           <h3>Максимум эффективности для перевозчиков, грузоотправителей и экспедиторов грузов</h3>
+          <p>
+            Биржа грузов и транспорта “Автобизнес.бай” призвана стать Вашим надежным помощником в организации внутренних
+            и международных грузо-пассажиро-перевозок. Зарегистрируйтесь на нашем сайте, чтобы не пропустить подходящее
+            предложение. Владелец груза получает доступ к каталогу транспортных компаний, а владелец транспорта – к базе
+            грузоотправителей. Планируйте свой маршрут на нашем сайте, и выполняйте каждую сделку четко и в срок!
+          </p>
           <div className="inner-block">
-            <p>
-              Биржа грузов и транспорта “Автобизнес.бай” призвана стать Вашим надежным помощником в организации
-              внутренних и международных грузо-пассажиро-перевозок. Зарегистрируйтесь на нашем сайте, чтобы не
-              пропустить подходящее предложение. Владелец груза получает доступ к каталогу транспортных компаний, а
-              владелец транспорта – к базе грузоотправителей. Планируйте свой маршрут на нашем сайте, и выполняйте
-              каждую сделку четко и в срок!
-            </p>
             <div className="item сustomer white-background">
               <span className="title">Вы заказчик?</span>
               <ul>

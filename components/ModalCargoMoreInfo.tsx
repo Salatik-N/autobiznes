@@ -4,14 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ModalCargoMoreInfo({ cargoInfo }) {
-  const generateGoogleMapsLink = (startCity, startAddress, finishCity, finishAddress) => {
-    const encodedStartCity = encodeURIComponent(startCity)
-    const encodedStartAddress = encodeURIComponent(`улица ${startAddress}`)
-    const encodedFinishCity = encodeURIComponent(finishCity)
-    const encodedFinishAddress = encodeURIComponent(`улица ${finishAddress}`)
-    const googleMapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodedStartAddress},+${encodedStartCity}&destination=${encodedFinishAddress},+${encodedFinishCity}`
-    return googleMapsLink
-  }
+  // const generateGoogleMapsLink = (startCity, startAddress, finishCity, finishAddress) => {
+  //   const encodedStartCity = encodeURIComponent(startCity)
+  //   const encodedStartAddress = encodeURIComponent(`улица ${startAddress}`)
+  //   const encodedFinishCity = encodeURIComponent(finishCity)
+  //   const encodedFinishAddress = encodeURIComponent(`улица ${finishAddress}`)
+  //   const googleMapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodedStartAddress},+${encodedStartCity}&destination=${encodedFinishAddress},+${encodedFinishCity}`
+  //   return googleMapsLink
+  // }
 
   return (
     <div className={styles.inner}>
@@ -89,7 +89,7 @@ export default function ModalCargoMoreInfo({ cargoInfo }) {
         <b>Расстояние: </b>0
       </div>
       <div className={styles.map}>
-        <Link
+        {/* <Link
           href={generateGoogleMapsLink(
             cargoInfo.acfCargoPickupPoint.shippingCity,
             cargoInfo.acfCargoPickupPoint.shippingAddress,
@@ -99,7 +99,7 @@ export default function ModalCargoMoreInfo({ cargoInfo }) {
           target="_blank"
         >
           Перейти на карту
-        </Link>
+        </Link> */}
       </div>
     </div>
   )

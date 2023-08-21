@@ -1,24 +1,21 @@
+import instagram from './InstagramSVG'
+
 export default function SocialIcons() {
+  const socials = [
+    {
+      img: instagram,
+      link: 'https://www.instagram.com/autobiznes.by',
+      alt: 'Instagram',
+    },
+  ]
+
   return (
     <div className="social-icons">
-      <a href="" className="">
-        1
-      </a>
-      <a href="" className="">
-        2
-      </a>
-      <a href="" className="">
-        3
-      </a>
-      <a href="" className="">
-        4
-      </a>
-      <a href="" className="">
-        5
-      </a>
-      <a href="" className="">
-        6
-      </a>
+      {socials.map((item) => (
+        <a href={item.link} target="_blank">
+          {item.img('#1d2a4a')}
+        </a>
+      ))}
     </div>
   )
 }

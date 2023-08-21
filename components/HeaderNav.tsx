@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import styles from './Header.module.scss'
 
 export default function HeaderNav() {
   const navigation = [
@@ -9,7 +10,7 @@ export default function HeaderNav() {
   return (
     <>
       <nav>
-        <ul className="header-menu">
+        <ul className={styles.headerMenu}>
           {navigation.map((item) => (
             <li key={item.id}>
               <Link href={`${item.path}`}>{item.title}</Link>

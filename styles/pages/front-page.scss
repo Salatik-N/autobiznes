@@ -20,26 +20,52 @@
     background-color: $white;
     padding-top: 44px;
     padding-bottom: 75px;
+    @media (min-width: $breakpoint-tablet) {
+      padding-top: 100px;
+    }
     h3 {
       text-align: center;
       margin-bottom: 15px;
+      @media (min-width: $breakpoint-tablet) {
+        text-align: initial;
+      }
     }
     .block-subtitile {
       text-align: center;
       line-height: 21px;
       margin-bottom: 25px;
+      @media (min-width: $breakpoint-tablet) {
+        text-align: initial;
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 50px;
+      }
     }
     .items-block {
       display: flex;
       flex-direction: column;
       gap: 29px;
+      @media (min-width: $breakpoint-laptop) {
+        flex-direction: row;
+        gap: 20px;
+      }
       .item {
         display: flex;
         flex-direction: column;
         text-align: left;
+        @media (min-width: $breakpoint-laptop) {
+          max-width: calc(100% / 3 - 40px / 3);
+          flex: 0 0 calc(100% / 3 - 40px / 3);
+        }
         .number {
           color: $blue;
           margin-bottom: 5px;
+        }
+        span {
+          @media (min-width: $breakpoint-laptop) {
+            font-size: 24px;
+            line-height: 30px;
+          }
         }
         img {
           margin: 21px auto;
@@ -54,24 +80,44 @@
     background-color: $white;
     padding-top: 44px;
     padding-bottom: 75px;
+    @media (min-width: $breakpoint-tablet) {
+      padding-bottom: 100px;
+    }
     h3 {
       text-align: center;
       margin-bottom: 20px;
+      @media (min-width: $breakpoint-tablet) {
+        text-align: initial;
+      }
+    }
+    p {
+      text-align: center;
+      font-size: 14px;
+      line-height: 21px;
+      margin-bottom: 30px;
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 20px;
+        line-height: 30px;
+        text-align: initial;
+        margin-bottom: 50px;
+      }
     }
     .inner-block {
       display: flex;
       flex-direction: column;
       gap: 30px;
-      p {
-        text-align: center;
-        font-size: 14px;
-        line-height: 21px;
+      @media (min-width: $breakpoint-tablet) {
+        justify-content: center;
+        flex-direction: row;
       }
       .item {
         display: flex;
         flex-direction: column;
         gap: 14px;
         padding: 20px 30px;
+        @media (min-width: $breakpoint-tablet) {
+          width: max-content;
+        }
         .title {
           text-align: center;
           font-weight: 700;
@@ -108,6 +154,9 @@
         }
         button {
           width: 100%;
+          @media (min-width: $breakpoint-tablet) {
+            margin-top: auto;
+          }
         }
         &.сustomer {
           .title {

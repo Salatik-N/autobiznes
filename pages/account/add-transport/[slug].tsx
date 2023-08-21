@@ -17,6 +17,7 @@ import Select from 'react-select'
 import address from '../../../lib/city.json'
 import { paymentMethod, paymentProcedure } from '../../../lib/options'
 import { FeaturesInput } from '../../../components/Form/FeaturesInput'
+import Cookies from 'js-cookie'
 
 const apolloClient = initializeApollo()
 
@@ -166,11 +167,11 @@ export default function Transport1t({ transportCategory }) {
 
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
-      // fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      // fetch('http://autobiznes.local/wp-json/wp/v2/media', {
       fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
-          authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          authorization: `Bearer ${Cookies.get('authToken')}`,
         },
         body: formData,
       })

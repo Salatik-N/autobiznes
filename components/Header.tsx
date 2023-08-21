@@ -11,11 +11,15 @@ import userIcon from '../public/icons/user.svg'
 import { useAuth } from '../lib/use-authorization'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { GET_USER_INFO } from '../lib/api'
+import { useQuery } from '@apollo/client'
 
 export default function Header() {
+  const { data } = useQuery(GET_USER_INFO)
   const [open, setOpen] = useState(false)
   const { isSignedIn } = useAuth()
   const router = useRouter()
+  console.log(data?.viewer)
 
   const handleRouteChange = () => {
     setOpen(false)
@@ -27,6 +31,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
+      <div className={styles.headerBackground}></div>
       <div className={styles.holderInner}>
         <div className={styles.siteLogo}>
           <Link href="/">
@@ -35,12 +40,23 @@ export default function Header() {
         </div>
         <div className={styles.controlButtons}>
           {isSignedIn && (
-            <Link href="/account" className={styles.userIcon}>
-              <Image src={userIcon} alt="Пользователь" />
-            </Link>
+            <div className={styles.user}>
+              <span>{data?.viewer?.username}</span>
+              <Link href="/account" className={styles.userIcon}>
+                <Image src={userIcon} alt="Пользователь" />
+              </Link>
+            </div>
           )}
           <div className={`${styles.headerInfo} ${open ? styles.burgerOpen : ''}`}>
-            <HeaderNav />
+            <div className={styles.headerBlock}>
+              <HeaderNav />
+              {!isSignedIn && (
+                <div className={styles.buttons}>
+                  <SignUp style={styles.registration}>Регистрация</SignUp>
+                  <Login style={styles.logIn}>Войти</Login>
+                </div>
+              )}
+            </div>
             <div className={styles.burgerBlock} onClick={() => setOpen(!open)}></div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ModalContacts.module.scss'
-import phoneIcon from '../public/icons/phone.svg'
+import PhoneSVG from './PhoneSVG'
 import viberIcon from '../public/icons/viber.svg'
 import whatsAppIcon from '../public/icons/whatsapp.svg'
 import telegramIcon from '../public/icons/telegram.svg'
@@ -28,7 +28,7 @@ export default function ModalCargoContacts({ cargoInfo }) {
       </div> */}
       <div>
         <Link className={styles.phone} href={`tel:${phone}`}>
-          <Image src={phoneIcon} alt="Звонок" width={16} height={16} />
+          <PhoneSVG fill={'#4caf50'} />
           {phone}
         </Link>
       </div>

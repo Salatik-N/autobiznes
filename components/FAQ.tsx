@@ -5,12 +5,28 @@ import styles from './FAQ.module.scss'
 export default function FAQ() {
   const faqs = [
     {
-      title: 'test',
-      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      title: 'Забыл пароль',
+      text: 'Для восстановления пароля нажмите на кнопку «Вход» и кликните «Забыли пароль?». На адрес электронной почты, указанной при регистрации, придет уведомление о успешной регистрации.',
     },
     {
-      title: 'test2',
-      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      title: 'Не пришел пароль для входа на email',
+      text: 'Проверьте папки «Спам» и «Рассылки».',
+    },
+    {
+      title: 'Как зарегистрироваться на сайте?',
+      text: `1. Для регистрации на сайте необходимо нажать на кнопку «Регистрация» и ввести имя, адрес электронной почты и свой уникальный пароль. 2. После успешной регистрации, необходимо нажать на кнопку «Войти», ввести свой адрес электронной почты и пароль.`,
+    },
+    {
+      title: 'Стоимость услуг сайта Autobiznes.by',
+      text: 'Сайт является полностью бесплатным как для грузоотправителей, так и для грузоперевозчиков.',
+    },
+    {
+      title: 'Как разместить груз / транспорт на сайте?',
+      text: ' 1.	Для размещения груза нажмите на вкладку «Добавить заказ/груз» в личном кабинете и заполните необходимую информацию о грузе. 2. Для размещения транспорта нажмите на вкладку «Добавить технику» в личном кабинете и заполните необходимую информацию о транспорте. 3. При необходимости отредактируйте опубликованные заявки в разделах «Ваш заказ/груз» и «Ваша техника»',
+    },
+    {
+      title: 'Как найти груз / транспорт?',
+      text: 'Осуществлять поиск грузов или транспорта можно несколькими способами: 1.	Для поиска грузов необходимо перейти во вкладку «Грузы» и введите необходимые параметры поиска груза 2.	Для поиска транспорта необходимо перейти во вкладку «Транспорт» и введите необходимые параметры поиска техники.',
     },
   ]
   const [activeIndex, setActiveIndex] = useState(null)

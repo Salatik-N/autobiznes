@@ -19,13 +19,30 @@ interface CategoryItemProps {
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
+  function customSort(a, b) {
+    function extractNumber(str) {
+      const matches = str.match(/(\d+(?:,\d+)?)/)
+      if (matches) {
+        return parseFloat(matches[1].replace(',', '.'))
+      }
+      return Infinity // Возвращаем бесконечность для строк без чисел
+    }
+
+    const numA = extractNumber(a.props.item.name)
+    const numB = extractNumber(b.props.item.name)
+
+    if (numA < numB) return -1
+    if (numA > numB) return 1
+
+    return a.props.item.name.localeCompare(b) // Если числа равны, сортируем по алфавиту
+  }
   return (
     <div className={styles.categories}>
       <div className={styles.title}>{category.name}</div>
       <div className={styles.categoryList}>
-        {category.children.edges.map((item) => (
-          <HoverableItem key={item.node.slug} item={item.node} />
-        ))}
+        {category.children.edges
+          .map((item) => <HoverableItem key={item.node.slug} item={item.node} />)
+          .sort(customSort)}
       </div>
     </div>
   )
