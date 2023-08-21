@@ -52,6 +52,10 @@
         @media (min-width: $breakpoint-tablet) {
           height: 125px;
         }
+
+        &.turnImage {
+          display: none;
+        }
       }
       span {
         font-weight: 600;
@@ -64,6 +68,14 @@
         @media (min-width: $breakpoint-laptop) {
           font-size: 18px;
           line-height: 24px;
+        }
+      }
+      &.hover {
+        .mainImage {
+          display: none;
+        }
+        .turnImage {
+          display: initial;
         }
       }
     }

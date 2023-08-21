@@ -70,9 +70,16 @@ const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
   }
 
   return (
-    <Link href={link} className={styles.item} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <Link
+      href={link}
+      className={`${styles.item} ${isHovered ? `${styles.hover}` : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Image src={`/images/${item.slug}.png`} className={styles.mainImage} alt={item.name} width={172} height={125} />
       <Image
-        src={isHovered ? `/images/${item.slug}-turn.png` : `/images/${item.slug}.png`}
+        src={`/images/${item.slug}-turn.png`}
+        className={styles.turnImage}
         alt={item.name}
         width={172}
         height={125}

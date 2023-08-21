@@ -444,12 +444,12 @@ export const ADD_NEW_CARGO = gql`
     $unloadingCountry: String = ""
     $whatsapp: Boolean = false
     $viber: Boolean = false
-    $weight: Float
+    $weight: Int
     $vehicleBodyType: String = ""
     $typeTransportation: String = ""
     $typeLoading: String = ""
     $telegram: Boolean = false
-    $budgetTo: Float
+    $budgetTo: Int
     $customName: String = ""
     $customPhone: String = ""
     $dateLoading: String = ""
@@ -502,12 +502,12 @@ export const EDIT_CARGO = gql`
     $unloadingCountry: String = ""
     $whatsapp: Boolean = false
     $viber: Boolean = false
-    $weight: Float
+    $weight: Int
     $vehicleBodyType: String = ""
     $typeTransportation: String = ""
     $typeLoading: String = ""
     $telegram: Boolean = false
-    $budgetTo: Float
+    $budgetTo: Int
     $customName: String = ""
     $customPhone: String = ""
     $dateLoading: String = ""
