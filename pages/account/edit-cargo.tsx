@@ -128,7 +128,7 @@ export default function EditCargo() {
             unloadingCity: form[FIELDS.UNLOADING_CITY],
             unloadingAdress: form[FIELDS.UNLOADING_ADDRESS],
             dateUnloading: form[FIELDS.DATE_UNLOADING],
-            weight: form[FIELDS.WEIGHT],
+            weight: parseInt(form[FIELDS.WEIGHT]),
             movers: form[FIELDS.MOVERS],
             vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
             typeLoading: form[FIELDS.TYPE_LOADING],
@@ -139,7 +139,7 @@ export default function EditCargo() {
             whatsapp: form[FIELDS.WHATSAPP],
             telegram: form[FIELDS.TELEGRAM],
             paymentMethod: form[FIELDS.PAYMENT_METHOD],
-            budgetTo: form[FIELDS.BUDGET_TO],
+            budgetTo: parseInt(form[FIELDS.BUDGET_TO]),
             fullDescription: form[FIELDS.FULL_DESCRIPTION],
           },
         })
