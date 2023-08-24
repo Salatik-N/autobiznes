@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_CARGO = gql`
-  query GetCargo {
-    cargos {
+  query GetCargo($first: Int! = 10, $after: String, $before: String) {
+    cargos(first: $first, after: $after, before: $before) {
       edges {
         node {
           slug
@@ -29,6 +29,11 @@ export const GET_ALL_CARGO = gql`
             paymentMethod
           }
         }
+      }
+      pageInfo {
+        total
+        hasNextPage
+        endCursor
       }
     }
   }
@@ -149,6 +154,10 @@ export const GET_TRANSPORT_CATEGORY = gql`
             acfTransportAddress {
               regionTransport
               city
+            }
+            acfTransportContacts {
+              paymentMethod
+              paymentProcedure
             }
             acfTransportFeatures {
               typeTransportation

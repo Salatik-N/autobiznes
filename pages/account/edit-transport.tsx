@@ -180,7 +180,7 @@ export default function EditCargo() {
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
       // fetch('http://autobiznes.local/wp-json/wp/v2/media', {
-        fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${Cookies.get('authToken')}`,
@@ -302,6 +302,7 @@ export default function EditCargo() {
     <Container>
       <button onClick={goBack} className="go-back-button">
         <i className="arrow" />
+        <span>Назад</span>
       </button>
       <span className="form-page-title">Редактирование транспорта, объявление №{router.query.id}</span>
       <form onSubmit={editCargo} autoComplete="on">

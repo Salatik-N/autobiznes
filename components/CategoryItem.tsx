@@ -76,13 +76,21 @@ const HoverableItem: React.FC<HoverableItemProps> = ({ item }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Image src={`/images/${item.slug}.png`} className={styles.mainImage} alt={item.name} width={172} height={125} />
+      <Image
+        src={`/images/${item.slug}.png`}
+        className={styles.mainImage}
+        alt={item.name}
+        width={172}
+        height={125}
+        priority={true}
+      />
       <Image
         src={`/images/${item.slug}-turn.png`}
         className={styles.turnImage}
         alt={item.name}
         width={172}
         height={125}
+        priority={true}
       />
       <span>{item.name}</span>
     </Link>

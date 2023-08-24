@@ -103,6 +103,7 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
               <TransportFeatures
                 active={expandedItem === item.node.databaseId && isFeaturesActive}
                 features={item.node.acfTransportFeatures}
+                payment={item.node.acfTransportContacts}
               />
             </div>
             <div className={styles.priceBlock}>
@@ -122,27 +123,29 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
             <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
               Контакты
             </button>
-            <div className={styles.description}>
-              <div className={styles.label}>Описание:</div>
-              <div className={styles.text}>
-                {expandedItem === item.node.databaseId && isDescriptionActive ? (
-                  item.node.acfTransportDescription.fullDescription
-                ) : (
-                  <>
-                    {item.node.acfTransportDescription.fullDescription?.length > 255 ? (
-                      <>
-                        {item.node.acfTransportDescription.fullDescription.slice(0, 255)}
-                        <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
-                          Читать больше
-                        </span>
-                      </>
-                    ) : (
-                      item.node.acfTransportDescription.fullDescription
-                    )}
-                  </>
-                )}
+            {item.node.acfTransportDescription.fullDescription && (
+              <div className={styles.description}>
+                <div className={styles.label}>Описание:</div>
+                <div className={styles.text}>
+                  {expandedItem === item.node.databaseId && isDescriptionActive ? (
+                    item.node.acfTransportDescription.fullDescription
+                  ) : (
+                    <>
+                      {item.node.acfTransportDescription.fullDescription?.length > 255 ? (
+                        <>
+                          {item.node.acfTransportDescription.fullDescription.slice(0, 255)}
+                          <span className={styles.readMore} onClick={() => handleDescriptionOpen(item.node.databaseId)}>
+                            Читать больше
+                          </span>
+                        </>
+                      ) : (
+                        item.node.acfTransportDescription.fullDescription
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         ))}
       <Modal active={isModalActive} setModalActive={setModalActive}>

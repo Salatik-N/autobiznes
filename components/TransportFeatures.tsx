@@ -1,10 +1,23 @@
 import styles from './TransportItem.module.scss'
 
-const TransportFeatures = ({ active, features }) => {
+const TransportFeatures = ({ active, features, payment = null }) => {
+  console.log(payment)
   return (
     <>
       {active && (
         <div className={styles.content}>
+          {payment.paymentMethod && (
+            <div className={styles.item}>
+              <div className={styles.label}>Способ оплаты</div>
+              <div className={styles.value}>{payment.paymentMethod}</div>
+            </div>
+          )}
+          {payment.paymentProcedure && (
+            <div className={styles.item}>
+              <div className={styles.label}>Порядок оплаты</div>
+              <div className={styles.value}>{payment.paymentProcedure}</div>
+            </div>
+          )}
           {features.vehicleBodyType && (
             <div className={styles.item}>
               <div className={styles.label}>Тип транспорта</div>

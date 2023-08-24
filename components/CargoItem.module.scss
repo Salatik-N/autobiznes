@@ -48,13 +48,14 @@
   }
 
   .cargoAdminBlock {
-    display: none;
+    display: block;
     align-items: center;
     justify-content: space-between;
+    @media (min-width: $breakpoint-tablet) {
+      display: none;
+    }
     &Active {
-      @media (min-width: $breakpoint-tablet) {
-        display: flex;
-      }
+      display: flex;
     }
   }
   .cargoNumber {

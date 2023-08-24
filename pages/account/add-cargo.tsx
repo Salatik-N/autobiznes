@@ -40,6 +40,7 @@ enum FIELDS {
 
 export default function AddCargo() {
   const { data } = useQuery(GET_USER_INFO)
+  const [consentToPosting, setConsentToPosting] = useState(false)
   const apolloClient = initializeApollo()
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
@@ -110,41 +111,43 @@ export default function AddCargo() {
 
   const createNewCargo = async (e) => {
     e.preventDefault()
-    apolloClient
-      .mutate({
-        mutation: ADD_NEW_CARGO,
-        variables: {
-          title: form[FIELDS.TITLE],
-          shippingRegion: form[FIELDS.SHIPPING_REGION],
-          shippingCity: form[FIELDS.SHIPPING_CITY],
-          shippingAddress: form[FIELDS.SHIPPING_ADDRESS],
-          dateLoading: form[FIELDS.DATE_LOADING],
-          unloadingCountry: form[FIELDS.UNLOADING_COUNTRY],
-          unloadingRegion: form[FIELDS.UNLOADING_REGION],
-          unloadingCity: form[FIELDS.UNLOADING_CITY],
-          unloadingAdress: form[FIELDS.UNLOADING_ADDRESS],
-          dateUnloading: form[FIELDS.DATE_UNLOADING],
-          weight: parseInt(form[FIELDS.WEIGHT]),
-          movers: form[FIELDS.MOVERS],
-          vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
-          typeLoading: form[FIELDS.TYPE_LOADING],
-          typeTransportation: form[FIELDS.TYPE_TRANSPORTATION],
-          customName: form[FIELDS.CUSTOM_NAME],
-          customPhone: form[FIELDS.CUSTOM_PHONE],
-          viber: form[FIELDS.VIBER],
-          whatsapp: form[FIELDS.WHATSAPP],
-          telegram: form[FIELDS.TELEGRAM],
-          paymentMethod: form[FIELDS.PAYMENT_METHOD],
-          budgetTo: parseInt(form[FIELDS.BUDGET_TO]),
-          fullDescription: form[FIELDS.FULL_DESCRIPTION],
-        },
-      })
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    if (consentToPosting) {
+      apolloClient
+        .mutate({
+          mutation: ADD_NEW_CARGO,
+          variables: {
+            title: form[FIELDS.TITLE],
+            shippingRegion: form[FIELDS.SHIPPING_REGION],
+            shippingCity: form[FIELDS.SHIPPING_CITY],
+            shippingAddress: form[FIELDS.SHIPPING_ADDRESS],
+            dateLoading: form[FIELDS.DATE_LOADING],
+            unloadingCountry: form[FIELDS.UNLOADING_COUNTRY],
+            unloadingRegion: form[FIELDS.UNLOADING_REGION],
+            unloadingCity: form[FIELDS.UNLOADING_CITY],
+            unloadingAdress: form[FIELDS.UNLOADING_ADDRESS],
+            dateUnloading: form[FIELDS.DATE_UNLOADING],
+            weight: parseInt(form[FIELDS.WEIGHT]),
+            movers: form[FIELDS.MOVERS],
+            vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
+            typeLoading: form[FIELDS.TYPE_LOADING],
+            typeTransportation: form[FIELDS.TYPE_TRANSPORTATION],
+            customName: form[FIELDS.CUSTOM_NAME],
+            customPhone: form[FIELDS.CUSTOM_PHONE],
+            viber: form[FIELDS.VIBER],
+            whatsapp: form[FIELDS.WHATSAPP],
+            telegram: form[FIELDS.TELEGRAM],
+            paymentMethod: form[FIELDS.PAYMENT_METHOD],
+            budgetTo: parseInt(form[FIELDS.BUDGET_TO]),
+            fullDescription: form[FIELDS.FULL_DESCRIPTION],
+          },
+        })
+        .then((result) => {
+          console.log(result)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
   }
 
   const goBack = () => {
@@ -155,6 +158,7 @@ export default function AddCargo() {
     <Container>
       <button onClick={goBack} className="go-back-button">
         <i className="arrow" />
+        <span>Назад</span>
       </button>
       <span className="form-page-title">Заполните форму для получения предложений</span>
       <form onSubmit={createNewCargo} autoComplete="on">

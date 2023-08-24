@@ -63,6 +63,7 @@ enum FIELDS {
 export default function Transport1t({ transportCategory }) {
   const { data } = useQuery(GET_USER_INFO)
   const inputPhotoDriverRef = useRef(null)
+  const [consentToPosting, setConsentToPosting] = useState(false)
   const inputPhotoTruckRef = useRef(null)
   const [form, setForm] = useState({
     [FIELDS.TITLE]: '',
@@ -226,55 +227,57 @@ export default function Transport1t({ transportCategory }) {
 
   const createNewTransport = async (e) => {
     e.preventDefault()
-    apolloClient
-      .mutate({
-        mutation: ADD_NEW_TRANSPORT,
-        variables: {
-          category: transportCategory.slug,
-          title: form[FIELDS.TITLE],
-          regionTransport: form[FIELDS.REGION_TRANSPORT],
-          city: form[FIELDS.CITY],
-          customName: form[FIELDS.CUSTOM_NAME],
-          customPhone: form[FIELDS.CUSTOM_PHONE],
-          viber: form[FIELDS.VIBER],
-          whatsapp: form[FIELDS.WHATSAPP],
-          telegram: form[FIELDS.TELEGRAM],
-          modeOperation: form[FIELDS.MODE_OPERATION],
-          paymentMethod: form[FIELDS.PAYMENT_METHOD],
-          paymentProcedure: form[FIELDS.PAYMENT_PROCEDURE],
-          vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
-          typeTransportation: form[FIELDS.TYPE_TRANSPORTATION],
-          vehicleBrand: form[FIELDS.VEHICLE_BRAND],
-          workExperience: form[FIELDS.WORK_EXPERIENCE],
-          leaseTerm: form[FIELDS.LEASE_TERM],
-          numberSeats: form[FIELDS.NUMBER_SEATS],
-          numberSeatsWithoutLuggage: form[FIELDS.NUMBER_SEATS_WITHOUT_LUGGAGE],
-          serviceSpecialization: form[FIELDS.SERVICE_SPECIALIZATION],
-          options: form[FIELDS.OPTIONS],
-          amenities: form[FIELDS.AMENITIES],
-          vehicleClass: form[FIELDS.VEHICLE_CLASS],
-          color: form[FIELDS.COLOR],
-          vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
-          minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
-          price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
-          pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),
-          price1Km: parseInt(form[FIELDS.PRICE_1_KM]),
-          carryingCapacity: parseInt(form[FIELDS.CARRYING_CAPACITY]),
-          bodyLength: parseInt(form[FIELDS.BODY_LENGTH]),
-          bodyHeight: parseInt(form[FIELDS.BODY_HEIGHT]),
-          bodyWidth: parseInt(form[FIELDS.BODY_WIDTH]),
-          bodyVolume: parseInt(form[FIELDS.BODY_VOLUME]),
-          photoTruck: form[FIELDS.PHOTO_TRUCK],
-          photoDriver: form[FIELDS.PHOTO_DRIVER],
-          fullDescription: form[FIELDS.FULL_DESCRIPTION],
-        },
-      })
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    if (consentToPosting) {
+      apolloClient
+        .mutate({
+          mutation: ADD_NEW_TRANSPORT,
+          variables: {
+            category: transportCategory.slug,
+            title: form[FIELDS.TITLE],
+            regionTransport: form[FIELDS.REGION_TRANSPORT],
+            city: form[FIELDS.CITY],
+            customName: form[FIELDS.CUSTOM_NAME],
+            customPhone: form[FIELDS.CUSTOM_PHONE],
+            viber: form[FIELDS.VIBER],
+            whatsapp: form[FIELDS.WHATSAPP],
+            telegram: form[FIELDS.TELEGRAM],
+            modeOperation: form[FIELDS.MODE_OPERATION],
+            paymentMethod: form[FIELDS.PAYMENT_METHOD],
+            paymentProcedure: form[FIELDS.PAYMENT_PROCEDURE],
+            vehicleBodyType: form[FIELDS.VEHICLE_BODY_TYPE],
+            typeTransportation: form[FIELDS.TYPE_TRANSPORTATION],
+            vehicleBrand: form[FIELDS.VEHICLE_BRAND],
+            workExperience: form[FIELDS.WORK_EXPERIENCE],
+            leaseTerm: form[FIELDS.LEASE_TERM],
+            numberSeats: form[FIELDS.NUMBER_SEATS],
+            numberSeatsWithoutLuggage: form[FIELDS.NUMBER_SEATS_WITHOUT_LUGGAGE],
+            serviceSpecialization: form[FIELDS.SERVICE_SPECIALIZATION],
+            options: form[FIELDS.OPTIONS],
+            amenities: form[FIELDS.AMENITIES],
+            vehicleClass: form[FIELDS.VEHICLE_CLASS],
+            color: form[FIELDS.COLOR],
+            vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
+            minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
+            price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
+            pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),
+            price1Km: parseInt(form[FIELDS.PRICE_1_KM]),
+            carryingCapacity: parseInt(form[FIELDS.CARRYING_CAPACITY]),
+            bodyLength: parseInt(form[FIELDS.BODY_LENGTH]),
+            bodyHeight: parseInt(form[FIELDS.BODY_HEIGHT]),
+            bodyWidth: parseInt(form[FIELDS.BODY_WIDTH]),
+            bodyVolume: parseInt(form[FIELDS.BODY_VOLUME]),
+            photoTruck: form[FIELDS.PHOTO_TRUCK],
+            photoDriver: form[FIELDS.PHOTO_DRIVER],
+            fullDescription: form[FIELDS.FULL_DESCRIPTION],
+          },
+        })
+        .then((result) => {
+          console.log(result)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
   }
 
   const goBack = () => {
@@ -286,6 +289,7 @@ export default function Transport1t({ transportCategory }) {
       <Container>
         <button onClick={goBack} className="go-back-button">
           <i className="arrow" />
+          <span>Назад</span>
         </button>
         <span className="form-page-title">{transportCategory.name}</span>
         <form onSubmit={createNewTransport} autoComplete="on">

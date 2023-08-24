@@ -3,8 +3,39 @@
 
 .filterBlock {
   margin-bottom: 44px;
+  @media (min-width: $breakpoint-tablet) {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+  }
+  .filterList {
+    @media (min-width: $breakpoint-tablet) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 25px;
+    }
+    @media (min-width: $breakpoint-xl) {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+    label {
+      @media (min-width: $breakpoint-tablet) {
+        width: 165px;
+      }
+      @media (min-width: $breakpoint-tablet) {
+        margin-bottom: 0;
+        flex: 1 0 auto;
+        width: initial;
+      }
+    }
+  }
   .filterButton {
     width: 100%;
     @include btn-yellow(15px, 15px);
+    @media (min-width: $breakpoint-tablet) {
+      max-width: 90px;
+      flex: 0 0 90px;
+      height: min-content;
+    }
   }
 }

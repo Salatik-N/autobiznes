@@ -162,6 +162,7 @@ export default function EditCargo() {
     <Container>
       <button onClick={goBack} className="go-back-button">
         <i className="arrow" />
+        <span>Назад</span>
       </button>
       <span className="form-page-title">Редактирование груза, объявление №{router.query.id}</span>
       <form onSubmit={editCargo} autoComplete="on">

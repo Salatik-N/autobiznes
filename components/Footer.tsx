@@ -10,6 +10,15 @@ import SocialIcons from './SocialIcons'
 import logo from '../public/icons/logo.svg'
 
 export default function Footer() {
+  const noscriptStyle = {
+    position: 'absolute',
+    left: '-9999px',
+  }
+  const informerStyle = {
+    width: '88px',
+    height: '31px',
+    border: 0,
+  }
   return (
     <>
       <footer className={styles.siteFooter}>
@@ -75,13 +84,47 @@ export default function Footer() {
               </div>
             </div>
             <div className={styles.metricsBlock}>
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
+              <div>
+                <a href="https://metrika.yandex.ru/stat/?id=94709793&amp;from=informer" target="_blank" rel="nofollow">
+                  <img
+                    src="https://informer.yandex.ru/informer/94709793/3_1_EFEFEFFF_EFEFEFFF_0_pageviews"
+                    style={informerStyle}
+                    alt="Яндекс.Метрика"
+                    title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
+                    className="ym-advanced-informer"
+                    data-cid="94709793"
+                    data-lang="ru"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </Container>
       </footer>
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `
+              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+              ym(94709793, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+              });
+            `,
+        }}
+      ></script>
+      <noscript>
+        <div>
+          <img src="https://mc.yandex.ru/watch/94709793" style={noscriptStyle} alt="" />
+        </div>
+      </noscript>
     </>
   )
 }

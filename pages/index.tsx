@@ -74,7 +74,9 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
           </>
         ) : null}
       </Container>
-      <Benefits />
+      <section className="benefits-section">
+        <Benefits />
+      </section>
       <div className="separator-white">
         <hr />
       </div>
