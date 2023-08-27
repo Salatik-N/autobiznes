@@ -28,7 +28,7 @@ export default function Transports() {
       {transportList && (
         <>
           <div className="transport-list">
-            <TransportItem active={null} transports={transportList} isActiveAdminTools />
+            <TransportItem transports={transportList} isActiveAdminTools />
           </div>
           <ListNavigation />
         </>
