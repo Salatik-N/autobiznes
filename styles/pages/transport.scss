@@ -109,4 +109,10 @@
       }
     }
   }
+  .first-section {
+    margin-bottom: 60px;
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 100px;
+    }
+  }
 }

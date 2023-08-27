@@ -20,7 +20,7 @@ type TransportItemProps = {
   isActiveAdminTools?: boolean
 }
 
-const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isActiveAdminTools = false }) => {
+const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdminTools = false }) => {
   const [transportInfo, setTransportInfo] = useState(null)
   const [isLoading, setLoading] = useState(false)
   const [isModalActive, setModalActive] = useState(false)
@@ -72,11 +72,11 @@ const TransportItem: React.FC<TransportItemProps> = ({ active, transports, isAct
   return (
     <>
       {transports.edges
-        .filter((item) =>
-          active === null || active.id === 0
-            ? item.node.acfTransportAddress.regionTransport
-            : item.node.acfTransportAddress.regionTransport === active.region
-        )
+        // .filter((item) =>
+        //   active === null || active.id === 0
+        //     ? item.node.acfTransportAddress.regionTransport
+        //     : item.node.acfTransportAddress.regionTransport === active.region
+        // )
         .map((item) => (
           <div key={item.node.databaseId} className={styles.transportItem}>
             {isActiveAdminTools && <AdminTools item={item.node} type="transport" />}

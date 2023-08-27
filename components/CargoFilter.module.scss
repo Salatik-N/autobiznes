@@ -9,7 +9,9 @@
     align-items: center;
   }
   .filterList {
+    margin-bottom: 15px;
     @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 25px;

@@ -9,7 +9,7 @@ const TransportFilter = ({ active, regions, onClickRegion }) => {
           className={`${active === i ? styles.active : ''} ${styles.filterButton}`}
           onClick={() => onClickRegion(i)}
         >
-          {item.region} - {item.count}
+          {item.region}
         </button>
       ))}
     </div>

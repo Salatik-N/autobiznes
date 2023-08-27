@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_CARGO = gql`
-  query GetCargo($first: Int! = 10, $after: String, $before: String) {
-    cargos(first: $first, after: $after, before: $before) {
+  query GetCargo($first: Int! = 10, $after: String) {
+    cargos(first: $first, after: $after) {
       edges {
         node {
           slug
@@ -133,12 +133,18 @@ export const GET_CARGO_INFO = gql`
     }
   }
 `
-export const GET_TRANSPORT_CATEGORY = gql`
+export const GET_CATEGORY_INFO = gql`
   query GetTransportCategory($id: ID!) {
     transportCategory(id: $id, idType: SLUG) {
       name
       slug
-      transports {
+    }
+  }
+`
+export const GET_TRANSPORT_CATEGORY = gql`
+  query GetTransportCategory($id: ID!, $first: Int! = 10, $after: String) {
+    transportCategory(id: $id, idType: SLUG) {
+      transports(first: $first, after: $after) {
         edges {
           node {
             author {
@@ -193,6 +199,11 @@ export const GET_TRANSPORT_CATEGORY = gql`
               views
             }
           }
+        }
+        pageInfo {
+          total
+          endCursor
+          hasNextPage
         }
       }
     }

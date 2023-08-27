@@ -117,12 +117,7 @@ export default function Footer() {
       ></script>
       <noscript>
         <div>
-          <img src="https://mc.yandex.ru/watch/94709793" alt="">
-            <style jsx>{`
-              position: 'absolute';
-              left: '-9999px';
-            `}</style>
-          </img>
+          <img src="https://mc.yandex.ru/watch/94709793" style={{ position: 'absolute', left: '-9999px' }} alt="" />
         </div>
       </noscript>
     </>

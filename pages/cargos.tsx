@@ -1,49 +1,39 @@
-import { GetServerSideProps } from 'next'
-import { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
 import Link from 'next/link'
-import ListNavigation from '../components/ListNavigation'
 import CargoItem from '../components/CargoItem'
 import CargoFilter from '../components/CargoFilter'
 import Benefits from '../components/Benefits'
 import Container from '../components/Container'
-import Declension from '../components/Declension'
 import { Loader } from '../components/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const ITEMS_PER_PAGE = 10
 
 export default function Cargo() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageTotal, setPageTotal] = useState(0)
-  const { data, loading, error, fetchMore } = useQuery(GET_ALL_CARGO, {
-    variables: { perPage: ITEMS_PER_PAGE },
+  const { data, fetchMore } = useQuery(GET_ALL_CARGO, {
+    variables: { first: ITEMS_PER_PAGE, after: null },
     notifyOnNetworkStatusChange: true,
   })
-  useEffect(() => {
-    setPageTotal(data?.cargos?.pageInfo?.total)
-  }, [data])
+
   const haveMorePosts = Boolean(data?.cargos?.pageInfo?.hasNextPage)
   const pageInfo = data?.cargos?.pageInfo || {}
+  const fetchMorePost = () => {
+    fetchMore({
+      variables: { after: pageInfo.endCursor },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult
 
-  const handleLoadMore = () => {
-    if (pageInfo.hasNextPage) {
-      fetchMore({
-        variables: { after: pageInfo.endCursor },
-        updateQuery: (prevResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prevResult
-
-          return {
-            cargos: {
-              edges: [...prevResult.cargos.edges, ...fetchMoreResult.cargos.edges],
-              pageInfo: fetchMoreResult.cargos.pageInfo,
-              __typename: 'CargosConnection', // Make sure to update the typename
-            },
-          }
-        },
-      })
-    }
+        return {
+          cargos: {
+            edges: [...prevResult.cargos.edges, ...fetchMoreResult.cargos.edges],
+            pageInfo: fetchMoreResult.cargos.pageInfo,
+            __typename: 'CargosConnection',
+          },
+        }
+      },
+    })
   }
 
   return (
@@ -60,6 +50,7 @@ export default function Cargo() {
               alt="Биржа грузов и транспорта"
               width={839}
               height={583}
+              priority={true}
             />
           </div>
         </Container>
@@ -73,25 +64,34 @@ export default function Cargo() {
               <CargoFilter cargoList={data.cargos} />
               <div className="cargo-list">
                 <span className="title">Все грузы для перевозки по Беларуси</span>
-                <p>
+                {/* <p>
                   По вашему запросу поиск грузов для перевозки найдено&nbsp;
                   <span className="text-green">
-                    <Declension count={pageTotal} words={['предложение', 'предложения', 'предложений']} />
+                    <Declension count={cargoTotal} words={['предложение', 'предложения', 'предложений']} />
                   </span>
-                </p>
+                </p> */}
                 <div className="cargo-list-button">
                   <span>У вас есть груз?</span>
                   <Link href="/account/add-cargo" className="add-order">
                     Добавить заказ
                   </Link>
                 </div>
-                <CargoItem cargos={data.cargos} />
+                <InfiniteScroll
+                  dataLength={pageInfo.total}
+                  next={fetchMorePost}
+                  hasMore={haveMorePosts}
+                  loader={'Загрузка...'}
+                  scrollThreshold={0.4}
+                  style={{ overflow: 'initial' }}
+                >
+                  <CargoItem cargos={data.cargos} />
+                </InfiniteScroll>
               </div>
-              {haveMorePosts && <button onClick={handleLoadMore}>{loading ? 'Loading...' : 'Load More'}</button>}
-              <ListNavigation />
             </>
           ) : (
-            <Loader />
+            <div className="white-background">
+              <Loader />
+            </div>
           )}
         </Container>
       </section>
