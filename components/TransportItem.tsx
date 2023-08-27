@@ -12,10 +12,6 @@ import TransportFeatures from './TransportFeatures'
 import ImagesGallery from './ImagesGallery'
 
 type TransportItemProps = {
-  active: {
-    id: number
-    region: string
-  }
   transports: any
   isActiveAdminTools?: boolean
 }
