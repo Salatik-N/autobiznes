@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetServerSideProps } from 'next'
 import { initializeApollo } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
 import {
   ADD_NEW_TRANSPORT,
-  GET_TRANSPORT_CATEGORY,
+  GET_CATEGORY_INFO,
   GET_USER_INFO,
-  GET_ALL_TRANSPORT_CATEGORIES,
 } from '../../../lib/api'
 import Image from 'next/image'
 import Container from '../../../components/Container'
@@ -528,21 +527,9 @@ export default function Transport1t({ transportCategory }) {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await apolloClient.query({
-    query: GET_ALL_TRANSPORT_CATEGORIES,
-  })
-  const transportCategories = response?.data?.transportCategories
-
-  return {
-    paths: transportCategories.edges.map(({ node }) => `/account/add-transport/${node.slug}`) || [],
-    fallback: false,
-  }
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const responseCategory = await apolloClient.query({
-    query: GET_TRANSPORT_CATEGORY,
+    query: GET_CATEGORY_INFO,
     variables: {
       id: context.params.slug,
     },
