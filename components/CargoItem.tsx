@@ -15,16 +15,17 @@ import ModalCargoContacts from './ModalCargoContacts'
 import ModalCargoMoreInfo from './ModalCargoMoreInfo'
 import { GET_CARGO_INFO, UPDATE_VIEWS_COUNT } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
+import { useQuery } from '@apollo/client'
 import { Loader } from './Loader'
 
 export default function CargoItem({ cargos, isActiveAdminTools = false }) {
   const [activeModalName, setactiveModalName] = useState(null)
   const [cargoInfo, setCargoInfo] = useState(null)
-  const [isLoading, setLoading] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   const apolloClient = initializeApollo()
+  const { data, loading, fetchMore } = useQuery(GET_CARGO_INFO)
 
-  const handleModalOpen = (idCargo, e) => {
+  const handleModalOpen = async (idCargo, e) => {
     setCargoInfo(null)
     setModalActive(true)
     setactiveModalName(e.target.name)
@@ -32,15 +33,17 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
   }
 
   const getCargoInfo = async (idCargo) => {
-    setLoading(true)
-    const responseCargo = await apolloClient.query({
-      query: GET_CARGO_INFO,
-      variables: {
-        id: idCargo,
+    await fetchMore({
+      variables: { id: idCargo },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult
+
+        return {
+          cargo: fetchMoreResult.cargo,
+        }
       },
     })
-    setCargoInfo(responseCargo?.data?.cargo)
-    setLoading(false)
+    setCargoInfo(data?.cargo)
     apolloClient.mutate({
       mutation: UPDATE_VIEWS_COUNT,
       variables: { postId: idCargo },
@@ -128,9 +131,8 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
         </div>
       ))}
       <Modal active={modalActive} setModalActive={setModalActive}>
-        {isLoading && <Loader />}
-        {cargoInfo && activeModalName === 'contacts' ? <ModalCargoContacts cargoInfo={cargoInfo} /> : null}
-        {cargoInfo && activeModalName === 'more-info' ? <ModalCargoMoreInfo cargoInfo={cargoInfo} /> : null}
+        {!loading && activeModalName === 'contacts' && <ModalCargoContacts cargoInfo={cargoInfo} />}
+        {!loading && activeModalName === 'more-info' && <ModalCargoMoreInfo cargoInfo={cargoInfo} />}
       </Modal>
     </>
   )

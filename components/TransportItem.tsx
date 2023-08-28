@@ -70,49 +70,58 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
       {transports.edges.map((item) => (
         <div key={item.node.databaseId} className={styles.transportItem}>
           {isActiveAdminTools && <AdminTools item={item.node} type="transport" />}
-          <ImagesGallery photos={item.node.acfTransportPhotos.photoTruck} />
-          <div className={styles.transportNumber}>№{item.node.databaseId}</div>
-          <div className={styles.title}>
-            {item.node.author.node.customField.verifiedUser && (
-              <Image src={verifiedUser} width={16} height={16} alt="Подтвержденный пользователь" />
-            )}
-            {item.node.title}
+          <div className={styles.wrapper}>
+            <div className={styles.imageBlock}>
+              <ImagesGallery photos={item.node.acfTransportPhotos.photoTruck} />
+              <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
+                Контакты
+              </button>
+            </div>
+            <div className={styles.blockInfo}>
+              <div className={styles.transportNumber}>№{item.node.databaseId}</div>
+              <div className={styles.title}>
+                {item.node.author.node.customField.verifiedUser && (
+                  <Image src={verifiedUser} width={16} height={16} alt="Подтвержденный пользователь" />
+                )}
+                {item.node.title}
+              </div>
+              <div
+                className={styles.address}
+              >{`${item.node.acfTransportAddress.regionTransport}, ${item.node.acfTransportAddress.city}`}</div>
+              {/* <div className={styles.experience}>{item.node.author.node.registeredDate} лет в сервисе</div> */}
+              <div
+                className={`${styles.features} ${
+                  expandedItem === item.node.databaseId && isFeaturesActive && styles.active
+                }`}
+              >
+                <div className={styles.button} onClick={() => handleFeaturesOpen(item.node.databaseId)}>
+                  Характеристики <i className={styles.arrow} />
+                </div>
+                <TransportFeatures
+                  active={expandedItem === item.node.databaseId && isFeaturesActive}
+                  features={item.node.acfTransportFeatures}
+                  payment={item.node.acfTransportContacts}
+                />
+              </div>
+              <div className={styles.priceBlock}>
+                <div className={styles.item}>
+                  <div className={styles.price}>{item.node.acfTransportFeatures.price1Hour}</div>
+                  <div className={styles.metering}>BYN/час</div>
+                </div>
+                <div className={styles.item}>
+                  <div className={styles.price}>{item.node.acfTransportFeatures.price1Km}</div>
+                  <div className={styles.metering}>BYN/км</div>
+                </div>
+                <div className={styles.item}>
+                  <div className={styles.price}>{item.node.acfTransportFeatures.pricePerShift}</div>
+                  <div className={styles.metering}>BYN/смена</div>
+                </div>
+              </div>
+              <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
+                Контакты
+              </button>
+            </div>
           </div>
-          <div
-            className={styles.address}
-          >{`${item.node.acfTransportAddress.regionTransport}, ${item.node.acfTransportAddress.city}`}</div>
-          {/* <div className={styles.experience}>{item.node.author.node.registeredDate} лет в сервисе</div> */}
-          <div
-            className={`${styles.features} ${
-              expandedItem === item.node.databaseId && isFeaturesActive && styles.active
-            }`}
-          >
-            <div className={styles.button} onClick={() => handleFeaturesOpen(item.node.databaseId)}>
-              Характеристики <i className={styles.arrow} />
-            </div>
-            <TransportFeatures
-              active={expandedItem === item.node.databaseId && isFeaturesActive}
-              features={item.node.acfTransportFeatures}
-              payment={item.node.acfTransportContacts}
-            />
-          </div>
-          <div className={styles.priceBlock}>
-            <div className={styles.item}>
-              <div className={styles.price}>{item.node.acfTransportFeatures.price1Hour}</div>
-              <div className={styles.metering}>BYN/час</div>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.price}>{item.node.acfTransportFeatures.price1Km}</div>
-              <div className={styles.metering}>BYN/км</div>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.price}>{item.node.acfTransportFeatures.pricePerShift}</div>
-              <div className={styles.metering}>BYN/смена</div>
-            </div>
-          </div>
-          <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
-            Контакты
-          </button>
           {item.node.acfTransportDescription.fullDescription && (
             <div className={styles.description}>
               <div className={styles.label}>Описание:</div>

@@ -8,6 +8,9 @@
   overflow: hidden;
   position: relative;
   @include border-radius(8px);
+  @media (min-width: $breakpoint-tablet) {
+    height: 160px;
+  }
 
   .image,
   .defaultImage {

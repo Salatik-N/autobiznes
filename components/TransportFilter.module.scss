@@ -2,10 +2,23 @@
 @import '../styles/components/buttons';
 
 .filterBlock {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 10px;
+  .filterTitle {
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+  }
+  .filterContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
   .filterButton {
     @include btn-white(10px, 10px);
     padding-left: 10px;

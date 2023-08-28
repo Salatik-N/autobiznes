@@ -9,6 +9,48 @@
   box-shadow: 0px 3px 50px rgba(153, 155, 168, 0.12);
   padding: 10px;
   @include border-radius(16px);
+  @media (min-width: $breakpoint-tablet) {
+    gap: 15px;
+  }
+
+  .blockInfo,
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wrapper {
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: row;
+    }
+  }
+
+  .imageBlock {
+    @media (min-width: $breakpoint-tablet) {
+      max-width: calc(40% - 15px / 2);
+      flex: 0 0 calc(40% - 15px / 2);
+    }
+    button {
+      display: none;
+      @media (min-width: $breakpoint-tablet) {
+        margin-top: 20px;
+        display: flex;
+      }
+    }
+  }
+
+  .blockInfo {
+    @media (min-width: $breakpoint-tablet) {
+      max-width: calc(60% - 15px / 2);
+      flex: 0 0 calc(60% - 15px / 2);
+    }
+    button {
+      @media (min-width: $breakpoint-tablet) {
+        display: none;
+      }
+    }
+  }
 
   &:not(:last-child) {
     margin-bottom: 15px;
@@ -115,6 +157,9 @@
     justify-content: space-between;
     gap: 5px;
     margin-bottom: 10px;
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 0;
+    }
 
     .item {
       flex: 1 0 auto;
