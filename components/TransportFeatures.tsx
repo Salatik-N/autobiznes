@@ -1,7 +1,6 @@
 import styles from './TransportItem.module.scss'
 
 const TransportFeatures = ({ active, features, payment = null }) => {
-  console.log(payment)
   return (
     <>
       {active && (

@@ -2,6 +2,14 @@
 @import '../styles/components/buttons';
 
 .home-page {
+  .header-section .page-title-block {
+    position: relative;
+    .content-image {
+      @media (min-width: $breakpoint-tablet) {
+        right: -50px;
+      }
+    }
+  }
   .show-more-cargo {
     margin-bottom: 40px;
     p {

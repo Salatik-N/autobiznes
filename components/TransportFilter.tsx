@@ -1,17 +1,37 @@
 import styles from './TransportFilter.module.scss'
 
-const TransportFilter = ({ active, regions, onClickRegion }) => {
+const TransportFilter = ({ activeRegion, regions, onClickRegion, activeCity, cities, onClickCity }) => {
   return (
     <div className={`${styles.filterBlock} white-background`}>
-      {regions.map((item, i) => (
-        <button
-          key={i}
-          className={`${active === i ? styles.active : ''} ${styles.filterButton}`}
-          onClick={() => onClickRegion(i)}
-        >
-          {item.region}
-        </button>
-      ))}
+      {activeRegion === 0 ? (
+        regions.map((item, i) => (
+          <button
+            key={i}
+            className={`${activeRegion === i ? styles.active : ''} ${styles.filterButton}`}
+            onClick={() => onClickRegion(i)}
+          >
+            {item.name}
+          </button>
+        ))
+      ) : (
+        <>
+          <button className={styles.filterButton} onClick={() => onClickRegion(0)}>
+            <i className={styles.filterButtonArrow}></i>
+            <span>Регионы</span>
+          </button>
+          <div className={styles.filterCity}>
+            {cities.map((item, i) => (
+              <button
+                key={i}
+                className={`${activeCity === i ? styles.active : ''} ${styles.filterButton}`}
+                onClick={() => onClickCity(i)}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }

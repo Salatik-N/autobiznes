@@ -142,69 +142,77 @@ export const GET_CATEGORY_INFO = gql`
   }
 `
 export const GET_TRANSPORT_CATEGORY = gql`
-  query GetTransportCategory($id: ID!, $first: Int! = 10, $after: String) {
-    transportCategory(id: $id, idType: SLUG) {
-      transports(first: $first, after: $after) {
-        edges {
-          node {
-            author {
-              node {
-                customField {
-                  verifiedUser
-                }
+  query GetTransportCategory(
+    $categoryTransport: String
+    $first: Int! = 10
+    $after: String
+    $regionTransport: String
+    $city: String
+  ) {
+    transports(
+      first: $first
+      after: $after
+      where: { categoryTransport: $categoryTransport, regionTransport: $regionTransport, city: $city }
+    ) {
+      edges {
+        node {
+          author {
+            node {
+              customField {
+                verifiedUser
               }
-            }
-            title
-            databaseId
-            id
-            acfTransportAddress {
-              regionTransport
-              city
-            }
-            acfTransportContacts {
-              paymentMethod
-              paymentProcedure
-            }
-            acfTransportFeatures {
-              typeTransportation
-              vehicleBodyType
-              carryingCapacity
-              vehicleBrand
-              workExperience
-              leaseTerm
-              numberSeats
-              numberSeatsWithoutLuggage
-              serviceSpecialization
-              options
-              amenities
-              vehicleClass
-              color
-              vehiclesInPark
-              minimumOrderTime
-              bodyWidth
-              bodyVolume
-              bodyLength
-              bodyHeight
-              price1Hour
-              price1Km
-              pricePerShift
-            }
-            acfTransportPhotos {
-              photoTruck {
-                mediaItemUrl
-              }
-            }
-            acfTransportDescription {
-              fullDescription
-              views
             }
           }
+          title
+          databaseId
+          id
+          acfTransportAddress {
+            regionTransport
+            city
+          }
+          acfTransportContacts {
+            paymentMethod
+            paymentProcedure
+          }
+          acfTransportFeatures {
+            typeTransportation
+            vehicleBodyType
+            carryingCapacity
+            vehicleBrand
+            workExperience
+            leaseTerm
+            numberSeats
+            numberSeatsWithoutLuggage
+            serviceSpecialization
+            options
+            amenities
+            vehicleClass
+            color
+            vehiclesInPark
+            minimumOrderTime
+            bodyWidth
+            bodyVolume
+            bodyLength
+            bodyHeight
+            price1Hour
+            price1Km
+            pricePerShift
+          }
+          acfTransportPhotos {
+            photoTruck {
+              mediaItemUrl
+            }
+          }
+          acfTransportDescription {
+            fullDescription
+            views
+          }
         }
-        pageInfo {
-          total
-          endCursor
-          hasNextPage
-        }
+      }
+      pageInfo {
+        total
+        endCursor
+        hasNextPage
       }
     }
   }

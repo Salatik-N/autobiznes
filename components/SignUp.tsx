@@ -16,10 +16,8 @@ const SignUp = ({ children, style }) => {
       </button>
 
       <Modal active={modalActive} setModalActive={setModalActive}>
-        <div>Регистрация</div>
+        <div className="popup-title">Регистрация</div>
         <SingUpForm />
-        <p>Если у вас есть аккаунт, войдите через него.</p>
-        <button>Войти</button>
       </Modal>
     </>
   )

@@ -244,7 +244,7 @@ main {
     }
   }
   .bg-image {
-    clippath: polygon(43% 73%, 75% 84%, 66% 100%, 0 100%, 0 0, 100% 0, 100% 27%);
+    clip-path: polygon(43% 73%, 75% 84%, 66% 100%, 0 100%, 0 0, 100% 0, 100% 27%);
     position: absolute;
     object-fit: cover;
     top: -100px;
@@ -253,6 +253,9 @@ main {
     width: 100%;
     height: calc(100% + 100px);
     z-index: -2;
+    @media (min-width: $breakpoint-tablet) {
+      clip-path: polygon(60% 73%, 80% 90%, 65% 100%, 0 100%, 0 0, 100% 0, 100% 27%);
+    }
   }
 }
 .first-section {
@@ -529,6 +532,35 @@ input[type='checkbox'] {
   display: flex;
   align-items: center;
 }
+.popup-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.reset-password-button {
+  text-align: left;
+  font-size: 16px;
+  color: $blue;
+}
+.footer-login-form,
+.footer-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.footer-login-form {
+  a {
+    color: $green;
+  }
+}
+.footer-signup-form {
+  a {
+    color: $blue;
+  }
+}
 .messenger-contacts {
   display: flex;
   gap: 25px;
@@ -538,5 +570,17 @@ input[type='checkbox'] {
         color: $green;
       }
     }
+  }
+}
+.login-page,
+.signup-page {
+  padding-top: 40px;
+  background-color: $white;
+  .popup-title {
+    margin-top: 15px;
+  }
+  .page-form {
+    max-width: 500px;
+    margin: auto;
   }
 }

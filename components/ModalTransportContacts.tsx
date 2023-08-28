@@ -20,7 +20,12 @@ export default function ModalCargoContacts({ transportInfo }) {
   return (
     <div className={styles.inner}>
       <div className={styles.avatar}>
-        <Image src={authorInfo.avatar.url} alt="Аватар" width={80} height={80} />
+        <Image
+          src={transportInfo.acfTransportPhotos.photoDriver?.mediaItemUrl || authorInfo.avatar.url}
+          alt="Аватар"
+          width={200}
+          height={200}
+        />
       </div>
       <div className={styles.name}>{transport.customName}</div>
       {authorInfo.customField.transportInPark && (

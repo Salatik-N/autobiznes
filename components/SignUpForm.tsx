@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRegistration } from '../lib/use-registration'
+import Link from 'next/link'
 import { initializeApollo } from '../lib/apollo'
 import { REGISTER_USER } from '../lib/api'
 
@@ -51,36 +51,46 @@ export default function SignUpForm() {
   return (
     <form onSubmit={createNewUser} autoComplete="on">
       <div>
-        <label>Электронная почта</label>
-        <input
-          name={FIELDS.EMAIL}
-          type="email"
-          placeholder="Введите вашу почту"
-          value={form[FIELDS.EMAIL]}
-          onChange={handleChangeForm}
-        />
+        <label>
+          <span>Электронная почта</span>
+          <input
+            name={FIELDS.EMAIL}
+            type="email"
+            placeholder="Введите вашу почту"
+            value={form[FIELDS.EMAIL]}
+            onChange={handleChangeForm}
+          />
+        </label>
       </div>
       <div>
-        <label>Ваше имя</label>
-        <input
-          name={FIELDS.FIRST_NAME}
-          type="text"
-          placeholder="Введите ваше имя"
-          value={form[FIELDS.FIRST_NAME]}
-          onChange={handleChangeForm}
-        />
+        <label>
+          <span>Ваше имя</span>
+          <input
+            name={FIELDS.FIRST_NAME}
+            type="text"
+            placeholder="Введите ваше имя"
+            value={form[FIELDS.FIRST_NAME]}
+            onChange={handleChangeForm}
+          />
+        </label>
       </div>
       <div>
-        <label>Пароль</label>
-        <input
-          name={FIELDS.PASSWORD}
-          type="password"
-          placeholder="Пароль минимум из 8 символов"
-          value={form[FIELDS.PASSWORD]}
-          onChange={handleChangeForm}
-        />
+        <label>
+          <span>Пароль</span>
+          <input
+            name={FIELDS.PASSWORD}
+            type="password"
+            placeholder="Пароль минимум из 8 символов"
+            value={form[FIELDS.PASSWORD]}
+            onChange={handleChangeForm}
+          />
+        </label>
       </div>
       <button type="submit">Зарегистрироваться</button>
+      <div className="footer-signup-form">
+        <span>Если у вас есть аккаунт, войдите через него</span>
+        <Link href={'/login'}>Войти</Link>
+      </div>
     </form>
   )
 }

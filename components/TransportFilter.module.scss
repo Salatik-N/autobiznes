@@ -13,10 +13,28 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 18px;
+    gap: 5px;
 
     &.active {
       background-color: $dark-blue;
       color: $white;
     }
+
+    &Arrow {
+      border: solid $dark-blue;
+      border-width: 0 0 2px 2px;
+      display: inline-block;
+      padding: 3px;
+      margin-left: 11px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+
+  .filterCity {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 }

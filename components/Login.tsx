@@ -17,7 +17,7 @@ const Login = ({ children, style }) => {
       </button>
 
       <Modal active={modalActive} setModalActive={setModalActive}>
-        <div>Вход в кабинет</div>
+        <div className="popup-title">Вход в кабинет</div>
         <LoginFrom />
       </Modal>
     </>

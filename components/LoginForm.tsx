@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../lib/use-authorization'
 import { initializeApollo } from '../lib/apollo'
+import Link from 'next/link'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
@@ -16,27 +17,35 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} autoComplete="on">
       <div>
-        <label>Электронная почта</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Введите вашу почту"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <label>
+          <span>Электронная почта</span>
+          <input
+            type="email"
+            name="email"
+            placeholder="Введите вашу почту"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
       </div>
       <div>
-        <label>Пароль</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Ваш пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <label>
+          <span>Пароль</span>
+          <input
+            type="password"
+            name="password"
+            placeholder="Ваш пароль"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
       </div>
-      <button>Забыли пароль?</button>
+      <button className="reset-password-button">Забыли пароль?</button>
       <button type="submit">Войти</button>
+      <div className="footer-login-form">
+        <span>Для тех, кто первый раз на сайте</span>
+        <Link href={'/signup'}>Зарегистрироваться</Link>
+      </div>
     </form>
   )
 }
