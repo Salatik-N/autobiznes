@@ -615,6 +615,7 @@ form button[type='submit'] {
   gap: 25px;
   @media (min-width: $breakpoint-laptop) {
     order: 1;
+    width: 100%;
   }
 }
 .login-page,

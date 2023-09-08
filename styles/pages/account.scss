@@ -64,8 +64,13 @@
         width: calc(100% / 2 - 30px);
       }
     }
+    .messenger-contacts label {
+      @media (min-width: $breakpoint-laptop) {
+        width: max-content;
+      }
+    }
   }
-  .button[type='submit'] {
+  button[type='submit'] {
     @media (min-width: $breakpoint-laptop) {
       width: 232px;
     }

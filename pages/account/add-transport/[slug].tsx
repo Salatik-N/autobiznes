@@ -344,7 +344,7 @@ export default function Transport1t({ transportCategory }) {
                 />
               </label>
               <div className="messenger-contacts">
-                <label className="label-checkbox">
+                <label className={`label-checkbox ${form[FIELDS.WHATSAPP] ? 'checked' : ''}`}>
                   <input
                     name={FIELDS.WHATSAPP}
                     type="checkbox"
@@ -353,7 +353,7 @@ export default function Transport1t({ transportCategory }) {
                   />
                   <span>WhatsApp</span>
                 </label>
-                <label className="label-checkbox">
+                <label className={`label-checkbox ${form[FIELDS.TELEGRAM] ? 'checked' : ''}`}>
                   <input
                     name={FIELDS.TELEGRAM}
                     type="checkbox"
@@ -362,7 +362,7 @@ export default function Transport1t({ transportCategory }) {
                   />
                   <span>Telegram</span>
                 </label>
-                <label className="label-checkbox">
+                <label className={`label-checkbox ${form[FIELDS.VIBER] ? 'checked' : ''}`}>
                   <input
                     name={FIELDS.VIBER}
                     type="checkbox"
