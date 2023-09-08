@@ -19,7 +19,6 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const { isSignedIn } = useAuth()
   const router = useRouter()
-  console.log(data?.viewer)
 
   const handleRouteChange = () => {
     setOpen(false)

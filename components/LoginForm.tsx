@@ -3,7 +3,7 @@ import { useAuth } from '../lib/use-authorization'
 import { initializeApollo } from '../lib/apollo'
 import Link from 'next/link'
 
-export default function LoginForm() {
+export default function LoginForm(setModalActive) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -42,10 +42,6 @@ export default function LoginForm() {
       </div>
       <button className="reset-password-button">Забыли пароль?</button>
       <button type="submit">Войти</button>
-      <div className="footer-login-form">
-        <span>Для тех, кто первый раз на сайте</span>
-        <Link href={'/signup'}>Зарегистрироваться</Link>
-      </div>
     </form>
   )
 }

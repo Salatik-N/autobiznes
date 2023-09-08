@@ -5,6 +5,7 @@ import { initializeApollo } from '../../lib/apollo'
 import { GET_USER_INFO } from '../../lib/api'
 import { useEffect, useState } from 'react'
 import AccountHeader from '../../components/AccountHeader'
+import AccountMenu from '../../components/AccountMenu'
 
 export default function Cargos() {
   const [modalActive, setModalActive] = useState(false)
@@ -22,17 +23,25 @@ export default function Cargos() {
   }, [])
 
   return (
-    <Container>
-      <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
-      <div className="white-background">Мои грузы</div>
-      {cargoList ? (
-        <>
-          <div className="cargo-list">
-            <CargoItem cargos={cargoList} isActiveAdminTools />
+    <div className="account-page">
+      <Container>
+        <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
+        <div className="wrapper">
+          <div className="menu-big">
+            <AccountMenu />
           </div>
-          <ListNavigation />
-        </>
-      ) : null}
-    </Container>
+          <div className="content">
+            <div className="white-background">Мои грузы</div>
+            {cargoList ? (
+              <>
+                <div className="cargo-list">
+                  <CargoItem cargos={cargoList} isActiveAdminTools />
+                </div>
+              </>
+            ) : null}
+          </div>
+        </div>
+      </Container>
+    </div>
   )
 }

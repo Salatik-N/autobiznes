@@ -87,10 +87,6 @@ export default function SignUpForm() {
         </label>
       </div>
       <button type="submit">Зарегистрироваться</button>
-      <div className="footer-signup-form">
-        <span>Если у вас есть аккаунт, войдите через него</span>
-        <Link href={'/login'}>Войти</Link>
-      </div>
     </form>
   )
 }

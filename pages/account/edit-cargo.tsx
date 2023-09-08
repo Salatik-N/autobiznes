@@ -96,7 +96,6 @@ export default function EditCargo() {
       ...prevValue,
       [name]: value,
     }))
-    console.log(form)
   }
 
   const handleChangeFormCheckbox = (event: React.FormEvent<HTMLInputElement>) => {

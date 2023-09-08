@@ -217,3 +217,118 @@
     }
   }
 }
+
+.cargoItem {
+  &.accountPage {
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: column;
+      justify-content: initial;
+      align-items: initial;
+      gap: 10px;
+      padding: 10px;
+    }
+    @media (min-width: $breakpoint-laptop) {
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: 15px 25px;
+      position: relative;
+      overflow: hidden;
+      @include border-radius(8px);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 9px;
+      }
+
+      &:nth-child(even) {
+        &::before {
+          background: $yellow;
+        }
+      }
+      &:nth-child(odd) {
+        &::before {
+          background: $dark-blue;
+        }
+      }
+    }
+    &::before {
+      display: none;
+    }
+    .cargoAdminBlock {
+      &Active {
+        display: flex;
+        @media (min-width: $breakpoint-laptop) {
+          order: 1;
+          border-left: 1px solid $white;
+          padding-left: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .cargoNumber {
+      & {
+        display: none;
+        @media (min-width: $breakpoint-laptop) {
+          display: block;
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+      }
+      &Phone {
+        display: block;
+        @media (min-width: $breakpoint-laptop) {
+          display: none;
+        }
+      }
+    }
+    .deliveryPlace,
+    .cargoInfo {
+      margin-bottom: 10px;
+    }
+    .contactsBlock {
+      @media (min-width: $breakpoint-tablet) {
+        flex-direction: column;
+      }
+      .buttonsBlock {
+        width: 100%;
+        .contacts {
+          @media (min-width: $breakpoint-tablet) {
+            width: initial;
+            max-width: initial;
+            border-radius: initial;
+            height: initial;
+            @include border-radius(10px);
+          }
+          @media (min-width: $breakpoint-laptop) {
+            width: 40px;
+            max-width: 40px;
+            height: 40px;
+            @include border-radius(50%);
+          }
+          span {
+            @media (min-width: $breakpoint-tablet) {
+              display: block;
+            }
+            @media (min-width: $breakpoint-laptop) {
+              display: none;
+            }
+          }
+
+          svg {
+            @media (min-width: $breakpoint-tablet) {
+              display: none;
+            }
+            @media (min-width: $breakpoint-laptop) {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

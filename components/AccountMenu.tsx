@@ -1,4 +1,4 @@
-import styles from './ModalUserMenu.module.scss'
+import styles from './AccountMenu.module.scss'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -13,7 +13,7 @@ import SupportSVG from './SupportSVG'
 import signOutIcon from '../public/icons/power-button.svg'
 import { useAuth } from '../lib/use-authorization'
 
-export default function ModalUserMenu() {
+export default function AccountMenu() {
   const router = useRouter()
   const { signOut } = useAuth()
 

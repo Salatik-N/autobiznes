@@ -28,8 +28,8 @@
 
   .imageBlock {
     @media (min-width: $breakpoint-tablet) {
-      max-width: calc(40% - 15px / 2);
-      flex: 0 0 calc(40% - 15px / 2);
+      max-width: 300px;
+      flex: 0 0 300px;
     }
     button {
       display: none;
@@ -37,17 +37,41 @@
         margin-top: 20px;
         display: flex;
       }
+      @media (min-width: $breakpoint-laptop) {
+        display: none;
+      }
     }
   }
 
   .blockInfo {
+    &First,
+    &Second {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      @media (min-width: $breakpoint-laptop) {
+        max-width: calc(50% - 5px);
+        flex: 0 0 calc(50% - 5px);
+      }
+    }
+    &Second {
+      @media (min-width: $breakpoint-laptop) {
+        margin-top: 15px;
+      }
+    }
     @media (min-width: $breakpoint-tablet) {
-      max-width: calc(60% - 15px / 2);
-      flex: 0 0 calc(60% - 15px / 2);
+      max-width: calc(100% - 310px);
+      flex: 0 0 calc(100% - 310px);
+    }
+    @media (min-width: $breakpoint-laptop) {
+      flex-direction: row;
     }
     button {
       @media (min-width: $breakpoint-tablet) {
         display: none;
+      }
+      @media (min-width: $breakpoint-laptop) {
+        display: block;
       }
     }
   }
@@ -70,6 +94,9 @@
     line-height: 24px;
     display: flex;
     gap: 8px;
+    @media (min-width: $breakpoint-tablet) {
+      font-size: 16px;
+    }
 
     img {
       margin-top: 4px;
@@ -211,6 +238,65 @@
       cursor: pointer;
       text-decoration-line: underline;
       color: $dark-blue;
+    }
+  }
+}
+
+.transportItem {
+  &.accountPage {
+    .wrapper {
+      flex-direction: column;
+      @media (min-width: $breakpoint-xl) {
+        flex-direction: row;
+      }
+    }
+    .imageBlock {
+      @media (min-width: $breakpoint-tablet) {
+        max-width: 100%;
+        flex: 0 0 100%;
+      }
+      @media (min-width: $breakpoint-xl) {
+        max-width: 400px;
+        flex: 0 0 400px;
+      }
+      button {
+        display: none;
+        @media (min-width: $breakpoint-xl) {
+          margin-top: 20px;
+          display: flex;
+        }
+      }
+    }
+    .blockInfo {
+      &First,
+      &Second {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        @media (min-width: $breakpoint-laptop) {
+          max-width: calc(50% - 5px);
+          flex: 0 0 calc(50% - 5px);
+        }
+        @media (min-width: $breakpoint-xl) {
+          max-width: 100%;
+          flex: 1 0 auto;
+        }
+      }
+      @media (min-width: $breakpoint-tablet) {
+        max-width: 100%;
+        flex: 0 0 100%;
+      }
+      @media (min-width: $breakpoint-xl) {
+        flex-direction: column;
+        max-width: calc(100% - 410px);
+        flex: 0 0 calc(100% - 410px);
+      }
+      button {
+        display: block;
+        @media (min-width: $breakpoint-xl) {
+          display: none;
+        }
+      }
     }
   }
 }

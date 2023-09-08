@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { GET_USER_INFO, ADD_NEW_CARGO } from '../../lib/api'
 import { initializeApollo } from '../../lib/apollo'
 import { useQuery } from '@apollo/client'
-import { GetStaticProps } from 'next'
 import { movers, vehicleBodyType, typeTransportation, typeLoading, paymentMethod } from '../../lib/options'
 import Select from 'react-select'
 import Container from '../../components/Container'
@@ -147,6 +146,8 @@ export default function AddCargo() {
         .catch((error) => {
           console.error(error)
         })
+    } else {
+      alert('Подтвердите, что Вы ознакомились с правилами сервиса!')
     }
   }
 
@@ -155,263 +156,285 @@ export default function AddCargo() {
   }
 
   return (
-    <Container>
-      <button onClick={goBack} className="go-back-button">
-        <i className="arrow" />
-        <span>Назад</span>
-      </button>
-      <span className="form-page-title">Заполните форму для получения предложений</span>
-      <form onSubmit={createNewCargo} autoComplete="on">
-        <TitleInput name={FIELDS.TITLE} value={form[FIELDS.TITLE]} onChange={handleChangeForm} />
+    <div className="add-form">
+      <Container>
+        <button onClick={goBack} className="go-back-button">
+          <i className="arrow" />
+          <span>Назад</span>
+        </button>
+        <span className="form-page-title">Заполните форму для получения предложений</span>
+        <form onSubmit={createNewCargo} autoComplete="on">
+          <TitleInput name={FIELDS.TITLE} value={form[FIELDS.TITLE]} onChange={handleChangeForm} />
 
-        <div className="white-background">
-          <span className="form-block-title">Откуда забрать</span>
-          <label>
-            <span>Регион</span>
-            <Select
-              name={FIELDS.SHIPPING_REGION}
-              onChange={handleChangeFormSelect}
-              options={address.find((e) => e.name === 'Беларусь').regions}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.name}
-              placeholder="Выберите регион"
-            />
-          </label>
-          <label>
-            <span>Город</span>
-            <Select
-              name={FIELDS.SHIPPING_CITY}
-              onChange={handleChangeFormSelect}
-              options={
-                address.find((e) => e.name === 'Беларусь').regions.find((e) => e.name === form[FIELDS.SHIPPING_REGION])
-                  ?.cities
-              }
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.name}
-              placeholder="Выберите город"
-            />
-          </label>
-          <label>
-            <span>Адрес</span>
-            <input
-              name={FIELDS.SHIPPING_ADDRESS}
-              type="text"
-              placeholder="Ленина 30"
-              value={form[FIELDS.SHIPPING_ADDRESS]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <label>
-            <span>Дата</span>
-            <input
-              name={FIELDS.DATE_LOADING}
-              type="date"
-              placeholder="21.03.2023"
-              value={form[FIELDS.DATE_LOADING]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        </div>
+          <div className="white-background">
+            <span className="form-block-title">Откуда забрать</span>
+            <div className="input-list">
+              <label>
+                <span>Регион</span>
+                <Select
+                  name={FIELDS.SHIPPING_REGION}
+                  onChange={handleChangeFormSelect}
+                  options={address.find((e) => e.name === 'Беларусь').regions}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите регион"
+                />
+              </label>
+              <label>
+                <span>Город</span>
+                <Select
+                  name={FIELDS.SHIPPING_CITY}
+                  onChange={handleChangeFormSelect}
+                  options={
+                    address
+                      .find((e) => e.name === 'Беларусь')
+                      .regions.find((e) => e.name === form[FIELDS.SHIPPING_REGION])?.cities
+                  }
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите город"
+                />
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input
+                  name={FIELDS.SHIPPING_ADDRESS}
+                  type="text"
+                  placeholder="Ленина 30"
+                  value={form[FIELDS.SHIPPING_ADDRESS]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+              <label>
+                <span>Дата</span>
+                <input
+                  name={FIELDS.DATE_LOADING}
+                  type="date"
+                  placeholder="21.03.2023"
+                  value={form[FIELDS.DATE_LOADING]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+            </div>
+          </div>
 
-        <div className="white-background">
-          <span className="form-block-title">Куда доставить</span>
-          <label>
-            <span>Страна</span>
-            <Select
-              name={FIELDS.UNLOADING_COUNTRY}
-              onChange={handleChangeFormSelect}
-              options={address}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.name}
-              placeholder="Выберите страну"
-            />
-          </label>
-          <label>
-            <span>Регион</span>
-            <Select
-              name={FIELDS.UNLOADING_REGION}
-              onChange={handleChangeFormSelect}
-              options={address.find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])?.regions}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.name}
-              placeholder="Выберите регион"
-            />
-          </label>
-          <label>
-            <span>Город</span>
-            <Select
-              name={FIELDS.UNLOADING_CITY}
-              onChange={handleChangeFormSelect}
-              options={
-                address
-                  .find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])
-                  ?.regions.find((e) => e.name === form[FIELDS.UNLOADING_REGION])?.cities
-              }
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.name}
-              placeholder="Выберите город"
-            />
-          </label>
-          <label>
-            <span>Адрес</span>
-            <input
-              name={FIELDS.UNLOADING_ADDRESS}
-              type="text"
-              placeholder="Ленина 30"
-              value={form[FIELDS.UNLOADING_ADDRESS]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <label>
-            <span>Дата</span>
-            <input
-              name={FIELDS.DATE_UNLOADING}
-              type="date"
-              placeholder="21.03.2023"
-              value={form[FIELDS.DATE_UNLOADING]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        </div>
+          <div className="white-background">
+            <span className="form-block-title">Куда доставить</span>
+            <div className="input-list">
+              <label>
+                <span>Страна</span>
+                <Select
+                  name={FIELDS.UNLOADING_COUNTRY}
+                  onChange={handleChangeFormSelect}
+                  options={address}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите страну"
+                />
+              </label>
+              <label>
+                <span>Регион</span>
+                <Select
+                  name={FIELDS.UNLOADING_REGION}
+                  onChange={handleChangeFormSelect}
+                  options={address.find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])?.regions}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите регион"
+                />
+              </label>
+              <label>
+                <span>Город</span>
+                <Select
+                  name={FIELDS.UNLOADING_CITY}
+                  onChange={handleChangeFormSelect}
+                  options={
+                    address
+                      .find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])
+                      ?.regions.find((e) => e.name === form[FIELDS.UNLOADING_REGION])?.cities
+                  }
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите город"
+                />
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input
+                  name={FIELDS.UNLOADING_ADDRESS}
+                  type="text"
+                  placeholder="Ленина 30"
+                  value={form[FIELDS.UNLOADING_ADDRESS]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+              <label>
+                <span>Дата</span>
+                <input
+                  name={FIELDS.DATE_UNLOADING}
+                  type="date"
+                  placeholder="21.03.2023"
+                  value={form[FIELDS.DATE_UNLOADING]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+            </div>
+          </div>
 
-        <div className="white-background">
-          <span className="form-block-title">Информация о грузе</span>
-          <label>
-            <span>Масса, кг.</span>
-            <input
-              name={FIELDS.WEIGHT}
-              type="number"
-              placeholder="2700"
-              value={form[FIELDS.WEIGHT]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        </div>
+          <div className="white-background">
+            <span className="form-block-title">Информация о грузе</span>
+            <div className="input-list">
+              <label>
+                <span>Масса, кг.</span>
+                <input
+                  name={FIELDS.WEIGHT}
+                  type="number"
+                  placeholder="2700"
+                  value={form[FIELDS.WEIGHT]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+            </div>
+          </div>
 
-        <div className="white-background">
-          <span className="form-block-title">Характеристики грузовика</span>
-          <label>
-            <span>Грузчики</span>
-            <Select name={FIELDS.MOVERS} onChange={handleChangeFormSelect} options={movers} defaultValue={movers[0]} />
-          </label>
+          <div className="white-background">
+            <span className="form-block-title">Характеристики грузовика</span>
+            <div className="input-list">
+              <label>
+                <span>Грузчики</span>
+                <Select
+                  name={FIELDS.MOVERS}
+                  onChange={handleChangeFormSelect}
+                  options={movers}
+                  defaultValue={movers[0]}
+                />
+              </label>
 
-          <label>
-            <span>Тип кузова</span>
-            <Select
-              name={FIELDS.VEHICLE_BODY_TYPE}
-              onChange={handleChangeFormSelect}
-              options={vehicleBodyType}
-              defaultValue={vehicleBodyType[0]}
-            />
-          </label>
-          <label>
-            <span>Тип загрузки</span>
-            <Select
-              name={FIELDS.TYPE_LOADING}
-              onChange={handleChangeFormSelect}
-              options={typeLoading}
-              defaultValue={typeLoading[0]}
-            />
-          </label>
-          <label>
-            <span>Тип перевозки</span>
-            <Select
-              name={FIELDS.TYPE_TRANSPORTATION}
-              onChange={handleChangeFormSelect}
-              options={typeTransportation}
-              defaultValue={typeTransportation[0]}
-            />
-          </label>
-        </div>
+              <label>
+                <span>Тип кузова</span>
+                <Select
+                  name={FIELDS.VEHICLE_BODY_TYPE}
+                  onChange={handleChangeFormSelect}
+                  options={vehicleBodyType}
+                  defaultValue={vehicleBodyType[0]}
+                />
+              </label>
+              <label>
+                <span>Тип загрузки</span>
+                <Select
+                  name={FIELDS.TYPE_LOADING}
+                  onChange={handleChangeFormSelect}
+                  options={typeLoading}
+                  defaultValue={typeLoading[0]}
+                />
+              </label>
+              <label>
+                <span>Тип перевозки</span>
+                <Select
+                  name={FIELDS.TYPE_TRANSPORTATION}
+                  onChange={handleChangeFormSelect}
+                  options={typeTransportation}
+                  defaultValue={typeTransportation[0]}
+                />
+              </label>
+            </div>
+          </div>
 
-        <div className="white-background">
-          <span className="form-block-title">Контактные данные</span>
-          <label>
-            <span>Имя заказчика</span>
-            <input
-              name={FIELDS.CUSTOM_NAME}
-              type="text"
-              placeholder="Алексей"
-              value={form[FIELDS.CUSTOM_NAME]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <label>
-            <span>Номер телефона</span>
-            <PhoneMaskInput name={FIELDS.CUSTOM_PHONE} value={form[FIELDS.CUSTOM_PHONE]} onChange={handleChangeForm} />
-          </label>
-          <div className="messenger-contacts">
-            <label className="label-checkbox">
-              <input
-                name={FIELDS.WHATSAPP}
-                type="checkbox"
-                checked={form[FIELDS.WHATSAPP]}
-                onChange={handleChangeFormCheckbox}
+          <div className="white-background">
+            <span className="form-block-title">Контактные данные</span>
+            <div className="input-list">
+              <label>
+                <span>Имя заказчика</span>
+                <input
+                  name={FIELDS.CUSTOM_NAME}
+                  type="text"
+                  placeholder="Алексей"
+                  value={form[FIELDS.CUSTOM_NAME]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+              <label>
+                <span>Номер телефона</span>
+                <PhoneMaskInput
+                  name={FIELDS.CUSTOM_PHONE}
+                  value={form[FIELDS.CUSTOM_PHONE]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+              <div className="messenger-contacts">
+                <label className={`label-checkbox ${form[FIELDS.WHATSAPP] ? 'checked' : ''}`}>
+                  <input
+                    name={FIELDS.WHATSAPP}
+                    type="checkbox"
+                    checked={form[FIELDS.WHATSAPP]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>WhatsApp</span>
+                </label>
+                <label className={`label-checkbox ${form[FIELDS.TELEGRAM] ? 'checked' : ''}`}>
+                  <input
+                    name={FIELDS.TELEGRAM}
+                    type="checkbox"
+                    checked={form[FIELDS.TELEGRAM]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>Telegram</span>
+                </label>
+                <label className={`label-checkbox ${form[FIELDS.VIBER] ? 'checked' : ''}`}>
+                  <input
+                    name={FIELDS.VIBER}
+                    type="checkbox"
+                    checked={form[FIELDS.VIBER]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>Viber</span>
+                </label>
+              </div>
+              <label>
+                <span>Способ оплаты</span>
+                <Select
+                  name={FIELDS.PAYMENT_METHOD}
+                  onChange={handleChangeFormSelect}
+                  options={paymentMethod}
+                  placeholder="Наличные"
+                />
+              </label>
+              <label>
+                <span>Бюджет до, BYN</span>
+                <input
+                  name={FIELDS.BUDGET_TO}
+                  type="number"
+                  placeholder="Введите бюджет"
+                  value={form[FIELDS.BUDGET_TO]}
+                  onChange={handleChangeForm}
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="white-background">
+            <span className="form-block-title">Подробнее о заказе</span>
+            <label>
+              <span>Полное описание</span>
+              <textarea
+                name={FIELDS.FULL_DESCRIPTION}
+                placeholder="Введите описание до 200 символов"
+                value={form[FIELDS.FULL_DESCRIPTION]}
+                onChange={handleChangeForm}
               />
-              <span>WhatsApp</span>
-            </label>
-            <label className="label-checkbox">
-              <input
-                name={FIELDS.TELEGRAM}
-                type="checkbox"
-                checked={form[FIELDS.TELEGRAM]}
-                onChange={handleChangeFormCheckbox}
-              />
-              <span>Telegram</span>
-            </label>
-            <label className="label-checkbox">
-              <input
-                name={FIELDS.VIBER}
-                type="checkbox"
-                checked={form[FIELDS.VIBER]}
-                onChange={handleChangeFormCheckbox}
-              />
-              <span>Viber</span>
             </label>
           </div>
-          <label>
-            <span>Способ оплаты</span>
-            <Select
-              name={FIELDS.PAYMENT_METHOD}
-              onChange={handleChangeFormSelect}
-              options={paymentMethod}
-              placeholder="Наличные"
-            />
-          </label>
-          <label>
-            <span>Бюджет до, BYN</span>
-            <input
-              name={FIELDS.BUDGET_TO}
-              type="number"
-              placeholder="Введите бюджет"
-              value={form[FIELDS.BUDGET_TO]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        </div>
 
-        <div className="white-background">
-          <span className="form-block-title">Подробнее о заказе</span>
-          <label>
-            <span>Полное описание</span>
-            <textarea
-              name={FIELDS.FULL_DESCRIPTION}
-              placeholder="Введите описание до 200 символов"
-              value={form[FIELDS.FULL_DESCRIPTION]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        </div>
-
-        <div className="white-background">
-          <label className="label-checkbox user-agreement">
-            <input type="checkbox" />
-            Ознакомлен с правилами сервиса. Согласен на размещение рекламного логотипа autobiznes на загруженные мной
-            фотографии.
-          </label>
-          <button type="submit">Добавить объявление</button>
-        </div>
-      </form>
-    </Container>
+          <div className="white-background">
+            <label className={`label-checkbox user-agreement ${consentToPosting ? 'checked' : ''}`}>
+              <input type="checkbox" onChange={() => setConsentToPosting(!consentToPosting)} />
+              Ознакомлен с правилами сервиса. Согласен на размещение рекламного логотипа autobiznes на загруженные мной
+              фотографии.
+            </label>
+            <button type="submit">Добавить объявление</button>
+          </div>
+        </form>
+      </Container>
+    </div>
   )
 }

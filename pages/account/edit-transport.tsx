@@ -66,7 +66,6 @@ export default function EditCargo() {
   useEffect(() => {
     getCategoriesTransport()
     const transport = data?.transport
-    console.log(transport)
     transport &&
       setForm({
         [FIELDS.CATEGORY]: transport.transportCategories.edges[0].node || '',
@@ -130,7 +129,6 @@ export default function EditCargo() {
     const target = event.currentTarget
     const name = target?.name
     const value = target?.value
-    console.log(form)
     setForm((prevValue) => ({
       ...prevValue,
       [name]: value,
@@ -144,7 +142,6 @@ export default function EditCargo() {
       ...prevValue,
       [name]: value,
     }))
-    console.log(form)
   }
 
   const handleChangeFormCheckbox = (event: React.FormEvent<HTMLInputElement>) => {

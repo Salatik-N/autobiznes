@@ -3,11 +3,7 @@ import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { initializeApollo } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
-import {
-  ADD_NEW_TRANSPORT,
-  GET_CATEGORY_INFO,
-  GET_USER_INFO,
-} from '../../../lib/api'
+import { ADD_NEW_TRANSPORT, GET_CATEGORY_INFO, GET_USER_INFO } from '../../../lib/api'
 import Image from 'next/image'
 import Container from '../../../components/Container'
 import TitleInput from '../../../components/Form/TitleInput'
@@ -122,7 +118,6 @@ export default function Transport1t({ transportCategory }) {
       ...prevValue,
       [name]: value,
     }))
-    console.log(form)
   }
   const handleChangeFormSelect = (event, actionMeta) => {
     const name = actionMeta?.name
@@ -146,7 +141,6 @@ export default function Transport1t({ transportCategory }) {
   }
 
   const handleChangeFormImage = async (event) => {
-    console.log(event?.currentTarget?.name)
     const name = event?.currentTarget?.name
     const images = event?.target.files
     let value = []
@@ -276,6 +270,8 @@ export default function Transport1t({ transportCategory }) {
         .catch((error) => {
           console.error(error)
         })
+    } else {
+      alert('Подтвердите, что Вы ознакомились с правилами сервиса!')
     }
   }
 
@@ -284,7 +280,7 @@ export default function Transport1t({ transportCategory }) {
   }
 
   return (
-    <>
+    <div className="add-form">
       <Container>
         <button onClick={goBack} className="go-back-button">
           <i className="arrow" />
@@ -296,111 +292,115 @@ export default function Transport1t({ transportCategory }) {
 
           <div className="white-background">
             <span className="form-block-title">Адрес</span>
-            <label>
-              <span>Регион</span>
-              <Select
-                name={FIELDS.REGION_TRANSPORT}
-                onChange={handleChangeFormSelect}
-                options={address.find((e) => e.name === 'Беларусь').regions}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.name}
-                placeholder="Выберите регион"
-              />
-            </label>
-            <label>
-              <span>Город</span>
-              <Select
-                name={FIELDS.CITY}
-                onChange={handleChangeFormSelect}
-                options={
-                  address
-                    .find((e) => e.name === 'Беларусь')
-                    .regions.find((e) => e.name === form[FIELDS.REGION_TRANSPORT])?.cities
-                }
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.name}
-                placeholder="Выберите город"
-              />
-            </label>
+            <div className="input-list">
+              <label>
+                <span>Регион</span>
+                <Select
+                  name={FIELDS.REGION_TRANSPORT}
+                  onChange={handleChangeFormSelect}
+                  options={address.find((e) => e.name === 'Беларусь').regions}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите регион"
+                />
+              </label>
+              <label>
+                <span>Город</span>
+                <Select
+                  name={FIELDS.CITY}
+                  onChange={handleChangeFormSelect}
+                  options={
+                    address
+                      .find((e) => e.name === 'Беларусь')
+                      .regions.find((e) => e.name === form[FIELDS.REGION_TRANSPORT])?.cities
+                  }
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.name}
+                  placeholder="Выберите город"
+                />
+              </label>
+            </div>
           </div>
 
           <div className="white-background">
             <span className="form-block-title">Контактные данные</span>
-            <label>
-              <span>Имя исполнителя</span>
-              <input
-                name={FIELDS.CUSTOM_NAME}
-                type="text"
-                placeholder="Алексей"
-                value={form[FIELDS.CUSTOM_NAME]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Номер телефона</span>
-              <PhoneMaskInput
-                name={FIELDS.CUSTOM_PHONE}
-                value={form[FIELDS.CUSTOM_PHONE]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <div className="messenger-contacts">
-              <label className="label-checkbox">
+            <div className="input-list">
+              <label>
+                <span>Имя исполнителя</span>
                 <input
-                  name={FIELDS.WHATSAPP}
-                  type="checkbox"
-                  checked={form[FIELDS.WHATSAPP]}
-                  onChange={handleChangeFormCheckbox}
+                  name={FIELDS.CUSTOM_NAME}
+                  type="text"
+                  placeholder="Алексей"
+                  value={form[FIELDS.CUSTOM_NAME]}
+                  onChange={handleChangeForm}
                 />
-                <span>WhatsApp</span>
               </label>
-              <label className="label-checkbox">
-                <input
-                  name={FIELDS.TELEGRAM}
-                  type="checkbox"
-                  checked={form[FIELDS.TELEGRAM]}
-                  onChange={handleChangeFormCheckbox}
+              <label>
+                <span>Номер телефона</span>
+                <PhoneMaskInput
+                  name={FIELDS.CUSTOM_PHONE}
+                  value={form[FIELDS.CUSTOM_PHONE]}
+                  onChange={handleChangeForm}
                 />
-                <span>Telegram</span>
               </label>
-              <label className="label-checkbox">
+              <div className="messenger-contacts">
+                <label className="label-checkbox">
+                  <input
+                    name={FIELDS.WHATSAPP}
+                    type="checkbox"
+                    checked={form[FIELDS.WHATSAPP]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>WhatsApp</span>
+                </label>
+                <label className="label-checkbox">
+                  <input
+                    name={FIELDS.TELEGRAM}
+                    type="checkbox"
+                    checked={form[FIELDS.TELEGRAM]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>Telegram</span>
+                </label>
+                <label className="label-checkbox">
+                  <input
+                    name={FIELDS.VIBER}
+                    type="checkbox"
+                    checked={form[FIELDS.VIBER]}
+                    onChange={handleChangeFormCheckbox}
+                  />
+                  <span>Viber</span>
+                </label>
+              </div>
+              <label>
+                <span>Режим работы</span>
                 <input
-                  name={FIELDS.VIBER}
-                  type="checkbox"
-                  checked={form[FIELDS.VIBER]}
-                  onChange={handleChangeFormCheckbox}
+                  name={FIELDS.MODE_OPERATION}
+                  type="text"
+                  placeholder="Пн-Пт с 9.00-18.00"
+                  value={form[FIELDS.MODE_OPERATION]}
+                  onChange={handleChangeForm}
                 />
-                <span>Viber</span>
+              </label>
+              <label>
+                <span>Способ оплаты</span>
+                <Select
+                  name={FIELDS.PAYMENT_METHOD}
+                  onChange={handleChangeFormSelect}
+                  options={paymentMethod}
+                  placeholder="Выбрать"
+                />
+              </label>
+              <label>
+                <span>Порядок оплаты</span>
+                <Select
+                  name={FIELDS.PAYMENT_PROCEDURE}
+                  onChange={handleChangeFormSelect}
+                  options={paymentProcedure}
+                  placeholder="Выбрать"
+                />
               </label>
             </div>
-            <label>
-              <span>Режим работы</span>
-              <input
-                name={FIELDS.MODE_OPERATION}
-                type="text"
-                placeholder="Пн-Пт с 9.00-18.00"
-                value={form[FIELDS.MODE_OPERATION]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <label>
-              <span>Способ оплаты</span>
-              <Select
-                name={FIELDS.PAYMENT_METHOD}
-                onChange={handleChangeFormSelect}
-                options={paymentMethod}
-                placeholder="Выбрать"
-              />
-            </label>
-            <label>
-              <span>Порядок оплаты</span>
-              <Select
-                name={FIELDS.PAYMENT_PROCEDURE}
-                onChange={handleChangeFormSelect}
-                options={paymentProcedure}
-                placeholder="Выбрать"
-              />
-            </label>
           </div>
 
           <FeaturesInput
@@ -514,8 +514,8 @@ export default function Transport1t({ transportCategory }) {
           </div>
 
           <div className="white-background">
-            <label className="label-checkbox user-agreement">
-              <input type="checkbox" />
+            <label className={`label-checkbox user-agreement ${consentToPosting ? 'checked' : ''}`}>
+              <input type="checkbox" onChange={() => setConsentToPosting(!consentToPosting)} />
               Ознакомлен с правилами сервиса. Согласен на размещение рекламного логотипа autobiznes на загруженные мной
               фотографии.
             </label>
@@ -523,7 +523,7 @@ export default function Transport1t({ transportCategory }) {
           </div>
         </form>
       </Container>
-    </>
+    </div>
   )
 }
 

@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import Container from '../../components/Container'
 import { GET_USER_INFO, UPDATE_USER } from '../../lib/api'
 import Modal from '../../components/Modal'
-import ModalUserMenu from '../../components/ModalUserMenu'
+import AccountMenu from '../../components/AccountMenu'
 import AccountHeader from '../../components/AccountHeader'
 
 enum FIELDS {
@@ -33,7 +33,6 @@ export default function AccountSetting() {
         [FIELDS.EMAIL]: data.viewer.email || '',
         [FIELDS.PHONE]: data.viewer.customField.phone || '',
       }))
-    console.log(form)
   }, [data])
 
   const handleChangeForm = (event: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -64,50 +63,56 @@ export default function AccountSetting() {
 
   const editPassword = (e) => {
     e.preventDefault()
-    console.log(1)
   }
 
   return (
-    <Container>
-      <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
-      <form onSubmit={editUserInfo} autoComplete="on">
-        <div className="white-background">
-          <span className="form-block-title">Данные для входа в личный кабинет</span>
-          <label>
-            <span>Ваше имя</span>
-            <input
-              name={FIELDS.FIRST_NAME}
-              type="text"
-              placeholder="Введите свое имя"
-              value={form[FIELDS.FIRST_NAME]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <label>
-            <span>Электронная почта</span>
-            <input
-              disabled
-              name={FIELDS.EMAIL}
-              type="email"
-              placeholder="example@mail.ru"
-              value={form[FIELDS.EMAIL]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <label>
-            <span>Ваш номер телефона</span>
-            <input
-              name={FIELDS.PHONE}
-              type="text"
-              placeholder="Введите ваш номер телефона"
-              value={form[FIELDS.PHONE]}
-              onChange={handleChangeForm}
-            />
-          </label>
-          <button type="submit">Сохранить</button>
-        </div>
-      </form>
-      {/* <form onSubmit={editPassword} autoComplete="on">
+    <div className="account-page">
+      <Container>
+        <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
+        <div className="wrapper">
+          <div className="menu-big">
+            <AccountMenu />
+          </div>
+          <div className="content">
+            <form onSubmit={editUserInfo} autoComplete="on">
+              <div className="white-background">
+                <span className="form-block-title">Данные для входа в личный кабинет</span>
+                <label>
+                  <span>Ваше имя</span>
+                  <input
+                    name={FIELDS.FIRST_NAME}
+                    type="text"
+                    placeholder="Введите свое имя"
+                    value={form[FIELDS.FIRST_NAME]}
+                    onChange={handleChangeForm}
+                  />
+                </label>
+                <label>
+                  <span>Электронная почта</span>
+                  <input
+                    disabled
+                    name={FIELDS.EMAIL}
+                    type="email"
+                    placeholder="example@mail.ru"
+                    value={form[FIELDS.EMAIL]}
+                    onChange={handleChangeForm}
+                  />
+                </label>
+                <label>
+                  <span>Ваш номер телефона</span>
+                  <input
+                    name={FIELDS.PHONE}
+                    type="text"
+                    placeholder="Введите ваш номер телефона"
+                    value={form[FIELDS.PHONE]}
+                    onChange={handleChangeForm}
+                  />
+                </label>
+                <button type="submit">Сохранить</button>
+              </div>
+            </form>
+          </div>
+          {/* <form onSubmit={editPassword} autoComplete="on">
         <div className="white-background">
           <span className="form-block-title">Изменение пароля</span>
           <label>
@@ -123,6 +128,8 @@ export default function AccountSetting() {
           <button type="submit">Сменить пароль</button>
         </div>
       </form> */}
-    </Container>
+        </div>
+      </Container>
+    </div>
   )
 }

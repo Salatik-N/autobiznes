@@ -28,3 +28,12 @@
     height: 46px;
   }
 }
+
+.adminTools {
+  &.cargoTools {
+    @media (min-width: $breakpoint-laptop) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

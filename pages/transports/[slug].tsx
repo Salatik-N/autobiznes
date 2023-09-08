@@ -105,7 +105,6 @@ export default function Transports({ transportCategory }) {
       variables: { after: pageInfo.endCursor },
       updateQuery: (prevResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prevResult
-        console.log(fetchMoreResult.transports.pageInfo)
 
         return {
           transports: {

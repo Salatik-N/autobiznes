@@ -53,7 +53,10 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
   return (
     <>
       {cargos.edges.map((item) => (
-        <div key={item.node.databaseId} className={styles.cargoItem}>
+        <div
+          key={item.node.databaseId}
+          className={`${styles.cargoItem} ${isActiveAdminTools ? styles.accountPage : ''}`}
+        >
           <div className={`${styles.cargoAdminBlock} ${isActiveAdminTools && styles.cargoAdminBlockActive}`}>
             <div className={styles.cargoNumberPhone}>№{item.node.databaseId}</div>
             {isActiveAdminTools && <AdminTools item={item.node} type="cargo" />}

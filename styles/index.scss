@@ -393,7 +393,7 @@ main {
 .white-background {
   background: #ffffff;
   box-shadow: 0px 3px 50px rgba(153, 155, 168, 0.12);
-  padding: 15px 10px;
+  padding: 10px 15px;
   @include border-radius(16px);
   @media (min-width: $breakpoint-tablet) {
     padding: 30px;
@@ -413,13 +413,23 @@ form {
   font-size: 16px;
   line-height: 27px;
   margin-bottom: 15px;
+  @media (min-width: $breakpoint-laptop) {
+    font-size: 36px;
+    line-height: normal;
+    font-weight: 600;
+  }
 }
 .form-block-title {
   display: block;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   line-height: 36px;
   margin-bottom: 15px;
+  @media (min-width: $breakpoint-laptop) {
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
 }
 form label {
   display: block;
@@ -431,18 +441,24 @@ form label {
     display: block;
     margin-bottom: 5px;
     font-size: 12px;
+    @media (min-width: $breakpoint-laptop) {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
   }
 }
 form input,
 form select,
 form textarea {
-  border: 1px solid #eee;
-  @include border-radius(8px);
-  padding: 20px 16px;
+  font-family: '__interFont_9b1c85', '__interFont_Fallback_9b1c85';
+  border: 1px solid hsl(0, 0%, 80%);
+  @include border-radius(4px);
+  padding: 9px 10px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 18px;
   width: 100%;
-  color: $dark-blue;
+  color: hsl(0, 0%, 20%);
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.6);
@@ -514,6 +530,7 @@ form textarea {
 }
 form .user-agreement {
   margin-bottom: 15px;
+  font-weight: 500;
 }
 form button[type='submit'] {
   width: 100%;
@@ -523,14 +540,45 @@ form button[type='submit'] {
   cursor: text;
   background-color: #9a9ea73b;
 }
-form select,
-.label-checkbox,
-input[type='checkbox'] {
-  cursor: pointer;
-}
 .label-checkbox {
   display: flex;
   align-items: center;
+  gap: 10px;
+  height: max-content;
+  cursor: pointer;
+  input[type='checkbox'] {
+    display: none;
+  }
+  &::before {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+  }
+  span {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 21px;
+  }
+  &.checked {
+    &::before {
+      content: '\2713';
+      background-color: #dff1df;
+      border-color: #dff1df;
+      color: $green;
+      font-weight: 700;
+    }
+    span {
+      color: $green;
+    }
+  }
 }
 .popup-title {
   font-size: 24px;
@@ -550,6 +598,7 @@ input[type='checkbox'] {
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  margin-top: 15px;
 }
 .footer-login-form {
   a {
@@ -564,17 +613,14 @@ input[type='checkbox'] {
 .messenger-contacts {
   display: flex;
   gap: 25px;
-  label {
-    input[type='checkbox'] {
-      &:checked + span {
-        color: $green;
-      }
-    }
+  @media (min-width: $breakpoint-laptop) {
+    order: 1;
   }
 }
 .login-page,
 .signup-page {
   padding-top: 40px;
+  padding-bottom: 70px;
   background-color: $white;
   .popup-title {
     margin-top: 15px;

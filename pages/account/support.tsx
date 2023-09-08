@@ -4,7 +4,8 @@ import AccountHeader from '../../components/AccountHeader'
 import AccountLinks from '../../components/AccountLinks'
 import { initializeApollo } from '../../lib/apollo'
 import { GET_USER_INFO, SEND_SUPPORT_MAIL } from '../../lib/api'
-import { useQuery, useMutation } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import AccountMenu from '../../components/AccountMenu'
 
 enum FIELDS {
   FROM = 'from',
@@ -44,7 +45,6 @@ export default function Transports() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log(form)
     apolloClient
       .mutate({
         mutation: SEND_SUPPORT_MAIL,
@@ -71,29 +71,38 @@ export default function Transports() {
   }
 
   return (
-    <Container>
-      <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
-      <div className="white-background account-text-block">
-        <span className="form-block-title">Техподдержка</span>
-        {!isSent ? (
-          <form onSubmit={handleSubmit} autoComplete="on">
-            <label>
-              <span>Ваше обращение</span>
-              <textarea
-                name={FIELDS.BODY}
-                placeholder="Введите обращение до 300 символов"
-                maxLength={300}
-                value={form[FIELDS.BODY]}
-                onChange={handleChangeForm}
-              />
-            </label>
-            <button type="submit">Отправить</button>
-          </form>
-        ) : (
-          'Мы ответим вам на почту в ближайшее время'
-        )}
-        <AccountLinks />
-      </div>
-    </Container>
+    <div className="account-page">
+      <Container>
+        <AccountHeader modalActive={modalActive} setModalActive={setModalActive} />
+        <div className="wrapper">
+          <div className="menu-big">
+            <AccountMenu />
+          </div>
+          <div className="content">
+            <div className="white-background account-text-block">
+              <span className="form-block-title">Техподдержка</span>
+              {!isSent ? (
+                <form onSubmit={handleSubmit} autoComplete="on">
+                  <label>
+                    <span>Ваше обращение</span>
+                    <textarea
+                      name={FIELDS.BODY}
+                      placeholder="Введите обращение до 300 символов"
+                      maxLength={300}
+                      value={form[FIELDS.BODY]}
+                      onChange={handleChangeForm}
+                    />
+                  </label>
+                  <button type="submit">Отправить</button>
+                </form>
+              ) : (
+                'Мы ответим вам на почту в ближайшее время'
+              )}
+              <AccountLinks />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
   )
 }

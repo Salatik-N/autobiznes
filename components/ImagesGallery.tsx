@@ -3,7 +3,12 @@ import Image from 'next/image'
 import { useState } from 'react'
 import transportDefaultIcon from '../public/icons/transport-default.svg'
 
-const ImagesGallery = ({ photos }) => {
+type imagesGalleryProps = {
+  photos: any
+  isActiveAdminTools?: Boolean
+}
+
+const ImagesGallery: React.FC<imagesGalleryProps> = ({ photos, isActiveAdminTools }) => {
   const [activeImageID, setActiveImageID] = useState(0)
 
   const handleSlideClick = (index) => {
@@ -12,7 +17,7 @@ const ImagesGallery = ({ photos }) => {
   }
 
   return (
-    <div className={styles.images}>
+    <div className={`${styles.images} ${isActiveAdminTools ? styles.accountPage : ''}`}>
       {!photos && (
         <div className={styles.defaultImage}>
           <Image src={transportDefaultIcon} width={79} height={47} alt="Нет изображения" />

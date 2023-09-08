@@ -38,7 +38,7 @@ const AdminTools: React.FC<adminToolsProps> = ({ item, type }) => {
   }
 
   return (
-    <div className={styles.adminTools}>
+    <div className={`${styles.adminTools} ${type === 'cargo' && styles.cargoTools}`}>
       <div className={styles.views}>
         <Image src={viewsIcon} width={20} height={20} alt="Просмотров" />
         {item.acfTransportDescription?.views === null || item.acfCargoDescription?.views === null

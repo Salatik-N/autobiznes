@@ -353,6 +353,16 @@ export const GET_USER_INFO = gql`
           node {
             slug
             databaseId
+            acfCargoDescription {
+              fullDescription
+            }
+            acfCargoFeatures {
+              movers
+              typeLoading
+              typeTransportation
+              vehicleBodyType
+              weight
+            }
             acfCargoPickupPoint {
               shippingAddress
               dateLoading
@@ -363,20 +373,27 @@ export const GET_USER_INFO = gql`
               unloadingCountry
               unloadingCity
             }
-            acfCargoFeatures {
-              weight
-              vehicleBodyType
-              typeTransportation
-              typeLoading
-              movers
+            acfCargoPickupPoint {
+              shippingAddress
+              dateLoading
+              shippingCity
+              shippingRegion
+            }
+            acfCargoDeliverPoint {
+              dateUnloading
+              unloadingCountry
+              unloadingCity
+              unloadingAdress
+              unloadingRegion
             }
             acfCargoContacts {
-              budgetTo
+              whatsapp
+              viber
+              telegram
+              customName
+              customPhone
               paymentMethod
-            }
-            acfCargoDescription {
-              fullDescription
-              views
+              budgetTo
             }
           }
         }
@@ -397,10 +414,26 @@ export const GET_USER_INFO = gql`
               regionTransport
               city
             }
+            acfTransportContacts {
+              paymentMethod
+              paymentProcedure
+            }
             acfTransportFeatures {
               typeTransportation
               vehicleBodyType
               carryingCapacity
+              vehicleBrand
+              workExperience
+              leaseTerm
+              numberSeats
+              numberSeatsWithoutLuggage
+              serviceSpecialization
+              options
+              amenities
+              vehicleClass
+              color
+              vehiclesInPark
+              minimumOrderTime
               bodyWidth
               bodyVolume
               bodyLength
