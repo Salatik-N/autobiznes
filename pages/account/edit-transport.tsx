@@ -13,6 +13,7 @@ import TitleInput from '../../components/Form/TitleInput'
 import { FeaturesInput } from '../../components/Form/FeaturesInput'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
+import DeleteSVG from '../../components/DeleteSVG'
 
 enum FIELDS {
   CATEGORY = 'category',
@@ -501,7 +502,7 @@ export default function EditCargo() {
                 {form[FIELDS.PHOTO_TRUCK].map((link, key) => (
                   <div className="images-item">
                     <div className="delete-button" onClick={() => removeImageTruck(key)}>
-                      <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                      <DeleteSVG />
                     </div>
                     <Image className="form-image" src={link} alt="Фото техники" width={200} height={200} />
                   </div>
@@ -542,7 +543,7 @@ export default function EditCargo() {
               <div className="form-file-images">
                 <div className="images-item">
                   <div className="delete-button" onClick={removeImageDriver}>
-                    <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                    <DeleteSVG />
                   </div>
                   <Image
                     className="form-image"

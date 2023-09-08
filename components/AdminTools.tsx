@@ -4,7 +4,7 @@ import { DELETE_TRANSPORT } from '../lib/api'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import viewsIcon from '../public/icons/views.svg'
-import deleteIcon from '../public/icons/delete.svg'
+import DeleteSVG from './DeleteSVG'
 import editIcon from '../public/icons/edit.svg'
 
 type itemProps = {
@@ -46,7 +46,7 @@ const AdminTools: React.FC<adminToolsProps> = ({ item, type }) => {
           : item.acfTransportDescription?.views || item.acfCargoDescription?.views}
       </div>
       <button className={styles.delete} onClick={() => handleDelete(item.databaseId)}>
-        <Image src={deleteIcon} width={33} height={33} alt="Удалить" />
+        <DeleteSVG fill={'#9A9EA7'} />
       </button>
       <button className={styles.edit} onClick={() => handleEdit(item.databaseId)}>
         <Image src={editIcon} width={25} height={25} alt="Редактировать" />

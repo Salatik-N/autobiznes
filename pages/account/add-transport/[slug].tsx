@@ -13,6 +13,7 @@ import address from '../../../lib/city.json'
 import { paymentMethod, paymentProcedure } from '../../../lib/options'
 import { FeaturesInput } from '../../../components/Form/FeaturesInput'
 import Cookies from 'js-cookie'
+import DeleteSVG from '../../../components/DeleteSVG'
 
 const apolloClient = initializeApollo()
 
@@ -452,7 +453,7 @@ export default function Transport1t({ transportCategory }) {
                 {form[FIELDS.PHOTO_TRUCK].map((link, key) => (
                   <div className="images-item">
                     <div className="delete-button" onClick={() => removeImageTruck(key)}>
-                      <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                      <DeleteSVG />
                     </div>
                     <Image className="form-image" src={link} alt="Фото техники" width={200} height={200} />
                   </div>
@@ -493,7 +494,7 @@ export default function Transport1t({ transportCategory }) {
               <div className="form-file-images">
                 <div className="images-item">
                   <div className="delete-button" onClick={removeImageDriver}>
-                    <Image src="/icons/delete.svg" alt="Удалить" width={28} height={28} />
+                    <DeleteSVG />
                   </div>
                   <Image
                     className="form-image"
