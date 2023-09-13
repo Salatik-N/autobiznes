@@ -22,7 +22,7 @@ export default function Transports({ transportCategory }) {
   const [cities, setCities] = useState(null)
   const [activeRegion, setActiveRegion] = useState(0)
   const [activeCity, setActiveCity] = useState(0)
-  const [isTransportaLoaded, setTransportaLoaded] = useState(false)
+  const [isTransportaLoaded, setTransportaLoaded] = useState(true)
   const [isRegionsLoaded, setRegionsLoaded] = useState(false)
 
   const { data, fetchMore } = useQuery(GET_TRANSPORT_CATEGORY, {
@@ -32,7 +32,6 @@ export default function Transports({ transportCategory }) {
 
   useEffect(() => {
     getRegions()
-    setTransportaLoaded(true)
   }, [])
 
   const getRegions = async () => {
@@ -194,7 +193,7 @@ export default function Transports({ transportCategory }) {
                   dataLength={pageInfo.total}
                   next={fetchMorePost}
                   hasMore={haveMorePosts}
-                  loader={'Загрузка...'}
+                  loader={''}
                   scrollThreshold={0.4}
                   style={{ overflow: 'initial' }}
                 >

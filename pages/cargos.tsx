@@ -80,7 +80,7 @@ export default function Cargo() {
                   dataLength={pageInfo.total}
                   next={fetchMorePost}
                   hasMore={haveMorePosts}
-                  loader={'Загрузка...'}
+                  loader={''}
                   scrollThreshold={0.4}
                   style={{ overflow: 'initial' }}
                 >
