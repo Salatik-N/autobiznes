@@ -75,6 +75,7 @@ export const GET_CARGO_INFO = gql`
   query GetCargoInfo($id: ID!) {
     cargo(id: $id, idType: DATABASE_ID) {
       title
+      authorDatabaseId
       author {
         node {
           avatar {
@@ -243,6 +244,7 @@ export const GET_TRANSPORT_INFO = gql`
       }
       title
       databaseId
+      authorDatabaseId
       transportCategories {
         edges {
           node {
