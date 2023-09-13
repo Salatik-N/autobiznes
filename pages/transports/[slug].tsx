@@ -22,7 +22,8 @@ export default function Transports({ transportCategory }) {
   const [cities, setCities] = useState(null)
   const [activeRegion, setActiveRegion] = useState(0)
   const [activeCity, setActiveCity] = useState(0)
-  const [queryDataLoaded, setQueryDataLoaded] = useState(false)
+  const [isTransportaLoaded, setTransportaLoaded] = useState(false)
+  const [isRegionsLoaded, setRegionsLoaded] = useState(false)
 
   const { data, loading, fetchMore } = useQuery(GET_TRANSPORT_CATEGORY, {
     variables: { categoryTransport: transportCategory.slug, first: ITEMS_PER_PAGE, after: null },
@@ -34,7 +35,7 @@ export default function Transports({ transportCategory }) {
   }, [])
 
   const getRegions = async () => {
-    setQueryDataLoaded(false)
+    setRegionsLoaded(false)
     const responseRegions = await apolloClient.query({
       query: REGIONS_TRANSPORT,
       variables: {
@@ -43,7 +44,7 @@ export default function Transports({ transportCategory }) {
     })
     const regions = responseRegions?.data.regionsTransport.map((e) => e) || []
     setRegions(handleFilterPlaceTransport(regions))
-    setQueryDataLoaded(true)
+    setRegionsLoaded(true)
   }
 
   const haveMorePosts = Boolean(data?.transports?.pageInfo.hasNextPage)
@@ -68,9 +69,10 @@ export default function Transports({ transportCategory }) {
   }
 
   const fetchFilterPost = async (activeIndex, item) => {
+    setTransportaLoaded(false)
+    setRegionsLoaded(false)
     let variables
     if (item === 'region') {
-      setQueryDataLoaded(false)
       setActiveRegion(activeIndex)
       const responseCities = await apolloClient.query({
         query: CITIES_TRANSPORT,
@@ -85,19 +87,18 @@ export default function Transports({ transportCategory }) {
       variables = {
         regionTransport: activeIndex !== 0 ? regions[activeIndex].name : null,
       }
-      setQueryDataLoaded(true)
+      setRegionsLoaded(true)
     }
     if (item === 'city') {
-      setQueryDataLoaded(false)
       setActiveCity(activeIndex)
       variables = {
         regionTransport: regions[activeRegion].name,
         city: activeIndex !== 0 ? cities[activeIndex].name : null,
       }
-      setQueryDataLoaded(true)
+      setRegionsLoaded(true)
     }
 
-    fetchMore({
+    await fetchMore({
       variables,
       updateQuery: (prevResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prevResult
@@ -111,6 +112,7 @@ export default function Transports({ transportCategory }) {
         }
       },
     })
+    setTransportaLoaded(true)
   }
 
   const fetchMorePost = () => {
@@ -170,16 +172,22 @@ export default function Transports({ transportCategory }) {
 
       <section className="first-section">
         <Container>
-          {queryDataLoaded && data?.transports ? (
+          {data?.transports && (
             <>
-              <TransportFilter
-                activeRegion={activeRegion}
-                regions={regions}
-                onClickRegion={(e) => fetchFilterPost(e, 'region')}
-                activeCity={activeCity}
-                cities={cities}
-                onClickCity={(e) => fetchFilterPost(e, 'city')}
-              />
+              {isRegionsLoaded ? (
+                <TransportFilter
+                  activeRegion={activeRegion}
+                  regions={regions}
+                  onClickRegion={(e) => fetchFilterPost(e, 'region')}
+                  activeCity={activeCity}
+                  cities={cities}
+                  onClickCity={(e) => fetchFilterPost(e, 'city')}
+                />
+              ) : (
+                <div className="white-background">
+                  <Loader />
+                </div>
+              )}
               <div className="transport-list">
                 <InfiniteScroll
                   dataLength={pageInfo.total}
@@ -189,14 +197,16 @@ export default function Transports({ transportCategory }) {
                   scrollThreshold={0.4}
                   style={{ overflow: 'initial' }}
                 >
-                  <TransportItem transports={data.transports} />
+                  {isTransportaLoaded ? (
+                    <TransportItem transports={data.transports} />
+                  ) : (
+                    <div className="white-background">
+                      <Loader />
+                    </div>
+                  )}
                 </InfiniteScroll>
               </div>
             </>
-          ) : (
-            <div className="white-background">
-              <Loader />
-            </div>
           )}
         </Container>
       </section>
