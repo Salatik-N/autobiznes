@@ -174,38 +174,46 @@ export default function Transports({ transportCategory }) {
         <Container>
           {data?.transports ? (
             <>
-              {isRegionsLoaded ? (
-                <TransportFilter
-                  activeRegion={activeRegion}
-                  regions={regions}
-                  onClickRegion={(e) => fetchFilterPost(e, 'region')}
-                  activeCity={activeCity}
-                  cities={cities}
-                  onClickCity={(e) => fetchFilterPost(e, 'city')}
-                />
-              ) : (
+              {data?.transports.edges.length === 0 ? (
                 <div className="white-background">
-                  <Loader />
+                  Упс.. Похоже еще нет подходящего транспорта, попробуйте зайти позже.
                 </div>
-              )}
-              <div className="transport-list">
-                <InfiniteScroll
-                  dataLength={pageInfo.total}
-                  next={fetchMorePost}
-                  hasMore={haveMorePosts}
-                  loader={''}
-                  scrollThreshold={0.4}
-                  style={{ overflow: 'initial' }}
-                >
-                  {isTransportaLoaded ? (
-                    <TransportItem transports={data.transports} />
+              ) : (
+                <>
+                  {isRegionsLoaded ? (
+                    <TransportFilter
+                      activeRegion={activeRegion}
+                      regions={regions}
+                      onClickRegion={(e) => fetchFilterPost(e, 'region')}
+                      activeCity={activeCity}
+                      cities={cities}
+                      onClickCity={(e) => fetchFilterPost(e, 'city')}
+                    />
                   ) : (
                     <div className="white-background">
                       <Loader />
                     </div>
                   )}
-                </InfiniteScroll>
-              </div>
+                  <div className="transport-list">
+                    <InfiniteScroll
+                      dataLength={pageInfo.total}
+                      next={fetchMorePost}
+                      hasMore={haveMorePosts}
+                      loader={''}
+                      scrollThreshold={0.4}
+                      style={{ overflow: 'initial' }}
+                    >
+                      {isTransportaLoaded ? (
+                        <TransportItem transports={data.transports} />
+                      ) : (
+                        <div className="white-background">
+                          <Loader />
+                        </div>
+                      )}
+                    </InfiniteScroll>
+                  </div>
+                </>
+              )}
             </>
           ) : (
             <div className="white-background">

@@ -61,32 +61,38 @@ export default function Cargo() {
         <Container>
           {data?.cargos ? (
             <>
-              <CargoFilter cargoList={data.cargos} />
-              <div className="cargo-list">
-                <span className="title">Все грузы для перевозки по Беларуси</span>
-                {/* <p>
+              {data?.cargos.edges.length === 0 ? (
+                <div className="white-background">Упс.. Похоже грузы закончились, попробуйте зайти позже.</div>
+              ) : (
+                <>
+                  <CargoFilter cargoList={data.cargos} />
+                  <div className="cargo-list">
+                    <span className="title">Все грузы для перевозки по Беларуси</span>
+                    {/* <p>
                   По вашему запросу поиск грузов для перевозки найдено&nbsp;
                   <span className="text-green">
                     <Declension count={cargoTotal} words={['предложение', 'предложения', 'предложений']} />
                   </span>
                 </p> */}
-                <div className="cargo-list-button">
-                  <span>У вас есть груз?</span>
-                  <Link href="/account/add-cargo" className="add-order">
-                    Добавить заказ
-                  </Link>
-                </div>
-                <InfiniteScroll
-                  dataLength={pageInfo.total}
-                  next={fetchMorePost}
-                  hasMore={haveMorePosts}
-                  loader={''}
-                  scrollThreshold={0.4}
-                  style={{ overflow: 'initial' }}
-                >
-                  <CargoItem cargos={data.cargos} />
-                </InfiniteScroll>
-              </div>
+                    <div className="cargo-list-button">
+                      <span>У вас есть груз?</span>
+                      <Link href="/account/add-cargo" className="add-order">
+                        Добавить заказ
+                      </Link>
+                    </div>
+                    <InfiniteScroll
+                      dataLength={pageInfo.total}
+                      next={fetchMorePost}
+                      hasMore={haveMorePosts}
+                      loader={''}
+                      scrollThreshold={0.4}
+                      style={{ overflow: 'initial' }}
+                    >
+                      <CargoItem cargos={data.cargos} />
+                    </InfiniteScroll>
+                  </div>
+                </>
+              )}
             </>
           ) : (
             <div className="white-background">
