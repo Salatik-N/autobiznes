@@ -172,7 +172,7 @@ export default function Transports({ transportCategory }) {
 
       <section className="first-section">
         <Container>
-          {data?.transports && (
+          {data?.transports ? (
             <>
               {isRegionsLoaded ? (
                 <TransportFilter
@@ -207,6 +207,10 @@ export default function Transports({ transportCategory }) {
                 </InfiniteScroll>
               </div>
             </>
+          ) : (
+            <div className="white-background">
+              <Loader />
+            </div>
           )}
         </Container>
       </section>
