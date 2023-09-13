@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GetServerSideProps } from 'next'
 import { initializeApollo } from '../../lib/apollo'
-import { GET_TRANSPORT_CATEGORY, GET_CATEGORY_INFO } from '../../lib/api'
+import { GET_TRANSPORT_CATEGORY, GET_CATEGORY_INFO, REGIONS_TRANSPORT, CITIES_TRANSPORT } from '../../lib/api'
 import Link from 'next/link'
 import Image from 'next/image'
 import Container from '../../components/Container'
@@ -18,7 +18,6 @@ const apolloClient = initializeApollo()
 
 export default function Transports({ transportCategory }) {
   const router = useRouter()
-  const [transports, setTransports] = useState(null)
   const [regions, setRegions] = useState(null)
   const [cities, setCities] = useState(null)
   const [activeRegion, setActiveRegion] = useState(0)
@@ -26,29 +25,29 @@ export default function Transports({ transportCategory }) {
   const [queryDataLoaded, setQueryDataLoaded] = useState(false)
 
   const { data, loading, fetchMore } = useQuery(GET_TRANSPORT_CATEGORY, {
-    variables: { categoryTransport: router.query.slug, first: ITEMS_PER_PAGE },
+    variables: { categoryTransport: transportCategory.slug, first: ITEMS_PER_PAGE, after: null },
     notifyOnNetworkStatusChange: true,
   })
 
   useEffect(() => {
-    if (data && !queryDataLoaded) {
-      setQueryDataLoaded(true)
-      const regions = data?.transports?.edges?.map((e) => e.node.acfTransportAddress.regionTransport) || []
-      setRegions(regions)
-      const cities = data?.transports?.edges?.map((e) => e.node.acfTransportAddress.city) || []
-      setCities(cities)
-    }
-  }, [data, queryDataLoaded])
+    getRegions()
+  }, [])
 
-  useEffect(() => {
-    setTransports(data?.transports)
-  }, [data, loading])
+  const getRegions = async () => {
+    setQueryDataLoaded(false)
+    const responseRegions = await apolloClient.query({
+      query: REGIONS_TRANSPORT,
+      variables: {
+        categoryTransport: transportCategory.slug,
+      },
+    })
+    const regions = responseRegions?.data.regionsTransport.map((e) => e) || []
+    setRegions(handleFilterPlaceTransport(regions))
+    setQueryDataLoaded(true)
+  }
 
-  const haveMorePosts = Boolean(transports?.pageInfo.hasNextPage)
-  const pageInfo = transports?.pageInfo || {}
-
-  const regionsWithCounts = handleFilterPlaceTransport(regions)
-  const citiesWithCounts = handleFilterPlaceTransport(cities)
+  const haveMorePosts = Boolean(data?.transports?.pageInfo.hasNextPage)
+  const pageInfo = data?.transports?.pageInfo || {}
 
   function handleFilterPlaceTransport(items) {
     const countItems = {}
@@ -71,18 +70,31 @@ export default function Transports({ transportCategory }) {
   const fetchFilterPost = async (activeIndex, item) => {
     let variables
     if (item === 'region') {
+      setQueryDataLoaded(false)
       setActiveRegion(activeIndex)
+      const responseCities = await apolloClient.query({
+        query: CITIES_TRANSPORT,
+        variables: {
+          categoryTransport: transportCategory.slug,
+          regionTransport: regions[activeIndex].name,
+        },
+      })
+      const cities = responseCities?.data.citiesTransport.map((e) => e) || []
+      setCities(handleFilterPlaceTransport(cities))
       setActiveCity(0)
       variables = {
-        regionTransport: activeIndex !== 0 ? regionsWithCounts[activeIndex].name : null,
+        regionTransport: activeIndex !== 0 ? regions[activeIndex].name : null,
       }
+      setQueryDataLoaded(true)
     }
     if (item === 'city') {
+      setQueryDataLoaded(false)
       setActiveCity(activeIndex)
       variables = {
-        regionTransport: regionsWithCounts[activeRegion].name,
-        city: activeIndex !== 0 ? citiesWithCounts[activeIndex].name : null,
+        regionTransport: regions[activeRegion].name,
+        city: activeIndex !== 0 ? cities[activeIndex].name : null,
       }
+      setQueryDataLoaded(true)
     }
 
     fetchMore({
@@ -100,6 +112,7 @@ export default function Transports({ transportCategory }) {
       },
     })
   }
+
   const fetchMorePost = () => {
     fetchMore({
       variables: { after: pageInfo.endCursor },
@@ -157,14 +170,14 @@ export default function Transports({ transportCategory }) {
 
       <section className="first-section">
         <Container>
-          {!loading && transports ? (
+          {queryDataLoaded && data?.transports ? (
             <>
               <TransportFilter
                 activeRegion={activeRegion}
-                regions={regionsWithCounts}
+                regions={regions}
                 onClickRegion={(e) => fetchFilterPost(e, 'region')}
                 activeCity={activeCity}
-                cities={citiesWithCounts}
+                cities={cities}
                 onClickCity={(e) => fetchFilterPost(e, 'city')}
               />
               <div className="transport-list">
@@ -176,7 +189,7 @@ export default function Transports({ transportCategory }) {
                   scrollThreshold={0.4}
                   style={{ overflow: 'initial' }}
                 >
-                  <TransportItem transports={transports} />
+                  <TransportItem transports={data.transports} />
                 </InfiniteScroll>
               </div>
             </>

@@ -1,6 +1,7 @@
 import styles from './TransportFilter.module.scss'
 
 const TransportFilter = ({ activeRegion, regions, onClickRegion, activeCity, cities, onClickCity }) => {
+  console.log(cities)
   return (
     <div className={`${styles.filterBlock} white-background`}>
       <div className={styles.filterTitle}>Выберите {activeRegion === 0 ? 'регион' : 'город'} для поиска</div>

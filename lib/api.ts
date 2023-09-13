@@ -133,6 +133,16 @@ export const GET_CARGO_INFO = gql`
     }
   }
 `
+export const REGIONS_TRANSPORT = gql`
+  query GetRegionsTransport($categoryTransport: String) {
+    regionsTransport(categoryTransport: $categoryTransport)
+  }
+`
+export const CITIES_TRANSPORT = gql`
+  query GetRegionsTransport($categoryTransport: String, $regionTransport: String) {
+    citiesTransport(categoryTransport: $categoryTransport, regionTransport: $regionTransport)
+  }
+`
 export const GET_CATEGORY_INFO = gql`
   query GetTransportCategory($id: ID!) {
     transportCategory(id: $id, idType: SLUG) {

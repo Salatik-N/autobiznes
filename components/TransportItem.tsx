@@ -65,6 +65,8 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
     setDescriptionActive(!isDescriptionActive)
   }
 
+  console.log(transports)
+
   return (
     <>
       {transports.edges.map((item) => (
@@ -84,7 +86,7 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
               <div className={styles.blockInfoFirst}>
                 <div className={styles.transportNumber}>№{item.node.databaseId}</div>
                 <div className={styles.title}>
-                  {item.node.author.node.customField.verifiedUser && (
+                  {item.node.author?.node.customField.verifiedUser && (
                     <Image src={verifiedUser} width={16} height={16} alt="Подтвержденный пользователь" />
                   )}
                   {item.node.title}
