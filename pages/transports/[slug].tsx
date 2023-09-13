@@ -25,13 +25,14 @@ export default function Transports({ transportCategory }) {
   const [isTransportaLoaded, setTransportaLoaded] = useState(false)
   const [isRegionsLoaded, setRegionsLoaded] = useState(false)
 
-  const { data, loading, fetchMore } = useQuery(GET_TRANSPORT_CATEGORY, {
+  const { data, fetchMore } = useQuery(GET_TRANSPORT_CATEGORY, {
     variables: { categoryTransport: transportCategory.slug, first: ITEMS_PER_PAGE, after: null },
     notifyOnNetworkStatusChange: true,
   })
 
   useEffect(() => {
     getRegions()
+    setTransportaLoaded(true)
   }, [])
 
   const getRegions = async () => {
