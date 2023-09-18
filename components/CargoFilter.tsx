@@ -2,36 +2,28 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import styles from './CargoFilter.module.scss'
 import searchIcon from '../public/icons/search.svg'
-import Select from 'react-select'
+import Select, { components } from 'react-select'
+import { filterWeight, orderBy, filterVehicleBodyType } from '../lib/options'
+import address from '../lib/city.json'
 
 enum FIELDS {
+  SHIPPING_REGION = 'shippingRegion',
   UNLOADING_COUNTRY = 'unloadingCountry',
+  UNLOADING_REGION = 'unloadingRegion',
+  WEIGHT = 'weight',
+  VEHICLE_BODY_TYPE = 'vehicleBodyType',
+  ORDER_BY = 'orederBy',
 }
 
-export default function CargoFilter({ cargoList }) {
+export default function CargoFilter({ onUseFilter }) {
   const [form, setForm] = useState({
+    [FIELDS.SHIPPING_REGION]: null,
     [FIELDS.UNLOADING_COUNTRY]: null,
+    [FIELDS.UNLOADING_REGION]: null,
+    [FIELDS.WEIGHT]: null,
+    [FIELDS.VEHICLE_BODY_TYPE]: null,
+    [FIELDS.ORDER_BY]: null,
   })
-
-  useEffect(() => {
-    getOptionsCargo()
-  }, [])
-
-  const getOptionsCargo = () => {
-    const countries = []
-    const response = []
-    cargoList.edges.map((item) =>
-      countries.includes(item.node.acfCargoDeliverPoint[FIELDS.UNLOADING_COUNTRY])
-        ? null
-        : countries.push(item.node.acfCargoDeliverPoint[FIELDS.UNLOADING_COUNTRY])
-    )
-    countries.map((item) => response.push({ value: item, label: item }))
-
-    setForm((prevValue) => ({
-      ...prevValue,
-      [FIELDS.UNLOADING_COUNTRY]: response,
-    }))
-  }
 
   const handleChangeFormSelect = (event, actionMeta) => {
     const name = actionMeta?.name
@@ -45,64 +37,92 @@ export default function CargoFilter({ cargoList }) {
 
   const handleUseFilter = (e) => {
     e.preventDefault()
+    onUseFilter(form)
+  }
+
+  const NoOptionsMessage = (props) => {
+    return (
+      <components.NoOptionsMessage {...props}>
+        <span className="custom-css-class">Выберите страну</span>
+      </components.NoOptionsMessage>
+    )
   }
 
   return (
     <form onSubmit={handleUseFilter} autoComplete="on">
       <div className={`${styles.filterBlock} white-background`}>
         <div className={styles.filterList}>
-          <label>
-            <span>Страна прибытия</span>
+          {/* <label>
+            <span>Страна отправки</span>
             <Select
               name={FIELDS.UNLOADING_COUNTRY}
               onChange={handleChangeFormSelect}
               options={form[FIELDS.UNLOADING_COUNTRY]}
               placeholder="Все"
             />
-          </label>
+          </label> */}
           <label>
             <span>Регион отправки</span>
             <Select
+              name={FIELDS.SHIPPING_REGION}
+              onChange={handleChangeFormSelect}
+              options={address.find((e) => e.name === 'Беларусь').regions}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.name}
+              placeholder="Все"
+            />
+          </label>
+          <label>
+            <span>Страна прибытия</span>
+            <Select
               name={FIELDS.UNLOADING_COUNTRY}
               onChange={handleChangeFormSelect}
-              options={form[FIELDS.UNLOADING_COUNTRY]}
+              options={address}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.name}
               placeholder="Все"
             />
           </label>
           <label>
             <span>Регион прибытия</span>
             <Select
-              name={FIELDS.UNLOADING_COUNTRY}
+              name={FIELDS.UNLOADING_REGION}
               onChange={handleChangeFormSelect}
-              options={form[FIELDS.UNLOADING_COUNTRY]}
+              options={address.find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])?.regions}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.name}
+              components={{ NoOptionsMessage }}
               placeholder="Все"
             />
           </label>
           <label>
             <span>Вес груза</span>
             <Select
-              name={FIELDS.UNLOADING_COUNTRY}
+              name={FIELDS.WEIGHT}
               onChange={handleChangeFormSelect}
-              options={form[FIELDS.UNLOADING_COUNTRY]}
+              options={filterWeight}
+              defaultValue={filterWeight[0]}
               placeholder="Все"
             />
           </label>
           <label>
             <span>Тип кузова</span>
             <Select
-              name={FIELDS.UNLOADING_COUNTRY}
+              name={FIELDS.VEHICLE_BODY_TYPE}
               onChange={handleChangeFormSelect}
-              options={form[FIELDS.UNLOADING_COUNTRY]}
+              options={filterVehicleBodyType}
+              defaultValue={filterVehicleBodyType[0]}
               placeholder="Все"
             />
           </label>
           <label>
-            <span>Упорядочить по</span>
+            <span>Сначала</span>
             <Select
-              name={FIELDS.UNLOADING_COUNTRY}
+              name={FIELDS.ORDER_BY}
               onChange={handleChangeFormSelect}
-              options={form[FIELDS.UNLOADING_COUNTRY]}
-              placeholder="Все"
+              options={orderBy}
+              defaultValue={orderBy[2]}
+              placeholder="Новые"
             />
           </label>
         </div>

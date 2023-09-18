@@ -6,6 +6,7 @@ import { GET_USER_INFO } from '../../lib/api'
 import { useEffect, useState } from 'react'
 import AccountHeader from '../../components/AccountHeader'
 import AccountMenu from '../../components/AccountMenu'
+import { Loader } from '../../components/Loader'
 
 export default function Cargos() {
   const [modalActive, setModalActive] = useState(false)
@@ -38,7 +39,11 @@ export default function Cargos() {
                   <CargoItem cargos={cargoList} isActiveAdminTools />
                 </div>
               </>
-            ) : null}
+            ) : (
+              <div className="white-background">
+                <Loader />
+              </div>
+            )}
           </div>
         </div>
       </Container>

@@ -1,5 +1,5 @@
 interface Option {
-  value: string
+  value: any
   label: string
 }
 
@@ -142,4 +142,57 @@ export const vehicleClass: Option[] = [
   { value: 'Особо большой (35-45)', label: 'Особо большой (35-45)' },
   { value: 'Грузовой', label: 'Грузовой' },
   { value: 'Двухэтажный', label: 'Двухэтажный' },
+]
+
+export const filterVehicleBodyType: Option[] = [
+  { value: null, label: 'Все' },
+  { value: 'Не знаю', label: 'Не знаю' },
+  { value: 'Автопоезд', label: 'Автопоезд' },
+  { value: 'Балковоз', label: 'Балковоз' },
+  { value: 'Гидроборт', label: 'Гидроборт' },
+  { value: 'Грузопассажирский', label: 'Грузопассажирский' },
+  { value: 'Длинномер', label: 'Длинномер' },
+  { value: 'Изотермический', label: 'Изотермический' },
+  { value: 'Контейнеровоз', label: 'Контейнеровоз' },
+  { value: 'Кормовоз', label: 'Кормовоз' },
+  { value: 'Муковоз', label: 'Муковоз' },
+  { value: 'Открытый', label: 'Открытый' },
+  { value: 'Панелевоз', label: 'Панелевоз' },
+  { value: 'Пикап', label: 'Пикап' },
+  { value: 'Пирамида', label: 'Пирамида' },
+  { value: 'Полуприцеп', label: 'Полуприцеп' },
+  { value: 'Прицеп легковой', label: 'Прицеп легковой' },
+  { value: 'Рефрижератор', label: 'Рефрижератор' },
+  { value: 'Рулоновоз', label: 'Рулоновоз' },
+  { value: 'Седельный тягач', label: 'Седельный тягач' },
+  { value: 'Сельхозник/зерновоз', label: 'Сельхозник/зерновоз' },
+  { value: 'Скотовоз', label: 'Скотовоз' },
+  { value: 'Сортиментовоз/лесовоз', label: 'Сортиментовоз/лесовоз' },
+  { value: 'Стекловоз', label: 'Стекловоз' },
+  { value: 'Сцепка', label: 'Сцепка' },
+  { value: 'Танк-контейнер', label: 'Танк-контейнер' },
+  { value: 'Тентованный', label: 'Тентованный' },
+  { value: 'Термобудка', label: 'Термобудка' },
+  { value: 'Трубовоз', label: 'Трубовоз' },
+  { value: 'Фура', label: 'Фура' },
+  { value: 'Фургон', label: 'Фургон' },
+  { value: 'Цельнометалл', label: 'Цельнометалл' },
+  { value: 'Щеповоз', label: 'Щеповоз' },
+]
+
+export const orderBy: Option[] = [
+  { value: 'PRICE_ASC', label: 'Дешевые' },
+  { value: 'PRICE_DESC', label: 'Дорогие' },
+  { value: 'DATE_DESC', label: 'Новые' },
+  { value: 'DATE_ASC', label: 'Старые' },
+]
+
+export const filterWeight: Option[] = [
+  { value: null, label: 'Все' },
+  { value: 1000, label: 'До 1 тонны' },
+  { value: 2000, label: 'До 2 тонн' },
+  { value: 3500, label: 'До 3,5 тонн' },
+  { value: 5000, label: 'До 5 тонн' },
+  { value: 10000, label: 'До 10 тонн' },
+  { value: 20000, label: 'До 20 тонн' },
 ]

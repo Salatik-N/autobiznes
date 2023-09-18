@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Image from 'next/image'
 import { GET_ALL_CARGO } from '../lib/api'
@@ -12,6 +13,8 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 const ITEMS_PER_PAGE = 10
 
 export default function Cargo() {
+  const [filterOrder, setFilterOrder] = useState('DATE_DESC')
+  const [isCargoLoaded, setCargoLoaded] = useState(true)
   const { data, fetchMore } = useQuery(GET_ALL_CARGO, {
     variables: { first: ITEMS_PER_PAGE, after: null },
     notifyOnNetworkStatusChange: true,
@@ -19,9 +22,41 @@ export default function Cargo() {
 
   const haveMorePosts = Boolean(data?.cargos?.pageInfo?.hasNextPage)
   const pageInfo = data?.cargos?.pageInfo || {}
+
+  const fetchFilterPost = async (item) => {
+    setCargoLoaded(false)
+    setFilterOrder(item.orederBy)
+    const variables = {
+      shippingRegion: item.shippingRegion,
+      unloadingCountry: item.unloadingCountry,
+      unloadingRegion: item.unloadingRegion,
+      weight: item.weight,
+      vehicleBodyType: item.vehicleBodyType,
+      customOrder: item.orederBy,
+    }
+
+    await fetchMore({
+      variables,
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult
+        console.log(fetchMoreResult)
+
+        return {
+          cargos: {
+            edges: fetchMoreResult.cargos.edges,
+            pageInfo: fetchMoreResult.cargos.pageInfo,
+            __typename: 'CargosConnection',
+          },
+        }
+      },
+    })
+    setCargoLoaded(true)
+  }
+
   const fetchMorePost = () => {
+    console.log(filterOrder)
     fetchMore({
-      variables: { after: pageInfo.endCursor },
+      variables: { after: pageInfo.endCursor, customOrder: filterOrder },
       updateQuery: (prevResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prevResult
 
@@ -61,25 +96,27 @@ export default function Cargo() {
         <Container>
           {data?.cargos ? (
             <>
-              {data?.cargos.edges.length === 0 ? (
-                <div className="white-background">Упс.. Похоже грузы закончились, попробуйте зайти позже.</div>
-              ) : (
-                <>
-                  <CargoFilter cargoList={data.cargos} />
-                  <div className="cargo-list">
-                    <span className="title">Все грузы для перевозки по Беларуси</span>
-                    {/* <p>
+              <CargoFilter onUseFilter={(e) => fetchFilterPost(e)} />
+              <div className="cargo-list">
+                <span className="title">Все грузы для перевозки по Беларуси</span>
+                {/* <p>
                   По вашему запросу поиск грузов для перевозки найдено&nbsp;
                   <span className="text-green">
                     <Declension count={cargoTotal} words={['предложение', 'предложения', 'предложений']} />
                   </span>
                 </p> */}
-                    <div className="cargo-list-button">
-                      <span>У вас есть груз?</span>
-                      <Link href="/account/add-cargo" className="add-order">
-                        Добавить заказ
-                      </Link>
+                <div className="cargo-list-button">
+                  <span>У вас есть груз?</span>
+                  <Link href="/account/add-cargo" className="add-order">
+                    Добавить заказ
+                  </Link>
+                </div>
+                <>
+                  {data?.cargos.edges.length === 0 ? (
+                    <div className="white-background">
+                      Упс.. Не найдено грузов по вашим параметрам, попробуйте зайти позже.
                     </div>
+                  ) : (
                     <InfiniteScroll
                       dataLength={pageInfo.total}
                       next={fetchMorePost}
@@ -88,11 +125,17 @@ export default function Cargo() {
                       scrollThreshold={0.4}
                       style={{ overflow: 'initial' }}
                     >
-                      <CargoItem cargos={data.cargos} />
+                      {isCargoLoaded ? (
+                        <CargoItem cargos={data.cargos} />
+                      ) : (
+                        <div className="white-background">
+                          <Loader />
+                        </div>
+                      )}
                     </InfiniteScroll>
-                  </div>
+                  )}
                 </>
-              )}
+              </div>
             </>
           ) : (
             <div className="white-background">

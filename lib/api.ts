@@ -1,8 +1,28 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_CARGO = gql`
-  query GetCargo($first: Int! = 10, $after: String) {
-    cargos(first: $first, after: $after) {
+  query GetCargo(
+    $weight: Int
+    $shippingRegion: String
+    $unloadingCountry: String
+    $unloadingRegion: String
+    $vehicleBodyType: String
+    $customOrder: Order
+    $first: Int! = 10
+    $after: String
+  ) {
+    cargos(
+      where: {
+        weight: $weight
+        vehicleBodyType: $vehicleBodyType
+        unloadingRegion: $unloadingRegion
+        unloadingCountry: $unloadingCountry
+        shippingRegion: $shippingRegion
+        customOrder: $customOrder
+      }
+      first: $first
+      after: $after
+    ) {
       edges {
         node {
           slug

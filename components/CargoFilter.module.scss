@@ -23,11 +23,8 @@
     label {
       @media (min-width: $breakpoint-tablet) {
         width: 165px;
-      }
-      @media (min-width: $breakpoint-tablet) {
         margin-bottom: 0;
         flex: 1 0 auto;
-        width: initial;
       }
     }
   }

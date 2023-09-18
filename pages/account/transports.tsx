@@ -6,6 +6,7 @@ import { GET_USER_INFO } from '../../lib/api'
 import { useEffect, useState } from 'react'
 import AccountHeader from '../../components/AccountHeader'
 import AccountMenu from '../../components/AccountMenu'
+import { Loader } from '../../components/Loader'
 
 export default function Transports() {
   const [modalActive, setModalActive] = useState(false)
@@ -32,12 +33,16 @@ export default function Transports() {
           </div>
           <div className="content">
             <div className="white-background">Мой транспорт</div>
-            {transportList && (
+            {transportList ? (
               <>
                 <div className="transport-list">
                   <TransportItem transports={transportList} isActiveAdminTools />
                 </div>
               </>
+            ) : (
+              <div className="white-background">
+                <Loader />
+              </div>
             )}
           </div>
         </div>

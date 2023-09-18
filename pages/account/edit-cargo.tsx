@@ -92,8 +92,10 @@ export default function EditCargo() {
   }
 
   const formattedDate = (item) => {
-    const parts = item.split('.')
-    return `${parts[2]}-${parts[1]}-${parts[0]}`
+    const parts = item?.split('.')
+    if (parts) {
+      return `${parts[2]}-${parts[1]}-${parts[0]}`
+    }
   }
 
   const handleChangeForm = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
