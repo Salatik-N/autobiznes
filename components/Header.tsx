@@ -15,7 +15,7 @@ import { GET_USER_INFO } from '../lib/api'
 import { useQuery } from '@apollo/client'
 
 export default function Header() {
-  const { data } = useQuery(GET_USER_INFO)
+  const { data, fetchMore } = useQuery(GET_USER_INFO)
   const [open, setOpen] = useState(false)
   const { isSignedIn } = useAuth()
   const router = useRouter()
@@ -26,6 +26,19 @@ export default function Header() {
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange)
+    fetchMore({
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult
+
+        return {
+          viewer: {
+            edges: fetchMoreResult.viewer.edges,
+            pageInfo: fetchMoreResult.viewer.pageInfo,
+            __typename: 'ViewerConnection',
+          },
+        }
+      },
+    })
   }, [])
 
   return (
