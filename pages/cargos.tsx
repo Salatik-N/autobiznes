@@ -39,7 +39,6 @@ export default function Cargo() {
       variables,
       updateQuery: (prevResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prevResult
-        console.log(fetchMoreResult)
 
         return {
           cargos: {
@@ -54,7 +53,6 @@ export default function Cargo() {
   }
 
   const fetchMorePost = () => {
-    console.log(filterOrder)
     fetchMore({
       variables: { after: pageInfo.endCursor, customOrder: filterOrder },
       updateQuery: (prevResult, { fetchMoreResult }) => {

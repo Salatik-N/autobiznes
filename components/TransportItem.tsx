@@ -65,8 +65,6 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
     setDescriptionActive(!isDescriptionActive)
   }
 
-  console.log(transports)
-
   return (
     <>
       {transports.edges.map((item) => (

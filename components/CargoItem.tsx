@@ -40,7 +40,6 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
         id: idCargo,
       },
     })
-    console.log(responseCargo?.data?.cargo)
     setCargoInfo(responseCargo?.data?.cargo)
     setLoading(false)
     apolloClient.mutate({
