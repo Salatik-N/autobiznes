@@ -26,19 +26,6 @@ export default function Header() {
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange)
-    fetchMore({
-      updateQuery: (prevResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prevResult
-
-        return {
-          viewer: {
-            edges: fetchMoreResult.viewer.edges,
-            pageInfo: fetchMoreResult.viewer.pageInfo,
-            __typename: 'ViewerConnection',
-          },
-        }
-      },
-    })
   }, [])
 
   return (
