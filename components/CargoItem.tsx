@@ -19,16 +19,15 @@ import { useQuery } from '@apollo/client'
 import { Loader } from './Loader'
 
 export default function CargoItem({ cargos, isActiveAdminTools = false }) {
-  const [activeModalName, setactiveModalName] = useState(null)
+  const [activeModalName, setActiveModalName] = useState(null)
   const [cargoInfo, setCargoInfo] = useState(null)
   const [isLoading, setLoading] = useState(false)
   const [modalActive, setModalActive] = useState(false)
   const apolloClient = initializeApollo()
 
-  const handleModalOpen = async (idCargo, e) => {
-    setCargoInfo(null)
+  const handleModalOpen = async (idCargo, name) => {
     setModalActive(true)
-    setactiveModalName(e.target.name)
+    setActiveModalName(name)
     getCargoInfo(idCargo)
   }
 
@@ -111,20 +110,11 @@ export default function CargoItem({ cargos, isActiveAdminTools = false }) {
           <div className={styles.contactsBlock}>
             <div className={styles.cargoNumber}>№{item.node.databaseId}</div>
             <div className={styles.buttonsBlock}>
-              <button
-                data-name="contacts"
-                name="contacts"
-                className={styles.contacts}
-                onClick={(e) => handleModalOpen(item.node.databaseId, e)}
-              >
+              <button className={styles.contacts} onClick={(e) => handleModalOpen(item.node.databaseId, 'contacts')}>
                 <span>Контакты</span>
                 <PhoneSVG />
               </button>
-              <button
-                name="more-info"
-                className={styles.more}
-                onClick={(e) => handleModalOpen(item.node.databaseId, e)}
-              >
+              <button className={styles.more} onClick={(e) => handleModalOpen(item.node.databaseId, 'more-info')}>
                 <Image src={moreButtonIcon} alt="Больше информации" />
               </button>
             </div>

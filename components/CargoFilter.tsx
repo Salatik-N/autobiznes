@@ -124,6 +124,7 @@ export default function CargoFilter({ onUseFilter }) {
                   .find((e) => e.name === form[FIELDS.UNLOADING_COUNTRY])
                   ?.regions.find((e) => e.name === form[FIELDS.UNLOADING_REGION])?.cities
               }
+              components={{ NoOptionsMessage }}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.name}
               placeholder="Выберите город"

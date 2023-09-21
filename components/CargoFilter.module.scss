@@ -17,12 +17,11 @@
       gap: 10px 25px;
     }
     @media (min-width: $breakpoint-xl) {
-      flex-wrap: nowrap;
       width: 100%;
     }
     label {
       @media (min-width: $breakpoint-tablet) {
-        width: 165px;
+        width: 200px;
         margin-bottom: 0;
         flex: 1 0 auto;
       }
