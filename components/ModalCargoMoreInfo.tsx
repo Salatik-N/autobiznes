@@ -89,6 +89,7 @@ export default function ModalCargoMoreInfo({ cargoInfo }) {
         <b>Расстояние: </b>0
       </div> */}
       <div className={styles.map}>
+        <Image className={styles.mapImage} src="/images/bg-map.jpg" width={1185} height={336} alt="Карта" />
         <Link
           href={generateGoogleMapsLink(
             cargoInfo.acfCargoPickupPoint.shippingCity,

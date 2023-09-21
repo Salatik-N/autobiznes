@@ -39,10 +39,24 @@
     padding-top: 34px;
     padding-bottom: 34px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.62);
+    position: relative;
+    background: #000;
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
     border-radius: 9px;
+
+    .mapImage {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      opacity: 0.6;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
     a {
       @include btn-yellow(11px, 12px);
       padding-left: 20px;
