@@ -196,7 +196,7 @@ export default function EditCargo() {
   const uploadImage = async (formData) => {
     return new Promise((resolve) => {
       // fetch('http://autobiznes.local/wp-json/wp/v2/media', {
-      fetch('https://react.autobiznes.by/wp-json/wp/v2/media', {
+      fetch('https://server.autobiznes.by/wp-json/wp/v2/media', {
         method: 'POST',
         headers: {
           authorization: `Bearer ${Cookies.get('authToken')}`,
