@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { initializeApollo } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
-import { ADD_NEW_TRANSPORT, GET_CATEGORY_INFO, GET_USER_INFO } from '../../../lib/api'
+import { ADD_NEW_TRANSPORT, GET_CATEGORY_INFO, GET_USER_INFO, GET_ALL_TRANSPORT_CATEGORIES } from '../../../lib/api'
 import Image from 'next/image'
 import Container from '../../../components/Container'
 import TitleInput from '../../../components/Form/TitleInput'
@@ -526,6 +526,25 @@ export default function Transport1t({ transportCategory }) {
       </Container>
     </div>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const responseCategory = await apolloClient.query({
+    query: GET_ALL_TRANSPORT_CATEGORIES,
+  })
+
+  console.log(responseCategory)
+
+  const slugs = responseCategory?.data?.transportCategories.edges.map((item) => item.node.slug) || []
+
+  const paths = slugs.map((slug) => ({
+    params: { slug },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {

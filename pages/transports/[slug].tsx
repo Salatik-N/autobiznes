@@ -1,9 +1,15 @@
 import { useEffect, useState, useLayoutEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { initializeApollo } from '../../lib/apollo'
-import { GET_TRANSPORT_CATEGORY, GET_CATEGORY_INFO, REGIONS_TRANSPORT, CITIES_TRANSPORT } from '../../lib/api'
+import {
+  GET_TRANSPORT_CATEGORY,
+  GET_CATEGORY_INFO,
+  REGIONS_TRANSPORT,
+  CITIES_TRANSPORT,
+  GET_ALL_TRANSPORT_CATEGORIES,
+} from '../../lib/api'
 import Link from 'next/link'
 import Image from 'next/image'
 import Container from '../../components/Container'
@@ -228,6 +234,25 @@ export default function Transports({ transportCategory }) {
       <Benefits />
     </div>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const responseCategory = await apolloClient.query({
+    query: GET_ALL_TRANSPORT_CATEGORIES,
+  })
+
+  console.log(responseCategory)
+
+  const slugs = responseCategory?.data?.transportCategories.edges.map((item) => item.node.slug) || []
+
+  const paths = slugs.map((slug) => ({
+    params: { slug },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
