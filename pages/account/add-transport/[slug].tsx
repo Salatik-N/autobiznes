@@ -251,7 +251,7 @@ export default function Transport1t({ transportCategory }) {
             vehicleClass: form[FIELDS.VEHICLE_CLASS],
             color: form[FIELDS.COLOR],
             vehiclesInPark: parseInt(form[FIELDS.VEHICLES_IN_PARK]),
-            minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
+            minimumOrderTime: parseInt(form[FIELDS.MINIMUM_ORDER_TIME]),
             price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
             pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),
             price1Km: parseInt(form[FIELDS.PRICE_1_KM]),
