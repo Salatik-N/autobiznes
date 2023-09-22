@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { initializeApollo } from '../../../lib/apollo'
 import { useQuery } from '@apollo/client'
 import { ADD_NEW_TRANSPORT, GET_CATEGORY_INFO, GET_USER_INFO } from '../../../lib/api'
@@ -528,7 +528,7 @@ export default function Transport1t({ transportCategory }) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const responseCategory = await apolloClient.query({
     query: GET_CATEGORY_INFO,
     variables: {
