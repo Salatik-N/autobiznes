@@ -284,7 +284,7 @@ export default function EditCargo() {
             amenities: form[FIELDS.AMENITIES],
             vehicleClass: form[FIELDS.VEHICLE_CLASS],
             color: form[FIELDS.COLOR],
-            vehiclesInPark: form[FIELDS.VEHICLES_IN_PARK],
+            vehiclesInPark: parseInt(form[FIELDS.VEHICLES_IN_PARK]),
             minimumOrderTime: form[FIELDS.MINIMUM_ORDER_TIME],
             price1Hour: parseInt(form[FIELDS.PRICE_1_HOUR]),
             pricePerShift: parseInt(form[FIELDS.PRICE_PER_SHIFT]),

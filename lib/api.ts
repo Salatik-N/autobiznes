@@ -676,7 +676,7 @@ export const ADD_NEW_TRANSPORT = gql`
     $amenities: String = ""
     $vehicleClass: String = ""
     $color: String = ""
-    $vehiclesInPark: String = ""
+    $vehiclesInPark: Int
     $minimumOrderTime: String = ""
     $viber: Boolean = false
     $photoTruck: [String]
@@ -762,7 +762,7 @@ export const EDIT_TRANSPORT = gql`
     $amenities: String = ""
     $vehicleClass: String = ""
     $color: String = ""
-    $vehiclesInPark: String = ""
+    $vehiclesInPark: Int
     $minimumOrderTime: String = ""
     $viber: Boolean = false
     $photoTruck: [String]
