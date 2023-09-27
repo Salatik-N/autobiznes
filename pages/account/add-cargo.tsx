@@ -142,6 +142,7 @@ export default function AddCargo() {
         })
         .then((result) => {
           console.log(result)
+          router.push('/account')
         })
         .catch((error) => {
           console.error(error)

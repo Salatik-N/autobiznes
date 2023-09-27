@@ -267,6 +267,7 @@ export default function Transport1t({ transportCategory }) {
         })
         .then((result) => {
           console.log(result)
+          router.push('/account')
         })
         .catch((error) => {
           console.error(error)

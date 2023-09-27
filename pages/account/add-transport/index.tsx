@@ -11,9 +11,9 @@ export default function AddTransport({ cargoTransport, passengerTransport }) {
       <section className="header-section">
         <Container>
           <div className="page-title-block">
-            <h2 className="page-title">
+            <h1 className="page-title">
               Грузовые и пассажирские <span className="text-yellow">перевозки в РБ</span>
-            </h2>
+            </h1>
             <div className="content-image">
               <Image src="/images/bags.png" alt="Биржа грузов и транспорта" width={839} height={583} />
               <Image src="/images/boxes.png" alt="Биржа грузов и транспорта" width={870} height={533} />

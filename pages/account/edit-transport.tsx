@@ -301,6 +301,7 @@ export default function EditCargo() {
         })
         .then((result) => {
           console.log(result)
+          router.push('/account')
         })
         .catch((error) => {
           console.error(error)

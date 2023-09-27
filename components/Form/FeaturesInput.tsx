@@ -57,18 +57,16 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
             />
           </label>
         )}
-        {isBus || isTaxi || isMinivans || isWeddingCars ? (
-          <label>
-            <span>Марка автомобиля</span>
-            <input
-              name={FIELDS.VEHICLE_BRAND}
-              type="text"
-              placeholder="Введите марку"
-              value={form[FIELDS.VEHICLE_BRAND]}
-              onChange={handleChangeForm}
-            />
-          </label>
-        ) : null}
+        <label>
+          <span>Марка автомобиля</span>
+          <input
+            name={FIELDS.VEHICLE_BRAND}
+            type="text"
+            placeholder="Введите марку"
+            value={form[FIELDS.VEHICLE_BRAND]}
+            onChange={handleChangeForm}
+          />
+        </label>
         {isBus || isTaxi || isMinivans || isWeddingCars ? (
           <label>
             <span>Опыт работы</span>
