@@ -27,8 +27,8 @@ export default function Cargo() {
     setCargoLoaded(false)
     setFilterOrder(item.orederBy)
     const variables = {
-      shippingCity: item.shippingCity,
       shippingRegion: item.shippingRegion,
+      shippingCity: item.shippingCity,
       unloadingCountry: item.unloadingCountry,
       unloadingRegion: item.unloadingRegion,
       unloadingCity: item.unloadingCity,

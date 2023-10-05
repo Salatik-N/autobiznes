@@ -4,8 +4,10 @@ export const GET_ALL_CARGO = gql`
   query GetCargo(
     $weight: Int
     $shippingRegion: String
+    $shippingCity: String
     $unloadingCountry: String
     $unloadingRegion: String
+    $unloadingCity: String
     $vehicleBodyType: String
     $customOrder: Order
     $first: Int! = 10
@@ -17,7 +19,9 @@ export const GET_ALL_CARGO = gql`
         vehicleBodyType: $vehicleBodyType
         unloadingRegion: $unloadingRegion
         unloadingCountry: $unloadingCountry
+        unloadingCity: $unloadingCity
         shippingRegion: $shippingRegion
+        shippingCity: $shippingCity
         customOrder: $customOrder
       }
       first: $first
