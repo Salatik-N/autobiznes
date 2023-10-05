@@ -89,9 +89,10 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
                   )}
                   {item.node.title}
                 </div>
-                <div
-                  className={styles.address}
-                >{`${item.node.acfTransportAddress.regionTransport}, ${item.node.acfTransportAddress.city}`}</div>
+                <div className={styles.address}>
+                  {item.node.acfTransportAddress.regionTransport}
+                  {item.node.acfTransportAddress.city && `, ${item.node.acfTransportAddress.city}`}
+                </div>
                 {/* <div className={styles.experience}>{item.node.author.node.registeredDate} лет в сервисе</div> */}
                 <div
                   className={`${styles.features} ${
@@ -110,24 +111,26 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
               </div>
               <div className={styles.blockInfoSecond}>
                 <div className={styles.priceBlock}>
-                  {item.node.acfTransportFeatures.price1Hour && (
-                    <div className={styles.item}>
-                      <div className={styles.price}>{item.node.acfTransportFeatures.price1Hour}</div>
-                      <div className={styles.metering}>BYN/час</div>
+                  <div className={styles.item}>
+                    <div className={styles.price}>
+                      {item.node.acfTransportFeatures.price1Hour ? item.node.acfTransportFeatures.price1Hour : '—'}
                     </div>
-                  )}
-                  {item.node.acfTransportFeatures.price1Km && (
-                    <div className={styles.item}>
-                      <div className={styles.price}>{item.node.acfTransportFeatures.price1Km}</div>
-                      <div className={styles.metering}>BYN/км</div>
+                    <div className={styles.metering}>BYN/час</div>
+                  </div>
+                  <div className={styles.item}>
+                    <div className={styles.price}>
+                      {item.node.acfTransportFeatures.price1Km ? item.node.acfTransportFeatures.price1Km : '—'}
                     </div>
-                  )}
-                  {item.node.acfTransportFeatures.pricePerShift && (
-                    <div className={styles.item}>
-                      <div className={styles.price}>{item.node.acfTransportFeatures.pricePerShift}</div>
-                      <div className={styles.metering}>BYN/смена</div>
+                    <div className={styles.metering}>BYN/км</div>
+                  </div>
+                  <div className={styles.item}>
+                    <div className={styles.price}>
+                      {item.node.acfTransportFeatures.pricePerShift
+                        ? item.node.acfTransportFeatures.pricePerShift
+                        : '—'}
                     </div>
-                  )}
+                    <div className={styles.metering}>BYN/смена</div>
+                  </div>
                 </div>
                 <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
                   Контакты

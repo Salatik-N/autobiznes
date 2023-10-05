@@ -253,6 +253,7 @@ export const GET_TRANSPORT_INFO = gql`
     transport(id: $id, idType: DATABASE_ID) {
       author {
         node {
+          databaseId
           avatar {
             url
           }

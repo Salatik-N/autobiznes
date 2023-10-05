@@ -5,9 +5,10 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
-import { initializeApollo, addApolloState } from '../lib/apollo'
+import { initializeApollo } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
+import SignUp from '../components/SignUp'
 
 export default function Index({ cargoList, cargoTransport, passengerTransport }) {
   return (
@@ -138,7 +139,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
                 <li>Большая база исполнителей</li>
                 <li>Простота работы через личный кабинет</li>
               </ul>
-              <button>Регистрация</button>
+              <SignUp style={'button'}>Регистрация</SignUp>
             </div>
             <div className="item performer white-background">
               <span className="title">Вы исполнитель?</span>
@@ -148,7 +149,7 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
                 <li>Постоянные звонки</li>
                 <li>Бесплатное размещение объявления</li>
               </ul>
-              <button>Регистрация</button>
+              <SignUp style={'button'}>Регистрация</SignUp>
             </div>
           </div>
         </Container>

@@ -28,14 +28,14 @@ export default function ModalCargoContacts({ transportInfo }) {
         />
       </div>
       <div className={styles.name}>{transport.customName}</div>
-      {authorInfo.customField.transportInPark && (
+      {authorInfo.customField.transportInPark && authorInfo.databaseId !== 2 ? (
         <div className={styles.additional}>
           {/* <p>
           Место в рейтинге: {authorInfo.firstName} из {authorInfo.firstName}
         </p> */}
           <p>Техники в парке: {authorInfo.customField.transportInPark} ед.</p>
         </div>
-      )}
+      ) : null}
       {phone && (
         <div>
           <Link className={styles.phone} href={`tel:${phone}`}>

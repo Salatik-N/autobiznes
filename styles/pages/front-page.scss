@@ -160,7 +160,7 @@
             }
           }
         }
-        button {
+        .button {
           width: 100%;
           @media (min-width: $breakpoint-tablet) {
             margin-top: auto;
@@ -175,7 +175,7 @@
               color: $green;
             }
           }
-          button {
+          .button {
             @include btn-green(15px, 15px);
           }
         }
@@ -188,7 +188,7 @@
               color: $blue;
             }
           }
-          button {
+          .button {
             @include btn-blue(15px, 15px);
           }
         }

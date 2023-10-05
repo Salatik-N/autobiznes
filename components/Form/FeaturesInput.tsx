@@ -52,7 +52,6 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
                 }
               }
               options={typeTransportation}
-              defaultValue={typeTransportation[0]}
               placeholder="Выберите тип перевозки"
             />
           </label>

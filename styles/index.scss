@@ -12,7 +12,7 @@ body {
   color: $dark-blue;
   font-size: 16px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: normal;
   letter-spacing: -0.1px;
   margin: 0;
 }
@@ -450,7 +450,6 @@ form label {
 form input,
 form select,
 form textarea {
-  font-family: '__interFont_9b1c85', '__interFont_Fallback_9b1c85';
   border: 1px solid hsl(0, 0%, 80%);
   @include border-radius(4px);
   padding: 9px 10px;
