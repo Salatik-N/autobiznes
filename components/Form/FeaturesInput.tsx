@@ -1,7 +1,7 @@
 import Select from 'react-select'
 import {
   vehicleBodyType,
-  typeTransportation,
+  cargoServiceSpecialization,
   workExperience,
   leaseTerm,
   serviceSpecialization,
@@ -41,7 +41,7 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
         )}
         {isCargo && (
           <label>
-            <span>Тип перевозки</span>
+            <span>Вид перевозки</span>
             <Select
               name={FIELDS.TYPE_TRANSPORTATION}
               onChange={handleChangeFormSelect}
@@ -51,7 +51,7 @@ export const FeaturesInput = ({ type, form, FIELDS, handleChangeFormSelect, hand
                   value: form[FIELDS.TYPE_TRANSPORTATION],
                 }
               }
-              options={typeTransportation}
+              options={cargoServiceSpecialization}
               placeholder="Выберите тип перевозки"
             />
           </label>

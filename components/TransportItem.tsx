@@ -111,26 +111,37 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
               </div>
               <div className={styles.blockInfoSecond}>
                 <div className={styles.priceBlock}>
-                  <div className={styles.item}>
-                    <div className={styles.price}>
-                      {item.node.acfTransportFeatures.price1Hour ? item.node.acfTransportFeatures.price1Hour : '—'}
+                  {item.node.acfTransportFeatures.price1Hour &&
+                  item.node.acfTransportFeatures.price1Km &&
+                  item.node.acfTransportFeatures.pricePerShift ? (
+                    <>
+                      <div className={styles.item}>
+                        <div className={styles.price}>
+                          {item.node.acfTransportFeatures.price1Hour ? item.node.acfTransportFeatures.price1Hour : '—'}
+                        </div>
+                        <div className={styles.metering}>BYN/час</div>
+                      </div>
+                      <div className={styles.item}>
+                        <div className={styles.price}>
+                          {item.node.acfTransportFeatures.price1Km ? item.node.acfTransportFeatures.price1Km : '—'}
+                        </div>
+                        <div className={styles.metering}>BYN/км</div>
+                      </div>
+                      <div className={styles.item}>
+                        <div className={styles.price}>
+                          {item.node.acfTransportFeatures.pricePerShift
+                            ? item.node.acfTransportFeatures.pricePerShift
+                            : '—'}
+                        </div>
+                        <div className={styles.metering}>BYN/смена</div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className={styles.item}>
+                      <div className={styles.price}>договорная</div>
+                      <div className={styles.metering}>цена</div>
                     </div>
-                    <div className={styles.metering}>BYN/час</div>
-                  </div>
-                  <div className={styles.item}>
-                    <div className={styles.price}>
-                      {item.node.acfTransportFeatures.price1Km ? item.node.acfTransportFeatures.price1Km : '—'}
-                    </div>
-                    <div className={styles.metering}>BYN/км</div>
-                  </div>
-                  <div className={styles.item}>
-                    <div className={styles.price}>
-                      {item.node.acfTransportFeatures.pricePerShift
-                        ? item.node.acfTransportFeatures.pricePerShift
-                        : '—'}
-                    </div>
-                    <div className={styles.metering}>BYN/смена</div>
-                  </div>
+                  )}
                 </div>
                 <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
                   Контакты
