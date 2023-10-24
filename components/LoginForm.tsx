@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { useAuth } from '../lib/use-authorization'
-import { initializeApollo } from '../lib/apollo'
-import Link from 'next/link'
 
 export default function LoginForm(setModalActive) {
   const [email, setEmail] = useState('')

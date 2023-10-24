@@ -519,6 +519,7 @@ export const REGISTER_USER = gql`
         firstName
         username
         email
+        jwtAuthToken
       }
     }
   }

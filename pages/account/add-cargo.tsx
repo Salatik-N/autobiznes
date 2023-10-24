@@ -142,6 +142,7 @@ export default function AddCargo() {
         })
         .then((result) => {
           console.log(result)
+          alert('Ваше объявление добавлено!')
           router.push('/account')
         })
         .catch((error) => {

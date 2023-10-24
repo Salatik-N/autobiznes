@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Link from 'next/link'
+import { useAuth } from '../lib/use-authorization'
 import { initializeApollo } from '../lib/apollo'
 import { REGISTER_USER } from '../lib/api'
 
@@ -11,6 +11,7 @@ enum FIELDS {
 
 export default function SignUpForm() {
   const apolloClient = initializeApollo()
+  const { signIn } = useAuth()
   const [form, setForm] = useState({
     [FIELDS.FIRST_NAME]: '',
     [FIELDS.EMAIL]: '',
@@ -42,6 +43,9 @@ export default function SignUpForm() {
       })
       .then((result) => {
         console.log(result)
+        let email = form[FIELDS.EMAIL]
+        let password = form[FIELDS.PASSWORD]
+        signIn({ email, password })
       })
       .catch((error) => {
         console.error(error)
