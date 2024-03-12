@@ -82,7 +82,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                       <div className="messengers">
                         {transportItem.acfTransportContacts.viber && (
                           <Link
-                            href={`viber://chat?number=%2B${transportItem.author.node.customField.phone?.replace(
+                            href={`viber://chat?number=%2B${transportItem.acfTransportContacts.phone?.replace(
                               /\D/g,
                               ''
                             )}`}
@@ -92,7 +92,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                         )}
                         {transportItem.acfTransportContacts.whatsapp && (
                           <Link
-                            href={`https://api.whatsapp.com/send?phone=${transportItem.author.node.customField.phone?.replace(
+                            href={`https://api.whatsapp.com/send?phone=${transportItem.acfTransportContacts.phone?.replace(
                               /\D/g,
                               ''
                             )}`}
@@ -101,7 +101,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                           </Link>
                         )}
                         {transportItem.acfTransportContacts.telegram && (
-                          <Link href={`https://t.me/${transportItem.author.node.customField?.phone}`}>
+                          <Link href={`https://t.me/${transportItem.acfTransportContacts?.phone}`}>
                             <Image src={telegramIcon} alt="Аватар" width={33} height={33} />
                           </Link>
                         )}
