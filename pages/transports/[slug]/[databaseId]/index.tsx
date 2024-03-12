@@ -71,9 +71,9 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                     <p className="transport-in-park">
                       Техники в парке: {transportItem.author.node.customField.transportInPark} ед.
                     </p>
-                    <Link className="phone" href={`tel:${transportItem.author.node.customField.phone}`}>
+                    <Link className="phone" href={`tel:${transportItem.acfTransportContacts.customPhone}`}>
                       <PhoneSVG fill={'#4caf50'} />
-                      {transportItem.author.node.customField.phone}
+                      {transportItem.acfTransportContacts.customPhone}
                     </Link>
                     {transportItem.acfTransportContacts.viber ||
                     transportItem.acfTransportContacts.whatsapp ||
@@ -200,7 +200,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking',
+    fallback: true,
   }
 }
 export const getStaticProps: GetStaticProps = async (context) => {
