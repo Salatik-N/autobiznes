@@ -1,4 +1,4 @@
-import styles from './TransportItem.module.scss'
+import styles from './TransportFeatures.module.scss'
 
 const TransportFeatures = ({ active, features, payment = null }) => {
   return (

@@ -31,11 +31,12 @@
       max-width: 300px;
       flex: 0 0 300px;
     }
-    button {
+    .buttonsBlockLeft {
       display: none;
       @media (min-width: $breakpoint-tablet) {
         margin-top: 20px;
         display: flex;
+        gap: 10px;
       }
       @media (min-width: $breakpoint-laptop) {
         display: none;
@@ -66,12 +67,14 @@
     @media (min-width: $breakpoint-laptop) {
       flex-direction: row;
     }
-    button {
+    .buttonsBlockRight {
+      display: flex;
+      gap: 10px;
       @media (min-width: $breakpoint-tablet) {
         display: none;
       }
       @media (min-width: $breakpoint-laptop) {
-        display: block;
+        display: flex;
       }
     }
   }
@@ -134,38 +137,6 @@
         transition: all 200ms ease-in-out;
       }
     }
-    .content {
-      @include border-radius(8px);
-      border: 1px solid $white;
-      margin-top: 5px;
-
-      .item {
-        padding: 15px 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        &:first-child {
-          padding-top: 15px;
-        }
-        &:last-child {
-          padding-bottom: 20px;
-        }
-        &:nth-child(2n-1) {
-          background-color: $white;
-        }
-
-        .label {
-          font-size: 13px;
-          line-height: 13px;
-        }
-
-        .value {
-          font-weight: 500;
-          font-size: 13px;
-          line-height: 13px;
-        }
-      }
-    }
 
     &.active {
       .button {
@@ -215,8 +186,13 @@
   }
 
   .buttonContacts {
-    width: 100%;
+    flex: 1 0 calc(50% - 5px);
     @include btn-blue(12px, 12px);
+  }
+
+  .buttonMore {
+    flex: 1 0 calc(50% - 5px);
+    @include btn-green(12px, 12px);
   }
 
   .description {
@@ -259,7 +235,8 @@
         max-width: 400px;
         flex: 0 0 400px;
       }
-      button {
+      button,
+      .buttonMore {
         display: none;
         @media (min-width: $breakpoint-xl) {
           margin-top: 20px;
@@ -291,8 +268,9 @@
         max-width: calc(100% - 410px);
         flex: 0 0 calc(100% - 410px);
       }
-      button {
-        display: block;
+      button,
+      .buttonMore {
+        display: flex;
         @media (min-width: $breakpoint-xl) {
           display: none;
         }

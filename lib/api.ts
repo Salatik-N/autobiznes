@@ -201,6 +201,14 @@ export const GET_TRANSPORT_CATEGORY = gql`
           title
           databaseId
           id
+          transportCategories {
+            edges {
+              node {
+                name
+                slug
+              }
+            }
+          }
           acfTransportAddress {
             regionTransport
             city
@@ -264,6 +272,7 @@ export const GET_TRANSPORT_INFO = gql`
           customField {
             verifiedUser
             transportInPark
+            phone
           }
         }
       }
@@ -374,6 +383,24 @@ export const GET_CATEGORIES_PASSENGER_TRANSPORT = gql`
     }
   }
 `
+export const GET_ALL_TRANSPORTS = gql`
+  query GetAllTransports {
+    transports {
+      edges {
+        node {
+          databaseId
+          transportCategories {
+            edges {
+              node {
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export const GET_USER_INFO = gql`
   query GetUserInfo {
     viewer {
@@ -447,6 +474,14 @@ export const GET_USER_INFO = gql`
             }
             title
             databaseId
+            transportCategories {
+              edges {
+                node {
+                  name
+                  slug
+                }
+              }
+            }
             acfTransportAddress {
               regionTransport
               city

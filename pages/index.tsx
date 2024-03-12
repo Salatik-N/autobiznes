@@ -39,7 +39,9 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
             />
           </div>
         </Container>
-        <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={746} />
+        <div className="header-section-bg">
+          <Image className="bg-image" src="/images/bg-home.jpg" alt="Фон" width={1920} height={668} />
+        </div>
       </section>
       <hr className="separator-black"></hr>
       <section className="first-section">

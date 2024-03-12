@@ -89,7 +89,9 @@ export default function Cargo() {
             />
           </div>
         </Container>
-        <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+        <div className="header-section-bg">
+          <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={1920} height={768} />
+        </div>
       </section>
       <hr className="separator-black"></hr>
       <section className="first-section">

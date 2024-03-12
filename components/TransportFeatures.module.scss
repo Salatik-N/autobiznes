@@ -1,0 +1,35 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.content {
+  @include border-radius(8px);
+  border: 1px solid $white;
+  margin-top: 5px;
+
+  .item {
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:first-child {
+      padding-top: 15px;
+    }
+    &:last-child {
+      padding-bottom: 20px;
+    }
+    &:nth-child(2n-1) {
+      background-color: $white;
+    }
+
+    .label {
+      font-size: 13px;
+      line-height: 13px;
+    }
+
+    .value {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 13px;
+    }
+  }
+}

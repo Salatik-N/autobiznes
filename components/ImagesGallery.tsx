@@ -17,7 +17,7 @@ const ImagesGallery: React.FC<imagesGalleryProps> = ({ photos, isActiveAdminTool
   }
 
   return (
-    <div className={`${styles.images} ${isActiveAdminTools ? styles.accountPage : ''}`}>
+    <div className={`images-list ${styles.images} ${isActiveAdminTools ? styles.accountPage : ''}`}>
       {!photos && (
         <div className={styles.defaultImage}>
           <Image src={transportDefaultIcon} width={79} height={47} alt="Нет изображения" />

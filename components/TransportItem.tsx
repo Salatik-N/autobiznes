@@ -10,6 +10,8 @@ import { Loader } from './Loader'
 import ModalTransprotContacts from '../components/ModalTransportContacts'
 import TransportFeatures from './TransportFeatures'
 import ImagesGallery from './ImagesGallery'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type TransportItemProps = {
   transports: any
@@ -65,6 +67,10 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
     setDescriptionActive(!isDescriptionActive)
   }
 
+  const router = useRouter()
+
+  console.log(transports)
+
   return (
     <>
       {transports.edges.map((item) => (
@@ -76,9 +82,14 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
           <div className={styles.wrapper}>
             <div className={styles.imageBlock}>
               <ImagesGallery photos={item.node.acfTransportPhotos.photoTruck} isActiveAdminTools={isActiveAdminTools} />
-              <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
-                Контакты
-              </button>
+              <div className={styles.buttonsBlockLeft}>
+                <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
+                  Контакты
+                </button>
+                <Link href={`${router.asPath}/${item.node.databaseId}`} className={styles.buttonMore}>
+                  Подробнее
+                </Link>
+              </div>
             </div>
             <div className={styles.blockInfo}>
               <div className={styles.blockInfoFirst}>
@@ -143,9 +154,17 @@ const TransportItem: React.FC<TransportItemProps> = ({ transports, isActiveAdmin
                     </>
                   )}
                 </div>
-                <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
-                  Контакты
-                </button>
+                <div className={styles.buttonsBlockRight}>
+                  <button className={styles.buttonContacts} onClick={() => handleModalOpen(item.node.databaseId)}>
+                    Контакты
+                  </button>
+                  <Link
+                    href={`/transports/${item.node.transportCategories?.edges[0].node.slug}/${item.node.databaseId}`}
+                    className={styles.buttonMore}
+                  >
+                    Подробнее
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

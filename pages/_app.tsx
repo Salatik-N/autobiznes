@@ -39,11 +39,11 @@ function MyApp({ Component, pageProps }: AppContext & AppInitialProps) {
     <>
       <ApolloProvider client={apolloClient}>
         <AuthProvider>
-          <main className={interFont.className}>
-            <Layout>
+          <Layout>
+            <main className={interFont.className}>
               <Component {...pageProps} />
-            </Layout>
-          </main>
+            </main>
+          </Layout>
         </AuthProvider>
       </ApolloProvider>
     </>

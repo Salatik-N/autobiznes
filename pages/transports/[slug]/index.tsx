@@ -2,22 +2,22 @@ import { useEffect, useState, useLayoutEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import { initializeApollo } from '../../lib/apollo'
+import { initializeApollo } from '../../../lib/apollo'
 import {
   GET_TRANSPORT_CATEGORY,
   GET_CATEGORY_INFO,
   REGIONS_TRANSPORT,
   CITIES_TRANSPORT,
   GET_ALL_TRANSPORT_CATEGORIES,
-} from '../../lib/api'
+} from '../../../lib/api'
 import Link from 'next/link'
 import Image from 'next/image'
-import Container from '../../components/Container'
-import TransportItem from '../../components/TransportItem'
-import TransportFilter from '../../components/TransportFilter'
-import Benefits from '../../components/Benefits'
+import Container from '../../../components/Container'
+import TransportItem from '../../../components/TransportItem'
+import TransportFilter from '../../../components/TransportFilter'
+import Benefits from '../../../components/Benefits'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Loader } from '../../components/Loader'
+import { Loader } from '../../../components/Loader'
 
 const ITEMS_PER_PAGE = 10
 const apolloClient = initializeApollo()
@@ -146,10 +146,12 @@ export default function Transports({ transportCategory }) {
     <div className="transport-category-page">
       <section className="header-section">
         <Container>
-          <button onClick={goBack} className="go-back-button">
-            <i className="arrow" />
-            <span>Назад</span>
-          </button>
+          <div className="go-back-button-block">
+            <button onClick={goBack} className="go-back-button">
+              <i className="arrow" />
+              <span>Назад</span>
+            </button>
+          </div>
           <div className="page-title-block">
             <h1 className="page-title">
               {transportCategory.name}
@@ -172,7 +174,9 @@ export default function Transports({ transportCategory }) {
             />
           </div>
         </Container>
-        <Image className="bg-image" src="/images/bg-cargo.jpg" alt="Фон" width={100} height={100} />
+        <div className="header-section-bg">
+          <Image className="bg-image" src="/images/bg-transport.jpg" alt="Фон" width={1920} height={668} />
+        </div>
       </section>
       <hr className="separator-black"></hr>
 
@@ -240,8 +244,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const responseCategory = await apolloClient.query({
     query: GET_ALL_TRANSPORT_CATEGORIES,
   })
-
-  console.log(responseCategory)
 
   const slugs = responseCategory?.data?.transportCategories.edges.map((item) => item.node.slug) || []
 

@@ -1,0 +1,220 @@
+@import '../styles/abstracts/colors';
+@import '../styles/components/buttons';
+
+.transport-item-page {
+  background-color: $white;
+
+  section {
+    padding-bottom: 70px;
+  }
+  .go-back-button-block {
+    .go-back-button {
+      margin-top: 0;
+      background: #fff;
+      .arrow {
+        border-color: $gray;
+      }
+      span {
+        color: $gray;
+      }
+    }
+  }
+
+  .transport-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      @media (min-width: $breakpoint-tablet) {
+        margin-bottom: 28px;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      h1 {
+        font-size: 16px;
+        line-height: 1;
+        @media (min-width: $breakpoint-tablet) {
+          font-size: 36px;
+        }
+        @media (min-width: $breakpoint-xl) {
+          font-size: 40px;
+        }
+      }
+    }
+
+    .main-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      @media (min-width: $breakpoint-tablet) {
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .image {
+        flex: 1 0 auto;
+        max-width: 100%;
+
+        .images-list {
+          @media (min-width: $breakpoint-tablet) {
+            height: 100%;
+          }
+        }
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        flex: 1 0 100%;
+        min-width: 100%;
+        padding: 5px;
+        border: 1px solid $white;
+        border-radius: 8px;
+        @media (min-width: $breakpoint-tablet) {
+          flex: 1 0 auto;
+          min-width: max-content;
+        }
+        @media (min-width: $breakpoint-xl) {
+          padding: 16px 30px;
+        }
+
+        .avatar {
+          width: 65px;
+          height: 65px;
+          border-radius: 50px;
+        }
+
+        .name {
+          font-size: 18px;
+          font-weight: 600;
+        }
+
+        .transport-in-park {
+          color: $gray;
+          line-height: 24px;
+        }
+
+        .phone {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 15px;
+        }
+
+        .messengers {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          img {
+            width: 33px;
+            height: 33px;
+          }
+        }
+
+        .work-time {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .price-block {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          gap: 5px;
+
+          .price-item {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: $white;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            @include border-radius(4px);
+
+            .price {
+              font-weight: 500;
+              font-size: 20px;
+              line-height: 16px;
+              margin-bottom: 5px;
+            }
+            .metering {
+              font-weight: 400;
+              font-size: 15px;
+              line-height: 12px;
+              color: $gray;
+            }
+          }
+        }
+      }
+    }
+
+    .transport-features {
+      margin-top: 25px;
+
+      .features-title {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        margin-bottom: 20px;
+        @media (min-width: $breakpoint-tablet) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .transport-map {
+      margin-top: 20px;
+      padding-top: 34px;
+      padding-bottom: 34px;
+      width: 100%;
+      position: relative;
+      background: #000;
+      backdrop-filter: blur(1.5px);
+      -webkit-backdrop-filter: blur(1.5px);
+      border-radius: 9px;
+      @media (min-width: $breakpoint-xl) {
+        margin-top: 40px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+
+      .transport-map-image {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        opacity: 0.6;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 9px;
+      }
+      a {
+        @include btn-yellow(11px, 12px);
+        padding-left: 20px;
+        padding-right: 20px;
+        width: max-content;
+        margin: auto;
+      }
+    }
+  }
+}

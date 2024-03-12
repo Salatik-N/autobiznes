@@ -69,7 +69,7 @@ export default function Footer() {
         <Container>
           <div className={styles.blockCopyright}>
             <div>
-              <span className={styles.copyrightText}>2016–2023 © Белорусский интернет-портал «Автобизнес.бай»</span>
+              <span className={styles.copyrightText}>2016–2024 © Белорусский интернет-портал «Автобизнес.бай»</span>
               <div className={styles.copyrightLinks}>
                 <Link href="/">Пользовательское соглашение</Link> | <Link href="/">Политика конфиденциальности</Link>
               </div>
