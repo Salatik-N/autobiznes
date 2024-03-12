@@ -30,6 +30,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
     router.back()
   }
 
+  console.log(transportItem)
   return (
     <>
       {transportItem ? (
@@ -81,7 +82,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                       <div className="messengers">
                         {transportItem.acfTransportContacts.viber && (
                           <Link
-                            href={`viber://chat?number=%2B${transportItem.author.node.customField?.phone.replace(
+                            href={`viber://chat?number=%2B${transportItem.author.node.customField.phone?.replace(
                               /\D/g,
                               ''
                             )}`}
@@ -91,7 +92,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                         )}
                         {transportItem.acfTransportContacts.whatsapp && (
                           <Link
-                            href={`https://api.whatsapp.com/send?phone=${transportItem.author.node.customField?.phone.replace(
+                            href={`https://api.whatsapp.com/send?phone=${transportItem.author.node.customField.phone?.replace(
                               /\D/g,
                               ''
                             )}`}
