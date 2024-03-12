@@ -81,7 +81,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                       <div className="messengers">
                         {transportItem.acfTransportContacts.viber && (
                           <Link
-                            href={`viber://chat?number=%2B${transportItem.author.node.customField.phone?.replace(
+                            href={`viber://chat?number=%2B${transportItem.author.node.customField?.phone.replace(
                               /\D/g,
                               ''
                             )}`}
@@ -91,7 +91,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                         )}
                         {transportItem.acfTransportContacts.whatsapp && (
                           <Link
-                            href={`https://api.whatsapp.com/send?phone=${transportItem.author.node.customField.phone?.replace(
+                            href={`https://api.whatsapp.com/send?phone=${transportItem.author.node.customField?.phone.replace(
                               /\D/g,
                               ''
                             )}`}
@@ -115,9 +115,11 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
                     {!transportItem.acfTransportFeatures.price1Hour &&
                     !transportItem.acfTransportFeatures.price1Km &&
                     !transportItem.acfTransportFeatures.pricePerShift ? (
-                      <div className="price-item">
-                        <div className="price">договорная</div>
-                        <div className="metering">цена</div>
+                      <div className="price-block">
+                        <div className="price-item">
+                          <div className="price">договорная</div>
+                          <div className="metering">цена</div>
+                        </div>
                       </div>
                     ) : (
                       <div className="price-block">
@@ -198,7 +200,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 export const getStaticProps: GetStaticProps = async (context) => {
