@@ -30,7 +30,6 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
     router.back()
   }
 
-  console.log(transportItem)
   return (
     <>
       {transportItem ? (
