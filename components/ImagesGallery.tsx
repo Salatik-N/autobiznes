@@ -25,7 +25,7 @@ const ImagesGallery: React.FC<imagesGalleryProps> = ({ photos, isActiveAdminTool
       )}
       {photos &&
         photos.map((image, index) => (
-          <div key={index} className={`${styles.image} ${index === activeImageID ? styles.activeImage : null}`}>
+          <div key={index} className={`images-item ${styles.image} ${index === activeImageID ? styles.activeImage : null}`}>
             <Image src={image.mediaItemUrl} width={330} height={166} alt="Изображение автомобиля" />
           </div>
         ))}
