@@ -94,6 +94,7 @@
         @media (min-width: $breakpoint-tablet) {
           flex: 1 0 auto;
           min-width: max-content;
+          max-width: max-content;
         }
         @media (min-width: $breakpoint-xl) {
           padding: 16px 30px;
