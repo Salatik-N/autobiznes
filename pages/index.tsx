@@ -14,15 +14,15 @@ import SignUp from '../components/SignUp'
 
 export default function Index({ homePage, cargoList, cargoTransport, passengerTransport }) {
 
-  const fullHead = parse(homePage.seo?.fullHead)
+  const fullHead = parse(homePage?.seo.fullHead)
 
   return (
     <div className="home-page">
       <Head>
-        <title>{homePage.seo?.title || "Грузы для перевозки по СНГ"}</title>
-        <meta name="description" content={homePage.seo?.metaDesc || "Грузы для перевозки по СНГ"} />
+        <title>{homePage?.seo.title || "Грузы для перевозки по СНГ"}</title>
+        <meta name="description" content={homePage?.seo.metaDesc || "Грузы для перевозки по СНГ"} />
         <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-        <meta name="keywords" content={homePage.seo?.focuskw || "Грузы для перевозки по СНГ"} />
+        <meta name="keywords" content={homePage?.seo.focuskw || "Грузы для перевозки по СНГ"} />
         {fullHead}
       </Head>
       <section className="header-section">

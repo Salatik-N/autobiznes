@@ -32,15 +32,15 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
     router.back()
   }
 
-  const fullHead = transportItem && parse(transportItem?.seo.fullHead)
+  const fullHead = transportItem && parse(transportItem.seo.fullHead)
 
   return (
     <>
       <Head>
-        <title>{transportItem.seo?.title || "Грузовые и пассажирские перевозки в РБ"}</title>
-        <meta name="description" content={transportItem.seo?.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
+        <title>{transportItem?.seo.title || "Грузовые и пассажирские перевозки в РБ"}</title>
+        <meta name="description" content={transportItem?.seo.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
         <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-        <meta name="keywords" content={transportItem.seo?.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
+        <meta name="keywords" content={transportItem?.seo.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
         {fullHead}
       </Head>
       {transportItem ? (

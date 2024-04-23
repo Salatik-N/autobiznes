@@ -76,15 +76,15 @@ export default function Cargo({cargosPage}) {
     })
   }
   
-  const fullHead = parse(cargosPage.seo?.fullHead)
+  const fullHead = parse(cargosPage?.seo.fullHead)
 
   return (
     <div className="cargos-page">
       <Head>
-        <title>{cargosPage.seo?.title || "Грузы для перевозки по СНГ"}</title>
-        <meta name="description" content={cargosPage.seo?.metaDesc || "Грузы для перевозки по СНГ"} />
+        <title>{cargosPage?.seo.title || "Грузы для перевозки по СНГ"}</title>
+        <meta name="description" content={cargosPage?.seo.metaDesc || "Грузы для перевозки по СНГ"} />
         <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-        <meta name="keywords" content={cargosPage.seo?.focuskw || "Грузы для перевозки по СНГ"} />
+        <meta name="keywords" content={cargosPage?.seo.focuskw || "Грузы для перевозки по СНГ"} />
         {fullHead}
       </Head>
       <section className="header-section">

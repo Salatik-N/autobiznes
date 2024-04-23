@@ -10,15 +10,15 @@ import Benefits from '../../components/Benefits'
 import Container from '../../components/Container'
 
 export default function Transport({ cargoTransport, passengerTransport }) {
-  const fullHead = cargoTransport && parse(cargoTransport?.seo.fullHead)
+  const fullHead = cargoTransport && parse(cargoTransport.seo.fullHead)
 
   return (
     <div className="transport-page">
       <Head>
-        <title>{cargoTransport.seo?.title || "Грузовые и пассажирские перевозки в РБ"}</title>
-        <meta name="description" content={cargoTransport.seo?.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
+        <title>{cargoTransport?.seo.title || "Грузовые и пассажирские перевозки в РБ"}</title>
+        <meta name="description" content={cargoTransport?.seo.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
         <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-        <meta name="keywords" content={cargoTransport.seo?.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
+        <meta name="keywords" content={cargoTransport?.seo.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
         {fullHead}
       </Head>
       <section className="header-section">
