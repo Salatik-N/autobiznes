@@ -144,7 +144,7 @@ export default function Transports({ transportCategory }) {
     router.back()
   }
 
-  const fullHead = parse(transportCategory.seo.fullHead)
+  const fullHead = parse(transportCategory?.seo.fullHead)
 
   return (
     <div className="transport-category-page">

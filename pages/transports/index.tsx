@@ -10,7 +10,7 @@ import Benefits from '../../components/Benefits'
 import Container from '../../components/Container'
 
 export default function Transport({ cargoTransport, passengerTransport }) {
-  const fullHead = parse(cargoTransport.seo.fullHead)
+  const fullHead = parse(cargoTransport?.seo.fullHead)
 
   return (
     <div className="transport-page">

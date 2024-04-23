@@ -32,7 +32,7 @@ export default function TransportPage({ transportItem, isActiveAdminTools = fals
     router.back()
   }
 
-  const fullHead = parse(transportItem.seo.fullHead)
+  const fullHead = parse(transportItem?.seo.fullHead)
 
   return (
     <>
