@@ -1,3 +1,5 @@
+import Head from 'next/head'
+import parse from "html-react-parser";
 import { useEffect, useState, useLayoutEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
@@ -142,8 +144,17 @@ export default function Transports({ transportCategory }) {
     router.back()
   }
 
+  const fullHead = parse(transportCategory.seo.fullHead)
+
   return (
     <div className="transport-category-page">
+      <Head>
+        <title>{transportCategory.seo?.title || "Грузовые и пассажирские перевозки в РБ"}</title>
+        <meta name="description" content={transportCategory.seo?.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
+        <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+        <meta name="keywords" content={transportCategory.seo?.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
+        {fullHead}
+      </Head>
       <section className="header-section">
         <Container>
           <div className="go-back-button-block">

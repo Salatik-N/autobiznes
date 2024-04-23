@@ -1,7 +1,11 @@
+import Head from 'next/head'
+import parse from "html-react-parser";
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Image from 'next/image'
-import { GET_ALL_CARGO } from '../lib/api'
+import { GetStaticProps } from 'next'
+import { GET_PAGE_SEO, GET_ALL_CARGO } from '../lib/api'
+import { initializeApollo } from '../lib/apollo'
 import Link from 'next/link'
 import CargoItem from '../components/CargoItem'
 import CargoFilter from '../components/CargoFilter'
@@ -11,8 +15,9 @@ import { Loader } from '../components/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 const ITEMS_PER_PAGE = 10
+const apolloClient = initializeApollo()
 
-export default function Cargo() {
+export default function Cargo({cargosPage}) {
   const [filterOrder, setFilterOrder] = useState('DATE_DESC')
   const [isCargoLoaded, setCargoLoaded] = useState(true)
   const { data, fetchMore } = useQuery(GET_ALL_CARGO, {
@@ -70,9 +75,18 @@ export default function Cargo() {
       },
     })
   }
+  
+  const fullHead = parse(cargosPage.seo?.fullHead)
 
   return (
     <div className="cargos-page">
+      <Head>
+        <title>{cargosPage.seo?.title || "Грузы для перевозки по СНГ"}</title>
+        <meta name="description" content={cargosPage.seo?.metaDesc || "Грузы для перевозки по СНГ"} />
+        <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+        <meta name="keywords" content={cargosPage.seo?.focuskw || "Грузы для перевозки по СНГ"} />
+        {fullHead}
+      </Head>
       <section className="header-section">
         <Container>
           <div className="page-title-block">
@@ -152,4 +166,22 @@ export default function Cargo() {
       <Benefits />
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const responsePage = await apolloClient.query({
+    query: GET_PAGE_SEO,
+    variables: {
+      id: 'cargos',
+    },
+  })
+  const cargosPage = responsePage?.data?.page
+  if (!responsePage) {
+    return {
+      notFound: true,
+    }
+  }
+  return {
+    props: { cargosPage },
+  }
 }

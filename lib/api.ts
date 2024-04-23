@@ -1,5 +1,28 @@
 import { gql } from '@apollo/client'
 
+export const GET_ALL_PAGES = gql`
+  query GetAllPages {
+    pages {
+      edges {
+        node {
+          slug
+        }
+      }
+    }
+  }
+`
+export const GET_PAGE_SEO = gql`
+  query GetPageSeo($id: ID!) {
+    page(id: $id, idType: URI) {
+      seo {
+        title
+        metaDesc
+        fullHead
+        focuskw
+      }
+    }
+  }
+`
 export const GET_ALL_CARGO = gql`
   query GetCargo(
     $weight: Int
@@ -173,6 +196,12 @@ export const GET_CATEGORY_INFO = gql`
     transportCategory(id: $id, idType: SLUG) {
       name
       slug
+      seo {
+        title
+        metaDesc
+        fullHead
+        focuskw
+      }
     }
   }
 `
@@ -337,10 +366,15 @@ export const GET_TRANSPORT_INFO = gql`
         fullDescription
         views
       }
+      seo {
+        title
+        metaDesc
+        fullHead
+        focuskw
+      }
     }
   }
 `
-
 export const GET_ALL_TRANSPORT_CATEGORIES = gql`
   query GetAllTransportCategories {
     transportCategories(where: { childless: true }) {
@@ -365,6 +399,12 @@ export const GET_CATEGORIES_CARGO_TRANSPORT = gql`
         }
       }
       name
+      seo {
+        title
+        metaDesc
+        fullHead
+        focuskw
+      }
     }
   }
 `

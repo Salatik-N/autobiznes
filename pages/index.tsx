@@ -1,18 +1,30 @@
+import Head from 'next/head'
+import parse from "html-react-parser";
 import Container from '../components/Container'
 import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
+import { GET_PAGE_SEO, GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 import SignUp from '../components/SignUp'
 
-export default function Index({ cargoList, cargoTransport, passengerTransport }) {
+export default function Index({ homePage, cargoList, cargoTransport, passengerTransport }) {
+
+  const fullHead = parse(homePage.seo?.fullHead)
+
   return (
     <div className="home-page">
+      <Head>
+        <title>{homePage.seo?.title || "Грузы для перевозки по СНГ"}</title>
+        <meta name="description" content={homePage.seo?.metaDesc || "Грузы для перевозки по СНГ"} />
+        <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+        <meta name="keywords" content={homePage.seo?.focuskw || "Грузы для перевозки по СНГ"} />
+        {fullHead}
+      </Head>
       <section className="header-section">
         <Container>
           <div className="page-title-block">
@@ -165,8 +177,15 @@ export default function Index({ cargoList, cargoTransport, passengerTransport })
 }
 
 const apolloClient = initializeApollo()
-
 export const getStaticProps: GetStaticProps = async () => {
+  const responsePage = await apolloClient.query({
+    query: GET_PAGE_SEO,
+    variables: {
+      id: 'home',
+    },
+  })
+  const homePage = responsePage?.data?.page
+
   const response = await apolloClient.query({
     query: GET_FIVE_FIRST_CARGO,
   })
@@ -181,5 +200,5 @@ export const getStaticProps: GetStaticProps = async () => {
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
-  return { props: { cargoList, cargoTransport, passengerTransport } }
+  return { props: { homePage, cargoList, cargoTransport, passengerTransport } }
 }
