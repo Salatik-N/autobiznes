@@ -2,10 +2,40 @@ import { gql } from '@apollo/client'
 
 export const GET_ALL_PAGES = gql`
   query GetAllPages {
-    pages {
+    pages(first: 1000) {
       edges {
         node {
           slug
+          seo {
+            opengraphModifiedTime
+          }
+        }
+      }
+    }
+    transports(first: 1000) {
+      edges {
+        node {
+          databaseId
+          seo {
+            opengraphModifiedTime
+          }
+          transportCategories {
+            edges {
+              node {
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+    transportCategories(first: 1000) {
+      edges {
+        node {
+          slug
+          seo {
+            opengraphModifiedTime
+          }
         }
       }
     }
