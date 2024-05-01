@@ -24,6 +24,7 @@ Disallow: /add/
 Disallow: /misc/
 Disallow: /hot/
 Disallow: /map/
+Allow: /
 Allow: *.js
 Allow: *.css
 Allow: *.svg

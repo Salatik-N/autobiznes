@@ -67,28 +67,3 @@ async function generateSitemap(): Promise<string> {
           }).join('')}
     </urlset>`
 }
-
-// async function getAllPages() {
-//   const { data, fetchMore } = useQuery(GET_ALL_PAGES, {
-//     variables: { first: 10, after: null },
-//     notifyOnNetworkStatusChange: true,
-//   })
-
-//   const haveMorePosts = Boolean(data.pages.pageInfo.hasNextPage)
-//   const pageInfo = data?.cargos?.pageInfo || {}
-
-//   while (haveMorePosts) {
-//     const response = await apolloClient.query({
-//       query: GET_ALL_PAGES,
-//       variables: { first: 1000, after: null },
-//       notifyOnNetworkStatusChange: true,
-//     })
-
-//     const pages = response.data.pages.edges.map(edge => edge.node);
-//     allPages = allPages.concat(pages);
-//     hasNextPage = response.data.pages.pageInfo.hasNextPage;
-//     cursor = response.data.pages.edges[response.data.pages.edges.length - 1].cursor;
-//   }
-
-//   return allPages;
-// }
