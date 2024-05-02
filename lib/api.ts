@@ -428,13 +428,6 @@ export const GET_CATEGORIES_CARGO_TRANSPORT = gql`
           }
         }
       }
-      name
-      seo {
-        title
-        metaDesc
-        fullHead
-        focuskw
-      }
     }
   }
 `
