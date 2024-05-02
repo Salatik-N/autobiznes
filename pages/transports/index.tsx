@@ -4,21 +4,21 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import CategoryItem from '../../components/CategoryItem'
-import { GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../../lib/api'
+import { GET_PAGE_SEO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../../lib/api'
 import { initializeApollo } from '../../lib/apollo'
 import Benefits from '../../components/Benefits'
 import Container from '../../components/Container'
 
-export default function Transport({ cargoTransport, passengerTransport }) {
-  const fullHead = cargoTransport && parse(cargoTransport.seo.fullHead)
+export default function Transport({ transportsPage, cargoTransport, passengerTransport }) {
+  const fullHead = transportsPage && parse(transportsPage.seo.fullHead)
 
   return (
     <div className="transport-page">
       <Head>
-        <title>{cargoTransport?.seo.title || "Грузовые и пассажирские перевозки в РБ"}</title>
-        <meta name="description" content={cargoTransport?.seo.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
+        <title>{transportsPage?.seo.title || "Грузовые и пассажирские перевозки в РБ"}</title>
+        <meta name="description" content={transportsPage?.seo.metaDesc || "Грузовые и пассажирские перевозки в РБ"} />
         <meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-        <meta name="keywords" content={cargoTransport?.seo.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
+        <meta name="keywords" content={transportsPage?.seo.focuskw || "Грузовые и пассажирские перевозки в РБ"} />
         {fullHead}
       </Head>
       <section className="header-section">
@@ -67,6 +67,14 @@ export default function Transport({ cargoTransport, passengerTransport }) {
 const apolloClient = initializeApollo()
 
 export const getStaticProps: GetStaticProps = async () => {
+  const responsePageSEO = await apolloClient.query({
+    query: GET_PAGE_SEO,
+    variables: {
+      id: 'transports',
+    },
+  })
+  const transportsPage = responsePageSEO?.data?.page
+
   const responseCargoTransport = await apolloClient.query({
     query: GET_CATEGORIES_CARGO_TRANSPORT,
   })
@@ -77,6 +85,6 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
   return {
-    props: { cargoTransport, passengerTransport },
+    props: { transportsPage, cargoTransport, passengerTransport },
   }
 }
