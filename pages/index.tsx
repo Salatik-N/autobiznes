@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import Container from '../components/Container'
 import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_PAGE_SEO, GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
@@ -11,6 +11,8 @@ import { initializeApollo } from '../lib/apollo'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 import SignUp from '../components/SignUp'
+
+const apolloClient = initializeApollo()
 
 export default function Index({ homePage, cargoList, cargoTransport, passengerTransport }) {
 
@@ -176,8 +178,7 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
   )
 }
 
-const apolloClient = initializeApollo()
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const responsePage = await apolloClient.query({
     query: GET_PAGE_SEO,
     variables: {
