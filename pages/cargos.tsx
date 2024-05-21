@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Image from 'next/image'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { GET_PAGE_SEO, GET_ALL_CARGO } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
 import Link from 'next/link'
@@ -168,7 +168,7 @@ export default function Cargo({cargosPage}) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const responsePage = await apolloClient.query({
     query: GET_PAGE_SEO,
     variables: {
