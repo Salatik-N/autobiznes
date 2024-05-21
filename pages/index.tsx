@@ -3,18 +3,32 @@ import parse from "html-react-parser";
 import Container from '../components/Container'
 import Benefits from '../components/Benefits'
 import FAQ from '../components/FAQ'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GET_PAGE_SEO, GET_FIVE_FIRST_CARGO, GET_CATEGORIES_CARGO_TRANSPORT, GET_CATEGORIES_PASSENGER_TRANSPORT } from '../lib/api'
 import { initializeApollo } from '../lib/apollo'
+import { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
 import CategoryItem from '../components/CategoryItem'
 import CargoItem from '../components/CargoItem'
 import SignUp from '../components/SignUp'
+import { Loader } from '../components/Loader'
 
 const apolloClient = initializeApollo()
 
-export default function Index({ homePage, cargoList, cargoTransport, passengerTransport }) {
+export default function Index({ homePage, cargoTransport, passengerTransport }) {
+  const [cargoList, setCargoList] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const { data, loading: queryLoading } = useQuery(GET_FIVE_FIRST_CARGO)
+
+  useEffect(() => {
+    if (data) {
+      setCargoList(data.cargos)
+      setLoading(false)
+    }
+  }, [data])
 
   const fullHead = parse(homePage?.seo.fullHead)
 
@@ -69,7 +83,9 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
         </Container>
       </section>
       <Container>
-        {cargoList ? (
+        {loading ? (
+          <Loader />
+        ) : (
           <>
             <div className="cargo-list">
               <h3>Ищете груз для перевозки?</h3>
@@ -89,7 +105,7 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
               </Link>
             </div>
           </>
-        ) : null}
+        )}
       </Container>
       <section className="benefits-section">
         <Benefits />
@@ -113,7 +129,7 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
               <Image src="/icons/truck-vector.svg" alt="Грузовой транспорт" width={170} height={170} />
               <p>
                 Регистрируйтесь на Autobiznes.by и находите грузы для вашего транспорта. Хотите разместить объявление о
-                ваших услугах и получать больше звонков?Мы вам в это поможем!
+                ваших услугах и получать больше звонков? Мы вам в это поможем!
               </p>
             </div>
             <div className="item white-background">
@@ -121,7 +137,7 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
               <span className="h3">Пассажирский транспорт</span>
               <Image src="/icons/bus-vector.svg" alt="Пассажирский транспорт" width={170} height={170} />
               <p>
-                Занимаетесь перевозкой пассажиров и хотите привлечь больше клиентов ?Разместите объявление на
+                Занимаетесь перевозкой пассажиров и хотите привлечь больше клиентов? Разместите объявление на
                 Autobiznes.by и ждите звонков!
               </p>
             </div>
@@ -147,7 +163,7 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
             грузоотправителей. Планируйте свой маршрут на нашем сайте, и выполняйте каждую сделку четко и в срок!
           </p>
           <div className="inner-block">
-            <div className="item сustomer white-background">
+            <div className="item customer white-background">
               <span className="title">Вы заказчик?</span>
               <ul>
                 <li>Бесплатное размещение объявления</li>
@@ -178,7 +194,9 @@ export default function Index({ homePage, cargoList, cargoTransport, passengerTr
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient = initializeApollo()
+
   const responsePage = await apolloClient.query({
     query: GET_PAGE_SEO,
     variables: {
@@ -186,11 +204,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   })
   const homePage = responsePage?.data?.page
-
-  const response = await apolloClient.query({
-    query: GET_FIVE_FIRST_CARGO,
-  })
-  const cargoList = response?.data?.cargos
 
   const responseCargoTransport = await apolloClient.query({
     query: GET_CATEGORIES_CARGO_TRANSPORT,
@@ -201,5 +214,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     query: GET_CATEGORIES_PASSENGER_TRANSPORT,
   })
   const passengerTransport = responsePassengerTransport?.data?.transportCategory
-  return { props: { homePage, cargoList, cargoTransport, passengerTransport } }
+
+  return { props: { homePage, cargoTransport, passengerTransport } }
 }
